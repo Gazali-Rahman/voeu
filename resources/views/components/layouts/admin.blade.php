@@ -45,6 +45,10 @@
                 </div>
                 <a href="/admin/orders"
                     class="block px-4 py-2 text-[10px] uppercase tracking-[0.3em] text-gray-400 hover:text-black transition-all">Orders</a>
+                <a href="/admin/cashflow"
+                    class="block px-4 py-2 text-[10px] uppercase tracking-[0.3em] {{ request()->is('admin/cashflow*') ? 'text-black bg-[#F9F8F6]' : 'text-gray-400 hover:text-black transition-all' }}">
+                    Cashflow
+                </a>
             </nav>
         </aside>
 

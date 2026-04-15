@@ -41,6 +41,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/roles', RoleManagement::class)->name('admin.roles');
     Route::get('/catalogs', ManageCatalog::class)->name('admin.catalogs');
     Route::get('/orders', Manageorder::class)->name('admin.orders');
+    Route::get('/cashflow', \App\Livewire\Admin\Cashflow::class)->name('admin.cashflow');
 });
 Route::post('/webhook/xendit', [WebhookController::class, 'handleXendit']);
 Route::post('/midtrans/callback', [MidtransController::class, 'callback']);
