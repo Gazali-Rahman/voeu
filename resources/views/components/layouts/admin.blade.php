@@ -20,6 +20,10 @@
                 <a href="/admin/catalogs"
                     class="block px-4 py-2 text-[10px] uppercase tracking-[0.3em] {{ request()->is('admin/catalogs') ? 'text-black bg-[#F9F8F6]' : 'text-gray-400 hover:text-black transition-all' }}">Manage
                     Catalog</a>
+                <a href="/admin/promos"
+                    class="block px-4 py-2 text-[10px] uppercase tracking-[0.3em] {{ request()->is('admin/promos*') ? 'text-black bg-[#F9F8F6]' : 'text-gray-400 hover:text-black transition-all' }}">
+                    Manage Promo
+                </a>
                 <div x-data="{ open: {{ request()->is('admin/users*') || request()->is('admin/roles*') ? 'true' : 'false' }} }">
                     <button @click="open = !open"
                         class="flex items-center justify-between w-full px-4 py-2 text-[10px] uppercase tracking-[0.3em] transition-all"

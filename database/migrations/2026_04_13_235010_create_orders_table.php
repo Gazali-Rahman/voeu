@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Menghubungkan ke user
             $table->foreignId('catalog_id')->constrained()->onDelete('cascade');
 
+            // Tambahkan kolom promo_id di sini
+            $table->foreignId('promo_id')->nullable()->constrained()->onDelete('set null');
             // Detail Pemesan
             $table->string('customer_name');
             $table->string('customer_phone');

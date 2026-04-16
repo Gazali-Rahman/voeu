@@ -10,6 +10,7 @@ class Order extends Model
         'external_id',
         'user_id',
         'catalog_id',
+        'promo_id',
         'customer_name',
         'customer_phone',
         'groom_name',
@@ -31,5 +32,9 @@ class Order extends Model
     public function ratings()
     {
         return $this->hasMany(Rating::class);
+    }
+    public function promo()
+    {
+        return $this->belongsTo(Promo::class);
     }
 }
