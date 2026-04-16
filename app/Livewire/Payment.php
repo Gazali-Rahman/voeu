@@ -14,9 +14,11 @@ class Payment extends Component
 {
     public $order;
 
-    public function mount($order_id)
+    public function mount($external_id)
     {
-        $this->order = Order::with('catalog')->findOrFail($order_id);
+        $this->order = Order::with(['catalog', 'user'])
+            ->where('external_id', $external_id)
+            ->firstOrFail();
     }
 
     /**
@@ -26,17 +28,10 @@ class Payment extends Component
     {
         // 1. Cek jika sudah ada Snap Token di database
         if ($this->order->checkout_url && $this->order->status === 'pending') {
-
-            // Handle jika data lama masih berupa link HTTP
-            if (str_contains($this->order->checkout_url, 'http')) {
-                return redirect()->away($this->order->checkout_url);
-            }
-
-            // Panggil modal Snap menggunakan token yang tersimpan
+            // Gunakan dispatch untuk memicu JavaScript Snap di front-end
             $this->dispatch('pay-via-midtrans', snapToken: $this->order->checkout_url);
             return;
         }
-
         // 2. Konfigurasi Midtrans
         Config::$serverKey = config('services.midtrans.server_key');
         Config::$isProduction = config('services.midtrans.is_production');

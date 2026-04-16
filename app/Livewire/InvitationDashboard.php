@@ -17,12 +17,13 @@ class InvitationDashboard extends Component
     public $generatedLink;
     public $mainUrl;
 
-    public function mount($order_id)
+    public function mount($slug)
     {
         // Pastikan hanya pemilik order yang bisa akses dashboard ini
         $this->order = Order::with('catalog')
             ->where('user_id', Auth::id())
-            ->findOrFail($order_id);
+            ->where('slug', $slug)
+            ->firstOrFail();
 
         /**
          * Sesuai keinginanmu: wedding.voeu.id/slug

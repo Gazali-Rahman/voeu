@@ -17,9 +17,9 @@ class Checkout extends Component
     public $name, $phone;
     public $groom_name, $bride_name; // Field baru untuk mempelai
 
-    public function mount($id)
+    public function mount($slug)
     {
-        $this->catalog = Catalog::findOrFail($id);
+        $this->catalog = Catalog::where('slug', $slug)->firstOrFail();
 
         // Opsional: Prefill nama jika user sudah login
         if (Auth::check()) {
@@ -59,7 +59,7 @@ class Checkout extends Component
             'status' => 'pending',
         ]);
 
-        return redirect()->route('payment', ['order_id' => $order->id]);
+        return redirect()->route('payment', ['external_id' => $order->external_id]);
     }
 
 

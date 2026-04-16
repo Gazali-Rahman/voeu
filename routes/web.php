@@ -19,11 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
 Route::middleware(['auth', 'role:user'])->group(function () {
-    Route::get('/checkout/{id}', Checkout::class)->name('checkout');
-    Route::get('/payment/{order_id}', Payment::class)->name('payment');
+    Route::get('/checkout/{slug}', Checkout::class)->name('checkout');
+    Route::get('/payment/{external_id}', Payment::class)->name('payment');
     Route::get('/order/success/{external_id}', \App\Livewire\SuccessPage::class)->name('order.success');
     Route::get('/my-orders', \App\Livewire\MyOrders::class)->name('my-orders');
-    Route::get('/invitation/{order_id}/dashboard', \App\Livewire\InvitationDashboard::class)
+    Route::get('/invitation/{slug}/dashboard', \App\Livewire\InvitationDashboard::class)
         ->name('invitation.dashboard');
 });
 Route::middleware('guest')->group(function () {

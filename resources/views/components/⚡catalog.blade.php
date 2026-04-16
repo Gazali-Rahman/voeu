@@ -18,13 +18,13 @@ new class extends Component {
             $catalog->increment('views_count');
         }
     }
-    public function buy($id)
+    public function buy($slug)
     {
         // Cek apakah produk ada
-        $product = Catalog::findOrFail($id);
-
+        // $product = Catalog::findOrFail($id);
+        $product = Catalog::where('slug', $slug)->firstOrFail();
         // Redirect ke route checkout dengan parameter id
-        return redirect()->route('checkout', ['id' => $id]);
+        return redirect()->route('checkout', ['slug' => $product->slug]);
     }
 };
 ?>
@@ -98,11 +98,11 @@ new class extends Component {
                         </div>
 
                         <div class="pt-2">
-                            <button wire:click="buy({{ $item->id }})" wire:loading.attr="disabled"
+                            <button wire:click="buy('{{ $item->slug }}')" wire:loading.attr="disabled"
                                 class="w-full text-[10px] uppercase tracking-[0.3em] text-white bg-[#1a1a1a] py-4 transition-all duration-500 hover:tracking-[0.5em] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed">
 
-                                <span wire:loading.remove wire:target="buy({{ $item->id }})">Buy Now</span>
-                                <span wire:loading wire:target="buy({{ $item->id }})">Processing...</span>
+                                <span wire:loading.remove wire:target="buy('{{ $item->slug }}')">Buy Now</span>
+                                <span wire:loading wire:target="buy('{{ $item->slug }}')">Processing...</span>
 
                             </button>
                         </div>

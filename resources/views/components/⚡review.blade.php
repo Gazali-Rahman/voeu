@@ -1,45 +1,29 @@
 <?php
-
+use App\Models\Rating;
 use Livewire\Component;
 
 new class extends Component {
     public function with(): array
     {
+        // Ambil 10 rating terbaru yang memiliki komentar
+        $dbReviews = Rating::with(['order', 'catalog'])
+            ->whereNotNull('comment')
+            ->latest()
+            ->take(10)
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'client_name' => $item->order->customer_name,
+                    'date' => $item->created_at->format('F Y'),
+                    'rating' => $item->stars,
+                    'comment' => $item->comment,
+                    'category' => $item->catalog->name,
+                ];
+            });
+
         return [
-            'reviews' => [
-                [
-                    'id' => 1,
-                    'client_name' => 'Aditya & Sarah',
-                    'date' => 'Maret 2026',
-                    'rating' => 5,
-                    'comment' => 'Desain Noir et Blanc benar-benar elevate pernikahan kami. Minimalis tapi terasa sangat mewah. Proses editnya juga cepat banget!',
-                    'category' => 'Noir et Blanc',
-                ],
-                [
-                    'id' => 2,
-                    'client_name' => 'Dimas & Arini',
-                    'date' => 'Februari 2026',
-                    'rating' => 5,
-                    'comment' => 'Voeu Digital memberikan pengalaman undangan yang berbeda. Tamu-tamu kami banyak yang memuji lagunya dan transisi videonya yang halus.',
-                    'category' => 'Tuscany Warmth',
-                ],
-                [
-                    'id' => 3,
-                    'client_name' => 'Reza & Putri',
-                    'date' => 'Januari 2026',
-                    'rating' => 5,
-                    'comment' => 'Suka banget sama layoutnya yang dreamy. Pas banget buat tema pernikahan garden party kami. Sangat worth it!',
-                    'category' => 'Eternal Serenity',
-                ],
-                [
-                    'id' => 4,
-                    'client_name' => 'Budi & Maria',
-                    'date' => 'Desember 2025',
-                    'rating' => 4,
-                    'comment' => 'Pelayanan ramah dan hasilnya sangat memuaskan. Terima kasih sudah membantu mewujudkan undangan impian kami.',
-                    'category' => 'Noir et Blanc',
-                ],
-            ],
+            'reviews' => $dbReviews,
         ];
     }
 };
@@ -48,11 +32,12 @@ new class extends Component {
 <div class="min-h-screen bg-[#F9F8F6] font-sans selection:bg-neutral-200 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-10 py-24" x-data="{
         active: 1,
-        count: {{ count($reviews) }},
+        count: {{ $reviews->count() > 0 ? $reviews->count() : 1 }},
         scrollTo(id) {
+            if (this.count === 0) return;
             this.active = id;
             const el = document.getElementById('review-' + id);
-            el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }
     }">
 
@@ -93,7 +78,7 @@ new class extends Component {
 
         <div class="relative">
             <div class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-8 pb-10" id="review-container">
-                @foreach ($reviews as $review)
+                @forelse ($reviews as $review)
                     <div id="review-{{ $loop->iteration }}"
                         class="snap-center shrink-0 w-[85vw] md:w-[45vw] bg-white p-10 md:p-14 border border-neutral-100 flex flex-col justify-between transition-all duration-500 hover:shadow-xl hover:shadow-neutral-200/50 group first:ml-0">
 
@@ -130,14 +115,23 @@ new class extends Component {
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    {{-- Tampilan jika belum ada review --}}
+                    <div class="w-full py-20 text-center border border-dashed border-neutral-200 rounded-3xl">
+                        <p class="text-[10px] uppercase tracking-widest text-neutral-400">Be the first to share your
+                            story</p>
+                    </div>
+                @endforelse
             </div>
         </div>
 
-        <div class="mt-12 w-full h-[2px] bg-neutral-100 relative">
-            <div class="absolute h-full bg-[#1a1a1a] transition-all duration-500"
-                :style="'width: ' + (active / count * 100) + '%;'"></div>
-        </div>
+        {{-- Progress Bar --}}
+        @if ($reviews->count() > 0)
+            <div class="mt-12 w-full h-[2px] bg-neutral-100 relative">
+                <div class="absolute h-full bg-[#1a1a1a] transition-all duration-500"
+                    :style="'width: ' + (active / count * 100) + '%;'"></div>
+            </div>
+        @endif
 
     </div>
 </div>
