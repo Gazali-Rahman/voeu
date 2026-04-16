@@ -6,10 +6,12 @@ use App\Models\Order;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Midtrans\Config;
 use Midtrans\Snap;
 
 #[Layout('components.layouts.app')]
+#[Title('Voeu | Payment')]
 class Payment extends Component
 {
     public $order;

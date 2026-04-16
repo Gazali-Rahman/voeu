@@ -6,11 +6,12 @@ use App\Models\Catalog;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('components.layouts.app')]
+#[Title('Voeu | Checkout')]
 class Checkout extends Component
 {
     public $catalog;

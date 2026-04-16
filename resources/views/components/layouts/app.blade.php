@@ -4,7 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voeu</title>
+
+    <title>{{ $title ?? 'Voeu | Jasa Undangan Digital Pernikahan Minimalis & Vintage' }}</title>
+    <link rel="icon" type="image/png" href="{{ asset('assets/png/logovoeu.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('assets/png/logovoeu.png') }}">
+    <meta name="description"
+        content="Voeu menyediakan jasa pembuatan undangan digital pernikahan berbasis website dengan desain minimalis, vintage, dan estetik. Abadikan momen spesial Anda dengan undangan digital elegant.">
+    <meta name="keywords"
+        content="undangan digital, undangan pernikahan website, undangan digital minimalis, undangan digital vintage, undangan digital aesthetic, undangan digital mewah, undangan digital modern, undangan digital premium, undangan digital elegan, jasa undangan digital elegant">
+    <meta name="author" content="Voeu Digital">
+
+    <meta property="og:title" content="Voeu - Undangan Digital Pernikahan Minimalis & Vintage">
+    <meta property="og:description" content="Abadikan momen spesial Anda dengan undangan digital elegant dari Voeu.">
+    <meta property="og:image" content="{{ asset('assets/png/logovoeu.png') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
     <link rel="preconnect" href="https://fonts.googleapis.com">

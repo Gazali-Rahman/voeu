@@ -7,8 +7,10 @@ use App\Models\Rating;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 
 #[Layout('components.layouts.app')]
+#[Title('Voeu | My Orders')]
 class MyOrders extends Component
 {
     public $showRatingModal = false;

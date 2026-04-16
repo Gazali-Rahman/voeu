@@ -7,9 +7,10 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Title;
 
 #[Layout('components.layouts.app')]
-
+#[Title('Voeu | Dashboard Undangan')]
 class InvitationDashboard extends Component
 {
     public $order;
