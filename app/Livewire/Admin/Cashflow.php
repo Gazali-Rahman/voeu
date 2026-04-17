@@ -51,7 +51,7 @@ class Cashflow extends Component
         $balance = $totalIncome - $totalExpense;
 
         // 3. Generate PDF
-        $pdf = Pdf::loadView('report', [
+        $pdf = Pdf::loadView('admin.report', [
             'transactions' => $transactions,
             'totalIncome' => $totalIncome,
             'totalExpense' => $totalExpense,
