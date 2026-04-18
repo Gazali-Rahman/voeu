@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\WebhookController;
 use App\Livewire\Admin\AdminOrder;
+use App\Livewire\Admin\Createinvitation;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\Manageuser;
 use App\Livewire\Admin\RoleManagement;
@@ -13,6 +14,7 @@ use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Checkout;
 use App\Livewire\Home;
+use App\Livewire\Invitations\Show;
 use App\Livewire\Payment;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +45,12 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/orders', Manageorder::class)->name('admin.orders');
     Route::get('/cashflow', \App\Livewire\Admin\Cashflow::class)->name('admin.cashflow');
     Route::get('/promos', \App\Livewire\Admin\Managepromo::class)->name('admin.promos');
+    Route::get('/invitation/create/{order_id}', Createinvitation::class)
+        ->name('invitation.create');
 });
 Route::post('/webhook/xendit', [WebhookController::class, 'handleXendit']);
 Route::post('/midtrans/callback', [MidtransController::class, 'callback']);
+
+// Invitation Routes
+Route::get('/v/{slug}', Show::class)->name('invitation.v');
+Route::get('/v/{slug}/home', \App\Livewire\Invitations\Noiretblanc\Home::class)->name('invitation.home');
