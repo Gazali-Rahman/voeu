@@ -74,7 +74,7 @@ new class extends Component {
                         <div class="relative z-10">
                             <p class="font-vogue text-[9px] tracking-[0.5em] text-white/30 uppercase mb-4">Account
                                 Number</p>
-                            <h4 class="font-vogue text-white text-2xl md:text-4xl tracking-widest">
+                            <h4 class="font-vogue text-white text-xl  tracking-widest">
                                 {{ $gift['account_number'] }}
                             </h4>
                         </div>

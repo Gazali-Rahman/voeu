@@ -47,6 +47,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/promos', \App\Livewire\Admin\Managepromo::class)->name('admin.promos');
     Route::get('/invitation/create/{order_id}', Createinvitation::class)
         ->name('invitation.create');
+    Route::get('/invitations', \App\Livewire\Admin\ManageInvitation::class)->name('admin.invitations');
 });
 Route::post('/webhook/xendit', [WebhookController::class, 'handleXendit']);
 Route::post('/midtrans/callback', [MidtransController::class, 'callback']);

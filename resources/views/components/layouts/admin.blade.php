@@ -53,6 +53,10 @@
                     class="block px-4 py-2 text-[10px] uppercase tracking-[0.3em] {{ request()->is('admin/cashflow*') ? 'text-black bg-[#F9F8F6]' : 'text-gray-400 hover:text-black transition-all' }}">
                     Cashflow
                 </a>
+                <a href="{{ route('admin.invitations') }}"
+                    class="block px-4 py-2 text-[10px] uppercase tracking-[0.3em] {{ request()->is('admin/invitations*') ? 'text-black bg-[#F9F8F6]' : 'text-gray-400 hover:text-black transition-all' }}">
+                    Manage Invitation
+                </a>
             </nav>
         </aside>
 
