@@ -14,6 +14,7 @@ use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Checkout;
 use App\Livewire\Home;
+use App\Livewire\Invitations\Home as InvitationsHome;
 use App\Livewire\Invitations\Show;
 use App\Livewire\Payment;
 use Illuminate\Support\Facades\Route;
@@ -54,4 +55,5 @@ Route::post('/midtrans/callback', [MidtransController::class, 'callback']);
 
 // Invitation Routes
 Route::get('/v/{slug}', Show::class)->name('invitation.v');
-Route::get('/v/{slug}/home', \App\Livewire\Invitations\Noiretblanc\Home::class)->name('invitation.home');
+// Route ini akan menangani SEMUA tema secara otomatis
+Route::get('/v/{slug}/home', InvitationsHome::class)->name('invitation.home');

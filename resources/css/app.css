@@ -16,10 +16,13 @@
     --font-poppins: "Poppins", sans-serif;
     --font-charlotte: "charlotte", sans-serif;
     --font-vogue: "vogue", sans-serif;
+    --font-samantha: "samantha", sans-serif;
 }
+
 html {
     scroll-behavior: smooth;
 }
+
 .poppins-thin {
     font-family: "Poppins", sans-serif;
     font-weight: 100;

@@ -24,7 +24,10 @@ class Show extends Component
     public function open()
     {
         // Masukkan logika tambahan di sini jika perlu
-        return $this->redirectRoute('invitation.home', ['slug' => $this->invitation->slug], navigate: true);
+        return $this->redirectRoute('invitation.home', [
+            'slug' => $this->invitation->slug,
+            'to' => $this->guestName
+        ], navigate: true);
     }
     public function render()
     {
@@ -34,7 +37,8 @@ class Show extends Component
         // 2. Arahkan view ke folder templates
         // Data 'content' dikirim agar bisa dipanggil langsung di blade
         return view('livewire.invitations.' . $templateName . '.first', [
-            'invitation' => $this->invitation
+            'invitation' => $this->invitation,
+            'guestName' => $this->guestName
         ]);
     }
 }

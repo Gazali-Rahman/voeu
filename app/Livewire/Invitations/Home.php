@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Invitations\Noiretblanc;
+namespace App\Livewire\Invitations;
 
 use App\Models\Invitation;
 use Livewire\Component;
@@ -10,6 +10,7 @@ use Livewire\Attributes\Layout;
 class Home extends Component
 {
     public $invitation;
+    public $guestName;
 
     public function mount($slug)
     {
@@ -17,6 +18,7 @@ class Home extends Component
         $this->invitation = Invitation::with('catalog')
             ->where('slug', $slug)
             ->firstOrFail();
+        $this->guestName = request()->query('to', 'Bapak/Ibu/Saudara/i');
     }
 
     public function render()
@@ -24,6 +26,9 @@ class Home extends Component
         $templateName = $this->invitation->catalog->slug; // Misal: 'vintage-royal'
 
         // Arahkan ke blade home yang ada di dalam folder template tersebut
-        return view('livewire.invitations.' . $templateName . '.home');
+        return view('livewire.invitations.' . $templateName . '.home', [
+            'invitation' => $this->invitation,
+            'guestName' => $this->guestName
+        ]);
     }
 }

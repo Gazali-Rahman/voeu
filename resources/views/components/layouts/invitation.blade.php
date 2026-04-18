@@ -32,6 +32,13 @@
             font-weight: normal;
             font-style: normal;
         }
+
+        @font-face {
+            font-family: "samantha";
+            src: url("/assets/font/samantha.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
     </style>
 </head>
 
