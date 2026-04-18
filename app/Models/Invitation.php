@@ -59,6 +59,6 @@ class Invitation extends Model
     }
     public function rsvps(): HasMany
     {
-        return $this->hasMany(Rsvp::class);
+        return $this->hasMany(rsvp::class);
     }
 }
