@@ -10,14 +10,14 @@
     <audio id="weddingMusic" loop>
         <source src="{{ $invitation->getMusic() }}" type="audio/mpeg">
     </audio>
-    @livewire('invitations.noiretblanc.header', ['invitation' => $invitation])
-    @livewire('invitations.noiretblanc.qoutes')
-    @livewire('invitations.noiretblanc.bridgegroom', ['invitation' => $invitation])
-    @livewire('invitations.noiretblanc.acara', ['invitation' => $invitation])
-    @livewire('invitations.noiretblanc.gallery', ['invitation' => $invitation])
-    @livewire('invitations.noiretblanc.lovestory', ['invitation' => $invitation])
-    @livewire('invitations.noiretblanc.rsvp', ['invitation' => $invitation])
-    @livewire('invitations.noiretblanc.gift', ['invitation' => $invitation])
+    @livewire('invitations.noir-et-blanc.header', ['invitation' => $invitation])
+    @livewire('invitations.noir-et-blanc.qoutes')
+    @livewire('invitations.noir-et-blanc.bridgegroom', ['invitation' => $invitation])
+    @livewire('invitations.noir-et-blanc.acara', ['invitation' => $invitation])
+    @livewire('invitations.noir-et-blanc.gallery', ['invitation' => $invitation])
+    @livewire('invitations.noir-et-blanc.lovestory', ['invitation' => $invitation])
+    @livewire('invitations.noir-et-blanc.rsvp', ['invitation' => $invitation])
+    @livewire('invitations.noir-et-blanc.gift', ['invitation' => $invitation])
     <!-- Floating Music Toggle -->
     <div class="fixed bottom-6 right-6 z-99">
         <button

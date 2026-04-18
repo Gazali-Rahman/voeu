@@ -40,7 +40,7 @@ new class extends Component {
 
     public function render()
     {
-        return view('components.invitations.noiretblanc.⚡rsvp', [
+        return view('components.invitations.noir-et-blanc.⚡rsvp', [
             'wishes' => $this->invitation->rsvps()->latest()->get(),
         ]);
     }
