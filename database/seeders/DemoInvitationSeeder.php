@@ -7,6 +7,7 @@ use App\Models\Catalog;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class DemoInvitationSeeder extends Seeder
 {
@@ -40,7 +41,30 @@ class DemoInvitationSeeder extends Seeder
                     'checkout_url' => '#',
                 ]
             );
+            $photos = [
+                ['label' => 'c1', 'path' => "demo/{$catalog->slug}/c1.png"],
+                ['label' => 'c2', 'path' => "demo/{$catalog->slug}/c2.png"],
+                ['label' => 'bridge', 'path' => "demo/{$catalog->slug}/bridge.png"],
+                ['label' => 'groom', 'path' => "demo/{$catalog->slug}/groom.png"],
+            ];
+            $directoryPath = public_path("storage/demo/{$catalog->slug}");
+            if (File::exists($directoryPath)) {
+                $allFiles = File::files($directoryPath);
 
+                foreach ($allFiles as $file) {
+                    $fileName = $file->getFilename();
+
+                    // Filter: Hanya ambil yang mengandung kata 'gallery'
+                    if (str_contains(strtolower($fileName), 'gallery')) {
+                        $label = pathinfo($fileName, PATHINFO_FILENAME);
+
+                        $photos[] = [
+                            'label' => $label,
+                            'path' => "demo/{$catalog->slug}/{$fileName}"
+                        ];
+                    }
+                }
+            }
             Invitation::updateOrCreate(
                 ['slug' => 'demo-' . $catalog->slug],
                 [
@@ -64,18 +88,7 @@ class DemoInvitationSeeder extends Seeder
                         'alamat_resepsi' => $faker->address,
                         'maps' => 'https://goo.gl/maps/example',
                         'music' => "demo/{$catalog->slug}/music.mp3",
-                        'dynamic_photos' => [
-                            ['label' => 'c1', 'path' => "demo/{$catalog->slug}/c1.png"],
-                            ['label' => 'c2', 'path' => "demo/{$catalog->slug}/c2.png"],
-                            ['label' => 'bridge', 'path' => "demo/{$catalog->slug}/bridge.png"],
-                            ['label' => 'groom', 'path' => "demo/{$catalog->slug}/groom.png"],
-                            ['label' => 'gallery1', 'path' => "demo/{$catalog->slug}/gallery1.png"],
-                            ['label' => 'gallery2', 'path' => "demo/{$catalog->slug}/gallery2.png"],
-                            ['label' => 'gallery3', 'path' => "demo/{$catalog->slug}/gallery3.png"],
-                            ['label' => 'gallery4', 'path' => "demo/{$catalog->slug}/gallery4.png"],
-                            ['label' => 'gallery5', 'path' => "demo/{$catalog->slug}/gallery5.png"],
-                            ['label' => 'gallery6', 'path' => "demo/{$catalog->slug}/gallery6.png"],
-                        ],
+                        'dynamic_photos' => $photos,
                         'love_stories' => [
                             ['year' => '2024', 'title' => 'First Meet', 'story' => 'Pertemuan yang tak sengaja di ' . $faker->city],
                             ['year' => '2025', 'title' => 'Engagement', 'story' => 'Lamaran yang tak terlupakan di ' . $faker->city],

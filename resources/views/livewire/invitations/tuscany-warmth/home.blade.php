@@ -13,8 +13,8 @@
     @livewire('invitations.tuscany-warmth.header', ['invitation' => $invitation])
     @livewire('invitations.tuscany-warmth.qoutes', ['guestName' => $guestName])
     @livewire('invitations.tuscany-warmth.bridgegroom', ['invitation' => $invitation])
-    {{-- @livewire('acara') --}}
-    {{-- @livewire('gallery') --}}
+    @livewire('invitations.tuscany-warmth.acara', ['invitation' => $invitation])
+    @livewire('invitations.tuscany-warmth.gallery', ['invitation' => $invitation])
     {{-- @livewire('lovestory') --}}
     {{-- @livewire('rsvp') --}}
     {{-- @livewire('gift') --}}
