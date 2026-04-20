@@ -74,7 +74,7 @@ new class extends Component {
             <h2 class="font-utama text-3xl text-black">{{ $invitation->content['nama_pria_lengkap'] }}</h2>
             <p class="font-poppins text-[10px] tracking-[0.3em] uppercase text-[#C08552] mt-1">Putra Pertama dari</p>
             <p class="font-poppins font-light text-xs text-gray-500 mt-2 leading-relaxed">
-                {{ $invitation->content['nama_ortu_pria'] }}
+                {{ $invitation->content['ayah_pria'] }} <br> & {{ $invitation->content['ibu_pria'] }}
             </p>
             {{-- 
             <a href="#" class="inline-flex items-center mt-4 text-gray-400 gap-2">
@@ -119,7 +119,7 @@ new class extends Component {
             <h2 class="font-utama text-3xl text-black">{{ $invitation->content['nama_wanita_lengkap'] }}</h2>
             <p class="font-poppins text-[10px] tracking-[0.3em] uppercase text-[#C08552] mt-1">Putri Kedua dari</p>
             <p class="font-poppins font-light text-xs text-gray-500 mt-2 leading-relaxed">
-                {{ $invitation->content['nama_ortu_wanita'] }}
+                {{ $invitation->content['ayah_wanita'] }} <br> & {{ $invitation->content['ibu_wanita'] }}
             </p>
 
             {{-- <a href="#" class="inline-flex flex-row-reverse items-center mt-4 text-gray-400 gap-2">

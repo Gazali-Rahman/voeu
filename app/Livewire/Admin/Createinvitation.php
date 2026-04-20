@@ -21,6 +21,10 @@ class Createinvitation extends Component
     public $ayah_pria, $ibu_pria;
     public $ayah_wanita, $ibu_wanita;
     public $label_ortu_pria, $label_ortu_wanita;
+
+    // Sosmed & Video
+    public $link_video, $instagram_pria, $instagram_wanita;
+
     public $music_file;
     public $existing_music;
     // Array untuk menampung slot foto secara dinamis
@@ -40,6 +44,12 @@ class Createinvitation extends Component
             // Load data teks baru (Nama Lengkap & Ortu)
             $this->nama_pria_lengkap = $invitation->content['nama_pria_lengkap'] ?? '';
             $this->nama_wanita_lengkap = $invitation->content['nama_wanita_lengkap'] ?? '';
+
+            // Load Sosmed & Video
+            $this->link_video = $content['link_video'] ?? '';
+            $this->instagram_pria = $content['instagram_pria'] ?? '';
+            $this->instagram_wanita = $content['instagram_wanita'] ?? '';
+
             $this->ayah_pria = $invitation->content['ayah_pria'] ?? '';
             $this->ibu_pria = $invitation->content['ibu_pria'] ?? '';
             $this->ayah_wanita = $invitation->content['ayah_wanita'] ?? '';
@@ -180,6 +190,11 @@ class Createinvitation extends Component
                     'nama_pria_lengkap' => $this->nama_pria_lengkap, // Simpan teks
                     'nama_wanita' => $this->nama_wanita,
                     'nama_wanita_lengkap' => $this->nama_wanita_lengkap, // Simpan teks
+
+                    // Sosmed & Video
+                    'link_video' => $this->link_video,
+                    'instagram_pria' => $this->instagram_pria,
+                    'instagram_wanita' => $this->instagram_wanita,
                     // Simpan Ortu Terpisah
                     'ayah_pria' => $this->ayah_pria,
                     'ibu_pria' => $this->ibu_pria,

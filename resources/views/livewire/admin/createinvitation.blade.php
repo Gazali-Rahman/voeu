@@ -181,6 +181,39 @@
                     <span class="text-[8px] text-red-500 mt-1 uppercase">{{ $message }}</span>
                 @enderror
             </div>
+            <div class="space-y-6">
+                <h3 class="text-[11px] uppercase tracking-[0.3em] font-bold text-black border-l-2 border-black pl-3">
+                    Sosmed & Video</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="group">
+                        <label class="block text-[9px] uppercase tracking-[0.2em] text-gray-400 mb-1">Link Video
+                            Youtube</label>
+                        <input type="text" wire:model="link_video"
+                            class="w-full py-3 bg-transparent border-b border-gray-200 focus:border-black focus:outline-none text-sm">
+                        @error('link_video')
+                            <span class="text-[8px] text-red-500 mt-1 uppercase">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="group">
+                        <label class="block text-[9px] uppercase tracking-[0.2em] text-gray-400 mb-1">Instagram
+                            Pria</label>
+                        <input type="text" wire:model="instagram_pria"
+                            class="w-full py-3 bg-transparent border-b border-gray-200 focus:border-black focus:outline-none text-sm">
+                        @error('tempat_resepsi')
+                            <span class="text-[8px] text-red-500 mt-1 uppercase">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="group">
+                        <label class="block text-[9px] uppercase tracking-[0.2em] text-gray-400 mb-1">Instagram
+                            Wanita</label>
+                        <input type="text" wire:model="instagram_wanita"
+                            class="w-full py-3 bg-transparent border-b border-gray-200 focus:border-black focus:outline-none text-sm">
+                        @error('instagram_wanita')
+                            <span class="text-[8px] text-red-500 mt-1 uppercase">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
             <div class="space-y-6 pt-12 border-t border-gray-100">
                 <div class="flex items-center justify-between border-b border-gray-100 pb-4">
                     <h3 class="text-[11px] uppercase tracking-[0.3em] font-bold text-black">Our Love Story</h3>

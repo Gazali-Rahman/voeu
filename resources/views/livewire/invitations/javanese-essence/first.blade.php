@@ -2,7 +2,7 @@
     <!-- 1. LOADING SCREEN LAYER -->
     <div x-show="loading" x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="fixed inset-0 z-999 flex flex-col items-center justify-center bg-[#8C5A3C]">
+        class="fixed inset-0 z-999 flex flex-col items-center justify-center bg-[#5a3a2e]">
 
         <!-- Logo Brand Voeu dengan Efek Sorot Cahaya -->
         <div class="relative flex flex-col items-center">
@@ -71,7 +71,7 @@
             </div>
 
             <div class="flex flex-col items-center justify-center mt-auto pb-10">
-                <button @click="playAudio()" wire:click="open"
+                <button @click="document.getElementById('weddingMusicFirst').play();" wire:click="open"
                     class="group relative px-10 py-3 overflow-hidden rounded-full border border-white/30 bg-white/10 backdrop-blur-md transition-all duration-300 active:scale-95">
                     <div class="relative flex items-center gap-3">
                         <span class="text-white text-[10px] tracking-[0.4em] uppercase font-light">Open
