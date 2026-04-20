@@ -16,6 +16,7 @@
             isset($invitation) && !empty($invitation->content['dynamic_photos'])
                 ? asset('storage/' . $invitation->content['dynamic_photos'][0]['path'])
                 : asset('assets/img/default-thumbnail.jpg');
+
     @endphp
 
     <title>{{ $title }}</title>
@@ -25,6 +26,8 @@
     <meta property="og:title" content="{{ $title }}">
     <meta property="og:description" content="{{ $description }}">
     <meta property="og:image" content="{{ $ogImage }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="1200">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
 
