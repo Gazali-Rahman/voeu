@@ -12,10 +12,16 @@
             : 'Voeu Digital Invitation';
         $description = 'The Wedding of ' . $title;
         // Ambil foto pertama dari dynamic_photos sebagai preview thumb
-        $ogImage =
-            isset($invitation) && !empty($invitation->content['dynamic_photos'])
-                ? asset('storage/' . $invitation->content['dynamic_photos'][0]['path'])
-                : asset('assets/img/default-thumbnail.jpg');
+        $ogImage = asset('assets/img/default-thumbnail.jpg'); // Default awal
+
+        if (isset($invitation)) {
+            if (!empty($invitation->content['og_image'])) {
+                $ogImage = asset('storage/' . $invitation->content['og_image']);
+            } elseif (!empty($invitation->content['dynamic_photos'][0]['path'])) {
+                $ogImage = asset('storage/' . $invitation->content['dynamic_photos'][0]['path']);
+            }
+        }
+        dd($ogImage);
 
     @endphp
 
@@ -26,8 +32,6 @@
     <meta property="og:title" content="{{ $title }}">
     <meta property="og:description" content="{{ $description }}">
     <meta property="og:image" content="{{ $ogImage }}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="1200">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
 

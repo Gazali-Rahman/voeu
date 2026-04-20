@@ -294,7 +294,44 @@
                     @enderror
                 </div>
             </div>
+            <div class="space-y-6 mb-8">
+                <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+                    <h3 class="text-[11px] uppercase tracking-[0.3em] font-bold text-black">WhatsApp Thumbnail</h3>
+                    <span class="text-[8px] text-gray-400 uppercase tracking-widest">*Disarankan 1:1 (Square)</span>
+                </div>
 
+                <div class="p-4 bg-white border border-gray-100 rounded-xl shadow-sm">
+                    <label class="text-[8px] uppercase tracking-widest text-gray-400 block mb-2">OG Image (Max
+                        2MB)</label>
+
+                    <div
+                        class="relative h-48 w-full md:w-48 bg-gray-50 rounded-lg overflow-hidden border-2 border-dashed border-gray-100 hover:border-gray-300 transition-colors">
+
+                        @if ($og_image_file)
+                            <img src="{{ $og_image_file->temporaryUrl() }}" class="w-full h-full object-cover">
+                        @elseif ($existing_og_image)
+                            <img src="{{ asset('storage/' . $existing_og_image) }}"
+                                class="w-full h-full object-cover">
+                        @else
+                            <div class="flex flex-col items-center justify-center h-full text-gray-300">
+                                <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                                <span class="text-[8px] uppercase tracking-widest">Select Square Image</span>
+                            </div>
+                        @endif
+
+                        <input type="file" wire:model="og_image_file"
+                            class="absolute inset-0 opacity-0 cursor-pointer">
+                    </div>
+
+                    @error('og_image_file')
+                        <span class="text-[8px] text-red-500 uppercase mt-2 block">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
             <div class="space-y-6">
                 <div class="flex items-center justify-between border-b border-gray-100 pb-4">
                     <h3 class="text-[11px] uppercase tracking-[0.3em] font-bold text-black">Photo Management</h3>

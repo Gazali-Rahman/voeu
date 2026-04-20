@@ -25,6 +25,9 @@ class Createinvitation extends Component
     // Sosmed & Video
     public $link_video, $instagram_pria, $instagram_wanita;
 
+    // ... di bagian atas class
+    public $og_image_file; // Untuk upload file baru
+    public $existing_og_image; // Untuk path file yang sudah ada di database
     public $music_file;
     public $existing_music;
     // Array untuk menampung slot foto secara dinamis
@@ -46,9 +49,9 @@ class Createinvitation extends Component
             $this->nama_wanita_lengkap = $invitation->content['nama_wanita_lengkap'] ?? '';
 
             // Load Sosmed & Video
-            $this->link_video = $content['link_video'] ?? '';
-            $this->instagram_pria = $content['instagram_pria'] ?? '';
-            $this->instagram_wanita = $content['instagram_wanita'] ?? '';
+            $this->link_video = $invitation->content['link_video'] ?? '';
+            $this->instagram_pria = $invitation->content['instagram_pria'] ?? '';
+            $this->instagram_wanita = $invitation->content['instagram_wanita'] ?? '';
 
             $this->ayah_pria = $invitation->content['ayah_pria'] ?? '';
             $this->ibu_pria = $invitation->content['ibu_pria'] ?? '';
@@ -65,7 +68,7 @@ class Createinvitation extends Component
             $this->alamat_resepsi = $invitation->content['alamat_resepsi'] ?? '';
             $this->maps = $invitation->content['maps'] ?? '';
             $this->existing_music = $invitation->content['music'] ?? null;
-
+            $this->existing_og_image = $invitation->content['og_image'] ?? null;
             // Load data dari JSON ke array photo_slots
             if (isset($invitation->content['dynamic_photos'])) {
                 foreach ($invitation->content['dynamic_photos'] as $item) {
@@ -147,6 +150,7 @@ class Createinvitation extends Component
         $this->validate([
             'photo_slots.*.label' => 'required',
             'photo_slots.*.file' => 'nullable|image|max:5120', // Max 5MB
+            'og_image_file' => 'nullable|image|max:2048',
             'music_file' => 'nullable|mimes:mp3,wav|max:10240',
         ]);
 
@@ -171,6 +175,18 @@ class Createinvitation extends Component
                 'path' => $path
             ];
         }
+
+        $ogImagePath = $this->existing_og_image;
+
+        if ($this->og_image_file) {
+            // Hapus thumbnail lama jika ada
+            if ($this->existing_og_image && Storage::disk('public')->exists($this->existing_og_image)) {
+                Storage::disk('public')->delete($this->existing_og_image);
+            }
+            // Simpan thumbnail baru
+            $ogImagePath = $this->og_image_file->store('invitations/' . $this->slug . '/og', 'public');
+        }
+
         $musicPath = $this->existing_music;
         if ($this->music_file) {
             // Hapus musik lama jika ada
@@ -210,6 +226,7 @@ class Createinvitation extends Component
                     'alamat_resepsi' => $this->alamat_resepsi,
                     'maps' => $this->maps,
                     'dynamic_photos' => $finalPhotos,
+                    'og_image' => $ogImagePath,
                     'love_stories' => $this->love_stories,
                     'music' => $musicPath,
                     'gifts' => $this->gifts,
