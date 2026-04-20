@@ -21,7 +21,6 @@
                 $ogImage = asset('storage/' . $invitation->content['dynamic_photos'][0]['path']);
             }
         }
-        dd($ogImage);
 
     @endphp
 
