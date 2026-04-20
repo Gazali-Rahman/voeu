@@ -31,6 +31,9 @@
     <meta property="og:title" content="{{ $title }}">
     <meta property="og:description" content="{{ $description }}">
     <meta property="og:image" content="{{ $ogImage }}">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="500">
+    <meta property="og:image:height" content="500">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
 
