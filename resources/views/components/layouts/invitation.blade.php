@@ -20,6 +20,7 @@
     @endphp
 
     <title>{{ $title }}</title>
+    <link rel="icon" type="image/png" href="{{ asset('assets/png/logovoeu.png') }}">
 
     {{-- Meta Tag untuk WhatsApp/FB/IG --}}
     <meta name="description" content="{{ $description }}">
