@@ -17,15 +17,14 @@ class DemoInvitationSeeder extends Seeder
         $admin = User::first();
 
         // Inisialisasi Faker dengan lokalisasi Indonesia
-        $faker = \Faker\Factory::create('id_ID');
+        $faker = \Faker\Factory::create('en_US');
 
         foreach ($catalogs as $catalog) {
             // Generate Nama Unik tiap kali loop
             $groomFirstName = $faker->firstNameMale;
-            $groomLastName = $faker->lastNameMale;
+            $groomLastName  = $faker->lastName;
             $brideFirstName = $faker->firstNameFemale;
-            $brideLastName = $faker->lastNameFemale;
-
+            $brideLastName  = $faker->lastName;
             $order = Order::updateOrCreate(
                 ['slug' => 'order-demo-' . $catalog->slug], // Pencarian berdasarkan slug
                 [
@@ -76,8 +75,10 @@ class DemoInvitationSeeder extends Seeder
                         'nama_pria_lengkap' => $groomFirstName . ' ' . $groomLastName . ', S.T.',
                         'nama_wanita' => $brideFirstName,
                         'nama_wanita_lengkap' => $brideFirstName . ' ' . $brideLastName . ', S.E.',
-                        'nama_ortu_pria' => 'Bpk. ' . $faker->name('male') . ' & Ibu ' . $faker->name('female'),
-                        'nama_ortu_wanita' => 'Bpk. ' . $faker->name('male') . ' & Ibu ' . $faker->name('female'),
+                        'ayah_pria' => 'Bpk. ' . $faker->name('male'),
+                        'ibu_pria' => 'Ibu ' . $faker->name('female'),
+                        'ayah_wanita' => 'Bpk. ' . $faker->name('male'),
+                        'ibu_wanita' => 'Ibu ' . $faker->name('female'),
                         'label_ortu_pria' => 'Putra Pertama Dari',
                         'label_ortu_wanita' => 'Putri Bungsu Dari',
                         'tanggal_akad' => '2026-12-20 09:00:00',
@@ -90,9 +91,21 @@ class DemoInvitationSeeder extends Seeder
                         'music' => "demo/{$catalog->slug}/music.mp3",
                         'dynamic_photos' => $photos,
                         'love_stories' => [
-                            ['year' => '2024', 'title' => 'First Meet', 'story' => 'Pertemuan yang tak sengaja di ' . $faker->city],
-                            ['year' => '2025', 'title' => 'Engagement', 'story' => 'Lamaran yang tak terlupakan di ' . $faker->city],
-                            ['year' => '2026', 'title' => 'Wedding', 'story' => 'Pernikahan yang penuh cinta di ' . $faker->city],
+                            [
+                                'year' => '2024',
+                                'title' => 'First Encounter',
+                                'story' => 'Semua bermula dari pertemuan yang tak disengaja. Di antara hiruk pikuk kota, takdir mempertemukan dua jiwa yang awalnya asing menjadi satu tujuan. Sebuah percakapan sederhana yang ternyata menjadi awal dari segalanya.'
+                            ],
+                            [
+                                'year' => '2025',
+                                'title' => 'The Commitment',
+                                'story' => 'Setelah melewati banyak tawa dan cerita, kami memutuskan untuk melangkah lebih jauh. Di depan keluarga dan kerabat, janji suci diucapkan sebagai bukti ketulusan untuk saling menjaga dan mendampingi hingga hari tua.'
+                            ],
+                            [
+                                'year' => '2026',
+                                'title' => 'Forever Starts Today',
+                                'story' => 'Hari ini adalah lembaran baru dalam buku kehidupan kami. Bukan tentang akhir dari pencarian, melainkan awal dari petualangan indah untuk membangun rumah tangga yang penuh cinta, keberkahan, dan kebahagiaan abadi.'
+                            ],
                         ],
                         'gifts' => [
                             ['bank_name' => 'BCA', 'account_number' => $faker->bankAccountNumber, 'account_name' => $groomFirstName],

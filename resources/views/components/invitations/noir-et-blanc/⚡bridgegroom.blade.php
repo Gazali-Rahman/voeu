@@ -63,8 +63,8 @@ new class extends Component {
                     </p>
                     <p class="font-light text-[10px] text-gray-400 uppercase tracking-[0.3em]">
                         {{ $content['label_ortu_pria'] }}</p>
-                    <p class="font-poppins text-sm text-black tracking-widest uppercase">
-                        {{ $content['nama_ortu_pria'] }}
+                    <p class="font-poppins text-xs text-black tracking-widest uppercase">
+                        {{ $content['ayah_pria'] }} <br> & {{ $content['ibu_pria'] }}
                     </p>
                 </div>
                 <div class="h-12 w-[0.5px] bg-black/10 rotate-25"></div>
@@ -115,8 +115,8 @@ new class extends Component {
                     <p class="font-light text-[10px] text-gray-400 uppercase tracking-[0.3em]">
                         {{ $content['label_ortu_wanita'] }}
                     </p>
-                    <p class="font-poppins text-sm text-black tracking-widest uppercase">
-                        {{ $content['nama_ortu_wanita'] }}
+                    <p class="font-poppins text-xs text-black tracking-widest uppercase">
+                        {{ $content['ayah_wanita'] }} <br> & {{ $content['ibu_wanita'] }}
                     </p>
                 </div>
                 <div class="h-12 w-[0.5px] bg-black/10 -rotate-25"></div>

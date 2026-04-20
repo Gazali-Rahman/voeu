@@ -17,7 +17,9 @@ class Createinvitation extends Component
     public $order;
     public $slug, $nama_pria, $nama_wanita, $tanggal_akad, $tanggal_resepsi, $tempat_akad, $alamat_akad, $tempat_resepsi, $alamat_resepsi, $maps;
     public $nama_pria_lengkap, $nama_wanita_lengkap;
-    public $nama_ortu_pria, $nama_ortu_wanita;
+    // Variabel Ortu yang dipisah
+    public $ayah_pria, $ibu_pria;
+    public $ayah_wanita, $ibu_wanita;
     public $label_ortu_pria, $label_ortu_wanita;
     public $music_file;
     public $existing_music;
@@ -38,8 +40,10 @@ class Createinvitation extends Component
             // Load data teks baru (Nama Lengkap & Ortu)
             $this->nama_pria_lengkap = $invitation->content['nama_pria_lengkap'] ?? '';
             $this->nama_wanita_lengkap = $invitation->content['nama_wanita_lengkap'] ?? '';
-            $this->nama_ortu_pria = $invitation->content['nama_ortu_pria'] ?? '';
-            $this->nama_ortu_wanita = $invitation->content['nama_ortu_wanita'] ?? '';
+            $this->ayah_pria = $invitation->content['ayah_pria'] ?? '';
+            $this->ibu_pria = $invitation->content['ibu_pria'] ?? '';
+            $this->ayah_wanita = $invitation->content['ayah_wanita'] ?? '';
+            $this->ibu_wanita = $invitation->content['ibu_wanita'] ?? '';
             $this->label_ortu_pria = $invitation->content['label_ortu_pria'] ?? 'Putra Pertama Dari';
             $this->label_ortu_wanita = $invitation->content['label_ortu_wanita'] ?? 'Putri Bungsu Dari';
 
@@ -176,8 +180,11 @@ class Createinvitation extends Component
                     'nama_pria_lengkap' => $this->nama_pria_lengkap, // Simpan teks
                     'nama_wanita' => $this->nama_wanita,
                     'nama_wanita_lengkap' => $this->nama_wanita_lengkap, // Simpan teks
-                    'nama_ortu_pria' => $this->nama_ortu_pria,
-                    'nama_ortu_wanita' => $this->nama_ortu_wanita,
+                    // Simpan Ortu Terpisah
+                    'ayah_pria' => $this->ayah_pria,
+                    'ibu_pria' => $this->ibu_pria,
+                    'ayah_wanita' => $this->ayah_wanita,
+                    'ibu_wanita' => $this->ibu_wanita,
                     'label_ortu_pria' => $this->label_ortu_pria,
                     'label_ortu_wanita' => $this->label_ortu_wanita,
                     'tanggal_akad' => $this->tanggal_akad,

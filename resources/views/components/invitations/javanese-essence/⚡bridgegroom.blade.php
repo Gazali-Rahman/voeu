@@ -43,15 +43,19 @@ new class extends Component {
                     <img src="{{ $invitation->getPhoto('bridge') }}" class="w-full h-full object-cover">
                 </div>
                 <div class="absolute -bottom-10 -left-16">
-                    <h4 class="font-abigail text-[#5a3a2e] text-[5.5rem] leading-none drop-shadow-sm">Andrea</h4>
+                    <h4 class="font-abigail text-[#5a3a2e] text-[5.5rem] leading-none drop-shadow-sm">
+                        {{ $invitation->content['nama_pria'] }}
+                    </h4>
                 </div>
             </div>
 
             <div class="mt-16 ml-4 text-left border-l-2 border-[#5a3a2e]/10 pl-4">
-                <p class="font-poppins text-[#5a3a2e] text-[11px] tracking-[0.3em] uppercase font-bold mb-1">Heppy
-                    Andriani, S.T.</p>
+                <p class="font-poppins text-[#5a3a2e] text-[11px] tracking-[0.3em] uppercase font-bold mb-1">
+                    {{ $invitation->content['nama_pria_lengkap'] }}</p>
                 <p class="font-poppins text-[#5a3a2e]/60 text-[10px] italic leading-relaxed">
-                    Putra dari Bpk. Hansyah <br> & Ibu Noorhasanah
+                    {{ $invitation->content['label_ortu_pria'] }} <br> Bpk. {{ $invitation->content['ayah_pria'] }} <br>
+                    & Ibu
+                    {{ $invitation->content['ibu_pria'] }}
                 </p>
             </div>
         </div>
@@ -68,15 +72,21 @@ new class extends Component {
                     <img src="{{ $invitation->getPhoto('groom') }}" class="w-full h-full object-cover">
                 </div>
                 <div class="absolute -bottom-10 -right-16 text-right">
-                    <h4 class="font-abigail text-[#5a3a2e] text-[5.5rem] leading-none drop-shadow-sm">Dinda</h4>
+                    <h4 class="font-abigail text-[#5a3a2e] text-[5.5rem] leading-none drop-shadow-sm">
+                        {{ $invitation->content['nama_wanita'] }}
+                    </h4>
                 </div>
             </div>
 
             <div class="mt-16 mr-4 text-right border-r-2 border-[#5a3a2e]/10 pr-4">
-                <p class="font-poppins text-[#5a3a2e] text-[11px] tracking-[0.3em] uppercase font-bold mb-1">Dinda
-                    Wulandari, S.T.</p>
+                <p class="font-poppins text-[#5a3a2e] text-[11px] tracking-[0.3em] uppercase font-bold mb-1">
+                    {{ $invitation->content['nama_wanita_lengkap'] }}
+                </p>
                 <p class="font-poppins text-[#5a3a2e]/60 text-[10px] italic leading-relaxed">
-                    Putri dari Bpk. Suyoto <br> & Ibu Sri Kusni
+                    {{ $invitation->content['label_ortu_wanita'] }} <br>
+                    {{ $invitation->content['ayah_wanita'] }} <br>
+                    &
+                    {{ $invitation->content['ibu_wanita'] }}
                 </p>
             </div>
         </div>

@@ -24,20 +24,22 @@ new class extends Component {
 
         <div class="relative flex flex-col">
             <h1 class="font-abigail text-white text-[5.5rem] leading-none self-start drop-shadow-2xl">
-                Andrea
+                {{ $invitation->content['nama_pria'] }}
             </h1>
 
             <div class="flex items-center justify-end -mt-8">
                 <span class="text-white font-poppins text-[10px] tracking-[0.8em] uppercase mr-4 opacity-40">And</span>
                 <h1 class="font-abigail text-white text-[5.5rem] leading-none">
-                    Dinda
+                    {{ $invitation->content['nama_wanita'] }}
                 </h1>
             </div>
         </div>
 
         <div class="self-end mt-6 text-right border-r-2 border-white/30 pr-4">
-            <p class="text-white text-[10px] font-light tracking-[0.4em] uppercase opacity-80">Sunday</p>
-            <p class="text-white text-xl font-abigail tracking-[0.2em] mt-1">June 07 . 2026</p>
+            <p class="text-white text-[10px] font-light tracking-[0.4em] uppercase opacity-80">
+                {{ Carbon\Carbon::parse($invitation->content['tanggal_resepsi'])->format('l') }}</p>
+            <p class="text-white text-xl font-abigail tracking-[0.2em] mt-1">
+                {{ Carbon\Carbon::parse($invitation->content['tanggal_resepsi'])->format('F j, Y') }}</p>
         </div>
     </div>
 
@@ -46,7 +48,7 @@ new class extends Component {
 
         <div class="relative bg-white/10 backdrop-blur-xs  border border-white/20 rounded-4xl py-6 px-4 overflow-hidden shadow-2xl"
             x-data="{
-                expiry: new Date('2026-06-07T08:00:00').getTime(),
+                expiry: new Date('{{ $invitation->content['tanggal_resepsi'] }}').getTime(),
                 remaining: { days: '00', hours: '00', minutes: '00', seconds: '00' },
                 update() {
                     let distance = this.expiry - new Date().getTime();

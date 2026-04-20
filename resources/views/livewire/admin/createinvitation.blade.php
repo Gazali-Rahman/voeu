@@ -49,9 +49,14 @@
                             class="w-full py-2 bg-transparent border-b border-gray-200 focus:border-black focus:outline-none text-sm">
                     </div>
                     <div class="group">
-                        <label class="block text-[9px] uppercase tracking-[0.2em] text-gray-400 mb-1">Nama Orang
+                        <label class="block text-[9px] uppercase tracking-[0.2em] text-gray-400 mb-1">Nama Ayah</label>
+                        <input type="text" wire:model="ayah_pria"
+                            class="w-full py-2 bg-transparent border-b border-gray-200 focus:border-black focus:outline-none text-sm">
+                    </div>
+                    <div class="group">
+                        <label class="block text-[9px] uppercase tracking-[0.2em] text-gray-400 mb-1">Nama Ibu
                             Tua</label>
-                        <input type="text" wire:model="nama_ortu_pria"
+                        <input type="text" wire:model="ibu_pria"
                             class="w-full py-2 bg-transparent border-b border-gray-200 focus:border-black focus:outline-none text-sm">
                     </div>
                 </div>
@@ -86,9 +91,14 @@
                             class="w-full py-2 bg-transparent border-b border-gray-200 focus:border-black focus:outline-none text-sm">
                     </div>
                     <div class="group">
-                        <label class="block text-[9px] uppercase tracking-[0.2em] text-gray-400 mb-1">Nama Orang
+                        <label class="block text-[9px] uppercase tracking-[0.2em] text-gray-400 mb-1">Nama Ayah</label>
+                        <input type="text" wire:model="ayah_wanita"
+                            class="w-full py-2 bg-transparent border-b border-gray-200 focus:border-black focus:outline-none text-sm">
+                    </div>
+                    <div class="group">
+                        <label class="block text-[9px] uppercase tracking-[0.2em] text-gray-400 mb-1">Nama Ibu
                             Tua</label>
-                        <input type="text" wire:model="nama_ortu_wanita"
+                        <input type="text" wire:model="ibu_wanita"
                             class="w-full py-2 bg-transparent border-b border-gray-200 focus:border-black focus:outline-none text-sm">
                     </div>
                 </div>

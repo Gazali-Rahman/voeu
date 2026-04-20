@@ -1,48 +1,53 @@
 <?php
 
 use Livewire\Component;
-use App\Models\Rsvp;
+use App\Models\rsvp;
 use Livewire\Attributes\Validate;
 
 new class extends Component {
     public $invitation;
+    public $name, $attendance, $message;
 
-    #[Validate('required|string|max:255')]
-    public $name = '';
-
-    #[Validate('required|in:hadir,berhalangan,ragu-ragu')]
-    public $attendance = 'hadir'; // Default value
-
-    #[Validate('required|string|min:5')]
-    public $message = '';
+    // Properti untuk menampung daftar ucapan
+    public $wishes = [];
 
     public function mount($invitation)
     {
         $this->invitation = $invitation;
+        $this->loadWishes();
     }
 
-    public function submitRsvp()
+    public function loadWishes()
     {
-        $this->validate();
+        // Ambil data dari database berdasarkan ID undangan
+        // Jika belum ada tabelnya, sementara gunakan data dummy atau query model
+        $this->wishes = rsvp::where('invitation_id', $this->invitation->id)->latest()->get();
+    }
 
-        Rsvp::create([
+    public function send()
+    {
+        $this->validate([
+            'name' => 'required|min:3',
+            'attendance' => 'required|in:hadir,berhalangan,ragu-ragu',
+            'message' => 'required|min:5',
+        ]);
+
+        // Simpan ke database
+        rsvp::create([
             'invitation_id' => $this->invitation->id,
             'name' => $this->name,
             'attendance' => $this->attendance,
             'message' => $this->message,
         ]);
 
-        $this->reset(['name', 'message', 'attendance']);
-        $this->attendance = 'hadir'; // Reset ke default
+        // Reset form
+        $this->reset(['name', 'attendance', 'message']);
 
-        session()->flash('success', 'Pesan Anda berhasil dikirim!');
-    }
+        // Refresh daftar ucapan
+        $this->loadWishes();
 
-    public function render()
-    {
-        return view('components.invitations.noir-et-blanc.⚡rsvp', [
-            'wishes' => $this->invitation->rsvps()->latest()->get(),
-        ]);
+        // Opsional: Tambahkan notifikasi
+        session()->flash('success', 'Ucapan berhasil dikirim!');
     }
 };
 ?>
@@ -68,7 +73,8 @@ new class extends Component {
             </div>
         @endif
 
-        <form wire:submit.prevent="submitRsvp" class="space-y-10">
+        <form wire:submit.prevent="send" class="space-y-10">
+            @csrf
             <div class="relative group">
                 <label
                     class="font-vogue text-[10px] tracking-[0.3em] uppercase text-gray-400 group-focus-within:text-black transition-colors">Nama

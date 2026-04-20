@@ -55,17 +55,18 @@
 
                 <h1
                     class="font-abigail text-white text-[5rem] leading-none self-start opacity-90 hover:opacity-100 transition-opacity">
-                    Andrea</h1>
+                    {{ $invitation->content['nama_pria'] }}</h1>
 
                 <div class="flex items-center self-end -mt-7">
                     <span class="text-white font-poppins text-xs tracking-[1em] uppercase mr-4 opacity-50">And</span>
-                    <h1 class="font-abigail text-white text-[5rem] leading-none">Dinda</h1>
+                    <h1 class="font-abigail text-white text-[5rem] leading-none">
+                        {{ $invitation->content['nama_wanita'] }}</h1>
                 </div>
 
                 <div class="self-end mt-4">
                     <p
                         class="text-white text-xs md:text-sm font-light tracking-[0.5em] uppercase bg-white/10 px-4 py-2 rounded-full">
-                        June 07th, 2026</p>
+                        {{ Carbon\Carbon::parse($invitation->content['tanggal_resepsi'])->format('F jS, Y') }}</p>
                 </div>
             </div>
 
