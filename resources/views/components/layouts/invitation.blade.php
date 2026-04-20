@@ -14,14 +14,9 @@
         // Ambil foto pertama dari dynamic_photos sebagai preview thumb
         $ogImage = asset('assets/img/default-thumbnail.jpg'); // Default awal
 
-        if (isset($invitation)) {
-            if (!empty($invitation->content['og_image'])) {
-                $ogImage = asset('storage/' . $invitation->content['og_image']);
-            } elseif (!empty($invitation->content['dynamic_photos'][0]['path'])) {
-                $ogImage = asset('storage/' . $invitation->content['dynamic_photos'][0]['path']);
-            }
+        if (isset($invitation) && !empty($invitation->content['og_image'])) {
+            $ogImage = asset('storage/' . $invitation->content['og_image']);
         }
-
     @endphp
 
     <title>{{ $title }}</title>
