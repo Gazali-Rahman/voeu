@@ -24,7 +24,7 @@ class Home extends Component
     public function render()
     {
         $templateName = $this->invitation->catalog->slug; // Misal: 'vintage-royal'
-
+        view()->share('invitation', $this->invitation);
         // Arahkan ke blade home yang ada di dalam folder template tersebut
         return view('livewire.invitations.' . $templateName . '.home', [
             'invitation' => $this->invitation,

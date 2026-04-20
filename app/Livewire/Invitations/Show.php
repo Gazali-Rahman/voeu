@@ -31,11 +31,11 @@ class Show extends Component
     }
     public function render()
     {
-        // 1. Ambil slug dari katalog, misal: 'vintage-royal'
         $templateName = $this->invitation->catalog->slug;
 
-        // 2. Arahkan view ke folder templates
-        // Data 'content' dikirim agar bisa dipanggil langsung di blade
+        // Bagikan variabel ke layout secara global untuk request ini
+        view()->share('invitation', $this->invitation);
+
         return view('livewire.invitations.' . $templateName . '.first', [
             'invitation' => $this->invitation,
             'guestName' => $this->guestName

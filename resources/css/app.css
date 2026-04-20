@@ -131,3 +131,11 @@ html {
     font-weight: 900;
     font-style: italic;
 }
+@media screen and (max-width: 768px) {
+    /* Paksa font 16px agar tidak zoom, tapi kecilkan secara visual */
+    input,
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+}
