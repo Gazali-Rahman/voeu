@@ -3,17 +3,27 @@ use Livewire\Component;
 
 new class extends Component {
     public $invitation;
-
+    public $galleryPhotos = [];
     public function mount($invitation)
     {
         $this->invitation = $invitation;
+        // Ambil foto gallery secara berurutan
+        for ($i = 1; $i <= 5; $i++) {
+            $photo = $this->invitation->getPhoto("gallery$i");
+            if ($photo) {
+                $this->galleryPhotos[] = $photo;
+            }
+        }
     }
 };
 ?>
 
 <!-- Section: Gallery (The Lookbook) -->
 <!-- Jarak & Padding tetap sama: py-24 px-6 -->
-<div class="bg-white py-24 px-6 overflow-hidden">
+<div class="bg-white py-24 px-6 overflow-hidden" x-data="{
+    activeIndex: 0,
+    photos: @js($galleryPhotos)
+}">
     <!-- Title Section: x-show diganti class binding agar jarak tidak lompat -->
     <div class="mb-16 relative" x-data="{ visible: false }" x-intersect.once="visible = true">
         <div class="flex flex-col transition-all duration-1000 transform"
@@ -28,15 +38,15 @@ new class extends Component {
     </div>
 
     <!-- Gallery Grid: Struktur tetap sama -->
-    <div class="space-y-10">
+    <div class="space-y-5">
 
-        <!-- Row 1 -->
         <div class="grid grid-cols-12 gap-4 items-start" x-data="{ visible: false }" x-intersect.once="visible = true">
             <div class="col-span-8 shadow-2xl transition-all duration-1000 transform"
                 :class="visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'">
-                <img src="{{ $invitation->getPhoto('gallery1') }}"
-                    class="w-full aspect-3/4 object-cover grayscale hover:grayscale-0 transition duration-700">
+                <img :src="photos[activeIndex]"
+                    class="w-full aspect-3/4 object-cover grayscale hover:grayscale-0 transition-all duration-700">
             </div>
+
             <div class="col-span-4 mt-12 transition-all duration-1000 delay-300 transform"
                 :class="visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'">
                 <img src="{{ $invitation->getPhoto('gallery2') }}"
@@ -44,6 +54,17 @@ new class extends Component {
                 <p class="mt-4 font-serif italic text-[9px] text-gray-400 leading-tight uppercase tracking-widest">
                     Captured Moments / 01</p>
             </div>
+        </div>
+
+        <div class="flex gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden snap-x">
+            <template x-for="(photo, index) in photos" :key="index">
+                <button @click="activeIndex = index" class="relative shrink-0 transition-all duration-500 snap-start"
+                    :class="activeIndex === index ? 'w-13' : 'w-12'">
+                    <img :src="photo"
+                        class="aspect-square object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                        :class="activeIndex === index ? 'grayscale-0 border-b-2 border-black' : 'opacity-50'">
+                </button>
+            </template>
         </div>
 
         <!-- Row 2 -->
