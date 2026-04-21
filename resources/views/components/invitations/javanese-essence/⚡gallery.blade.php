@@ -74,7 +74,7 @@ new class extends Component {
     {{-- VIDEO SECTION --}}
     @if ($videoEmbed)
         <div class="px-6 mb-12">
-            <div class="relative w-full aspect-video  overflow-hidden shadow-2xl border border-[#5a3a2e]/10">
+            <div class="relative w-full aspect-video overflow-hidden shadow-2xl border border-[#5a3a2e]/10">
                 <iframe class="absolute inset-0 w-full h-full" src="{{ $videoEmbed }}" title="YouTube video player"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

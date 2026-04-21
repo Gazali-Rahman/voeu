@@ -39,14 +39,11 @@ return [
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT_URL'),
     ],
-    'xendit' => [
-        'key' => env('XENDIT_SECRET_KEY'),
-    ],
     'midtrans' => [
         'merchant_id' => env('MIDTRANS_MERCHANT_ID'),
         'client_key' => env('MIDTRANS_CLIENT_KEY'),
         'server_key' => env('MIDTRANS_SERVER_KEY'),
-        'is_production' => env('MIDTRANS_IS_PRODUCTION', false),
+        'is_production' => env('MIDTRANS_IS_PRODUCTION', true),
         'is_sanitized' => true,
         'is_3ds' => true,
     ],
