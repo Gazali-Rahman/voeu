@@ -95,6 +95,7 @@
                                         </a>
                                     @endif
                                     <button wire:click="markAsCompleted({{ $order->id }})"
+                                        wire:confirm="Apakah Anda yakin ingin menandai pesanan ini sebagai selesai?"
                                         class="bg-[#1a1a1a] text-white px-5 py-2.5 rounded-lg text-[8px] uppercase tracking-[0.2em] hover:bg-black transition-all">
                                         Set Selesai
                                     </button>

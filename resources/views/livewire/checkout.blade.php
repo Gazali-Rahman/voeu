@@ -7,18 +7,93 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
             {{-- Product Preview --}}
+            {{-- Product Preview --}}
             <div class="space-y-6">
                 <div class="aspect-square rounded-2xl overflow-hidden border border-neutral-200 shadow-sm">
                     <img src="{{ asset('storage/' . $catalog->image) }}" class="w-full h-full object-cover">
                 </div>
-                <div class="flex justify-between items-end border-b border-neutral-100 pb-6">
-                    <div>
-                        <h3 class="text-xl font-medium uppercase tracking-widest text-[#1a1a1a]">{{ $catalog->name }}
-                        </h3>
-                        <p class="text-gray-400 mt-1 text-[10px] uppercase tracking-[0.3em]">Digital Invitation</p>
+
+                <div class="space-y-4" x-data="{ showDesc: false }">
+                    <div class="flex justify-between items-end border-b border-neutral-100 pb-6">
+                        <div>
+                            <h3 class="text-xl font-medium uppercase tracking-widest text-[#1a1a1a]">
+                                {{ $catalog->name }}</h3>
+                            <p class="text-gray-400 mt-1 text-[10px] uppercase tracking-[0.3em]">Digital Invitation</p>
+                        </div>
+                        <p class="text-lg font-utama text-[#1a1a1a]">Rp
+                            {{ number_format($catalog->price, 0, ',', '.') }}</p>
                     </div>
-                    <p class="text-lg font-utama text-[#1a1a1a]">Rp {{ number_format($catalog->price, 0, ',', '.') }}
-                    </p>
+
+                    {{-- Dropdown Toggle Button --}}
+                    <div class="border-b border-neutral-100 pb-4">
+                        <button @click="showDesc = !showDesc" class="flex items-center justify-between w-full group">
+                            <span
+                                class="text-[10px] uppercase tracking-[0.2em] font-medium text-gray-500 group-hover:text-black transition-colors">
+                                View Details & Features
+                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="h-4 w-4 text-gray-400 transition-transform duration-300"
+                                :class="showDesc ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        {{-- Description Content --}}
+                        <div x-show="showDesc" x-collapse x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 transform -translate-y-2"
+                            x-transition:enter-end="opacity-100 transform translate-y-0" class="mt-4">
+
+                            @php
+                                // 1. Pecah teks dari database berdasarkan baris baru
+                                $lines = explode("\n", $catalog->description);
+
+                                $mainDescription = [];
+                                $features = [];
+
+                                foreach ($lines as $line) {
+                                    $line = trim($line);
+                                    if (empty($line)) {
+                                        continue;
+                                    }
+
+                                    // 2. Cek apakah baris diawali tanda strip '-'
+                                    if (str_starts_with($line, '-')) {
+                                        // Simpan sebagai fitur (hapus tanda strip-nya)
+                                        $features[] = ltrim($line, '- ');
+                                    } else {
+                                        // Simpan sebagai deskripsi biasa
+                                        $mainDescription[] = $line;
+                                    }
+                                }
+                            @endphp
+
+                            {{-- Tampilkan Deskripsi Utama (Jika ada teks tanpa tanda strip) --}}
+                            @if (!empty($mainDescription))
+                                <div class="prose prose-sm max-w-none mb-4">
+                                    <p
+                                        class="text-[11px] leading-relaxed text-gray-600 font-light tracking-wide uppercase italic">
+                                        {{ implode(' ', $mainDescription) }}
+                                    </p>
+                                </div>
+                            @endif
+
+                            {{-- Tampilkan List Fitur Otomatis (Jika ada teks dengan tanda strip) --}}
+                            @if (!empty($features))
+                                <ul class="space-y-2.5">
+                                    @foreach ($features as $feature)
+                                        <li
+                                            class="flex items-start gap-3 text-[9px] text-gray-400 uppercase tracking-[0.2em]">
+                                            {{-- Dot minimalis --}}
+                                            <span class="w-1 h-1 bg-neutral-300 rounded-full mt-1 shrink-0"></span>
+                                            <span class="leading-tight">{{ $feature }}</span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
 

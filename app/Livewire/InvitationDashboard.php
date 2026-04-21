@@ -31,7 +31,7 @@ class InvitationDashboard extends Component
          * url() akan mengambil domain dari APP_URL di .env
          * Pastikan di .env APP_URL=https://wedding.voeu.id
          */
-        $this->mainUrl = url('/' . $this->order->slug);
+        $this->mainUrl = url('/v/' . $this->order->slug);
     }
 
     public function generateLink()
