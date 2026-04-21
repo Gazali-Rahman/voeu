@@ -46,20 +46,23 @@ new class extends Component {
             </div>
 
             <div class="border-l border-white/10 pl-6 py-2">
-                <p class="font-poppins text-lg tracking-[0.2em] text-[#fdfaf7] uppercase font-light">Minggu, 07 Juni
-                    2026
+                <p class="font-poppins text-lg tracking-[0.2em] text-[#fdfaf7] uppercase font-light">
+                    {{ \Carbon\Carbon::parse($invitation->content['tanggal_akad'])->locale('id')->isoFormat('dddd, D MMMM Y') }}
                 </p>
-                <p class="font-abigail italic text-xs text-white/40 mt-1 uppercase tracking-[0.3em]">07.00 — 9.00 WITA
+                <p class="font-abigail text-xs text-white/40 mt-1 uppercase tracking-[0.3em]">
+                    {{ \Carbon\Carbon::parse($invitation->content['tanggal_akad'])->locale('id')->isoFormat('HH:mm') }}
+                    -
+                    {{ \Carbon\Carbon::parse($invitation->content['tanggal_resepsi'])->locale('id')->isoFormat('HH:mm') }}
                 </p>
 
                 <div class="mt-8">
                     <p
                         class="font-poppins text-[11px] uppercase tracking-[0.3em] text-[#fdfaf7] font-semibold leading-relaxed">
-                        Rumah mempelai wanita
+                        {{ $invitation->content['tempat_akad'] }}
                     </p>
                     <p
                         class="font-poppins font-light text-[10px] text-white/30 leading-relaxed mt-2 uppercase tracking-widest">
-                        Desa Suryatama RT 5, Kecamatan Halong, Kabupaten Balangan, Kalimantan Selatan
+                        {{ $invitation->content['alamat_akad'] }}
                     </p>
                 </div>
             </div>
@@ -79,19 +82,23 @@ new class extends Component {
             </div>
 
             <div class="border-r border-white/10 pr-6 py-2">
-                <p class="font-poppins text-lg tracking-[0.2em] text-[#fdfaf7] uppercase font-light">Minggu, 07 Juni
-                    2026
+                <p class="font-poppins text-lg tracking-[0.2em] text-[#fdfaf7] uppercase font-light">
+                    {{ \Carbon\Carbon::parse($invitation->content['tanggal_resepsi'])->locale('id')->isoFormat('dddd, D MMMM Y') }}
                 </p>
-                <p class="font-abigail italic text-xs text-white/40 mt-1 uppercase tracking-[0.3em]">9.00 — Selesai</p>
+                <p class="font-abigail  text-xs text-white/40 mt-1 uppercase tracking-[0.3em]">
+                    {{ \Carbon\Carbon::parse($invitation->content['tanggal_resepsi'])->locale('id')->isoFormat('HH:mm') }}
+                    -
+                    selesai
+                </p>
 
                 <div class="mt-8">
                     <p
                         class="font-poppins text-[11px] uppercase tracking-[0.3em] text-[#fdfaf7] font-semibold leading-relaxed">
-                        Rumah mempelai wanita
+                        {{ $invitation->content['tempat_resepsi'] }}
                     </p>
                     <p
                         class="font-poppins font-light text-[10px] text-white/30 leading-relaxed mt-2 uppercase tracking-widest">
-                        Desa Suryatama RT 5, Kecamatan Halong, Kabupaten Balangan, Kalimantan Selatan
+                        {{ $invitation->content['alamat_resepsi'] }}
                     </p>
                 </div>
             </div>

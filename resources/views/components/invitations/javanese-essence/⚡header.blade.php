@@ -23,13 +23,13 @@ new class extends Component {
         </div>
 
         <div class="relative flex flex-col">
-            <h1 class="font-abigail text-white text-[5.5rem] leading-none self-start drop-shadow-2xl">
+            <h1 class="font-abigail text-white text-[4.5rem] leading-none self-start drop-shadow-2xl">
                 {{ $invitation->content['nama_pria'] }}
             </h1>
 
             <div class="flex items-center justify-end -mt-8">
                 <span class="text-white font-poppins text-[10px] tracking-[0.8em] uppercase mr-4 opacity-40">And</span>
-                <h1 class="font-abigail text-white text-[5.5rem] leading-none">
+                <h1 class="font-abigail text-white text-[4.5rem] leading-none">
                     {{ $invitation->content['nama_wanita'] }}
                 </h1>
             </div>

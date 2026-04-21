@@ -74,7 +74,7 @@
                         <div class="relative flex flex-col items-center">
 
                             <h2
-                                class="font-abigail text-6xl md:text-7xl leading-none self-start -mb-4 opacity-90 text-shimmer tracking-normal">
+                                class="font-abigail text-5xl  leading-none self-start -mb-4 opacity-90 text-shimmer tracking-normal">
                                 {{ $invitation->content['nama_pria'] }}
                             </h2>
 
@@ -85,7 +85,7 @@
                             </div>
 
                             <h2
-                                class="font-abigail text-6xl md:text-7xl leading-none self-end -mt-4 opacity-90 text-shimmer tracking-normal">
+                                class="font-abigail text-5xl  leading-none self-end -mt-4 opacity-90 text-shimmer tracking-normal">
                                 {{ $invitation->content['nama_wanita'] }}
                             </h2>
 

@@ -54,7 +54,7 @@ new class extends Component {
                     {{ $invitation->content['nama_pria_lengkap'] }}</p>
                 <p class="font-poppins text-[#5a3a2e]/60 text-[10px] italic leading-relaxed">
                     {{ $invitation->content['label_ortu_pria'] }} <br> Bpk. {{ $invitation->content['ayah_pria'] }} <br>
-                    & Ibu
+                    & Ibu.
                     {{ $invitation->content['ibu_pria'] }}
                 </p>
             </div>
@@ -84,9 +84,9 @@ new class extends Component {
                 </p>
                 <p class="font-poppins text-[#5a3a2e]/60 text-[10px] italic leading-relaxed">
                     {{ $invitation->content['label_ortu_wanita'] }} <br>
-                    {{ $invitation->content['ayah_wanita'] }} <br>
+                    Bpk. {{ $invitation->content['ayah_wanita'] }} <br>
                     &
-                    {{ $invitation->content['ibu_wanita'] }}
+                    Ibu. {{ $invitation->content['ibu_wanita'] }}
                 </p>
             </div>
         </div>
