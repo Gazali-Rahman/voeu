@@ -1,4 +1,4 @@
-<div class="max-w-md mx-auto px-4 bg-[#FFF8F0] overflow-hidden relative" x-data="{ isPlaying: true }" x-init="$nextTick(() => {
+<div class="max-w-md mx-auto  bg-[#FFF8F0] overflow-hidden relative" x-data="{ isPlaying: true }" x-init="$nextTick(() => {
     const audio = document.getElementById('weddingMusic');
     if (audio) {
         audio.play().catch(() => {
@@ -10,14 +10,17 @@
     <audio id="weddingMusic" loop>
         <source src="/assets/musik/1.mp3" type="audio/mpeg">
     </audio>
-    @livewire('invitations.tuscany-warmth.header', ['invitation' => $invitation])
-    @livewire('invitations.tuscany-warmth.qoutes', ['guestName' => $guestName])
-    @livewire('invitations.tuscany-warmth.bridgegroom', ['invitation' => $invitation])
-    @livewire('invitations.tuscany-warmth.acara', ['invitation' => $invitation])
-    @livewire('invitations.tuscany-warmth.gallery', ['invitation' => $invitation])
-    {{-- @livewire('lovestory') --}}
-    {{-- @livewire('rsvp') --}}
-    {{-- @livewire('gift') --}}
+    <div class="px-4">
+        @livewire('invitations.tuscany-warmth.header', ['invitation' => $invitation])
+        @livewire('invitations.tuscany-warmth.qoutes', ['guestName' => $guestName])
+        @livewire('invitations.tuscany-warmth.bridgegroom', ['invitation' => $invitation])
+        @livewire('invitations.tuscany-warmth.acara', ['invitation' => $invitation])
+        @livewire('invitations.tuscany-warmth.gallery', ['invitation' => $invitation])
+        @livewire('invitations.tuscany-warmth.lovestory', ['invitation' => $invitation])
+        @livewire('invitations.tuscany-warmth.rsvp', ['invitation' => $invitation])
+        @livewire('invitations.tuscany-warmth.gift', ['invitation' => $invitation])
+    </div>
+    @livewire('invitations.footer')
     <!-- Floating Music Toggle -->
     <div class="fixed bottom-6 right-6 z-99">
         <button
