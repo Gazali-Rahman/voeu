@@ -6,11 +6,25 @@ new class extends Component {
     public $invitation;
     public $topPhotos = [];
     public $bottomPhotos = [];
-
+    public $videoEmbed;
     public function mount($invitation)
     {
         $this->invitation = $invitation;
+        // Ambil link video dari database
+        $rawVideo = $this->invitation->content['link_video'] ?? null;
+        $this->videoEmbed = null;
+        if ($rawVideo) {
+            // Logika merubah link youtube biasa ke embed
+            // Contoh: https://youtu.be/abc atau https://youtube.com/watch?v=abc
+            $videoId = null;
+            if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $rawVideo, $match)) {
+                $videoId = $match[1];
+            }
 
+            if ($videoId) {
+                $this->videoEmbed = 'https://www.youtube.com/embed/' . $videoId;
+            }
+        }
         // Ambil semua foto gallery seperti biasa
         $rawData = $this->invitation->content['dynamic_photos'] ?? ($this->invitation->dynamic_photos ?? []);
         $allPhotos = collect($rawData)
@@ -57,7 +71,24 @@ new class extends Component {
             </div>
         </div>
     </div>
+    {{-- VIDEO SECTION --}}
+    @if ($videoEmbed)
+        <div class="px-6 mb-12">
+            <div class="relative w-full aspect-video  overflow-hidden shadow-2xl border border-[#5a3a2e]/10">
+                <iframe class="absolute inset-0 w-full h-full" src="{{ $videoEmbed }}" title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                </iframe>
+            </div>
 
+            {{-- Caption Pendek --}}
+            <div class="mt-4 flex items-center gap-3 opacity-30">
+                <div class="w-8 h-[0.5px] bg-[#5a3a2e]"></div>
+                <p class="font-poppins text-[#5a3a2e] text-[8px] tracking-[0.4em] uppercase">Love Story in Motion</p>
+            </div>
+        </div>
+    @endif
     {{-- TOP PHOTOS SECTION --}}
     @if (count($topPhotos) > 0)
         <div class="px-6" x-data="{
