@@ -146,7 +146,8 @@
     </div>
 
     {{-- Script Midtrans --}}
-    <script src="https://app.sandbox.midtrans.com/snap/snap.js"
+    <script
+        src="{{ config('services.midtrans.is_production') ? 'https://app.midtrans.com/snap/snap.js' : 'https://app.sandbox.midtrans.com/snap/snap.js' }}"
         data-client-key="{{ config('services.midtrans.client_key') }}"></script>
     <script>
         document.addEventListener('livewire:init', () => {
