@@ -1,4 +1,4 @@
-<div x-data="{ loading: true }" x-init="setTimeout(() => loading = false, 3000)" class="relative">
+<div x-data="{ loading: true, isOpening: false }" x-init="setTimeout(() => loading = false, 3000)" class="relative">
     <!-- 1. LOADING SCREEN LAYER -->
     <div x-show="loading" x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
@@ -28,7 +28,85 @@
 
     <div class="relative h-screen w-full bg-cover bg-center overflow-hidden max-w-md mx-auto"
         style="background-image: url('{{ $invitation->getPhoto('c1') }}')">
+        @php
+            // Samakan dengan logika di Controller/Gallery
+            $rawData = $invitation->content['dynamic_photos'] ?? ($invitation->dynamic_photos ?? []);
 
+            $galleryPhotos = collect($rawData)
+                ->filter(fn($photo) => isset($photo['label']) && str_contains(strtolower($photo['label']), 'gallery'))
+                ->take(5) // <--- AMBIL 4 FOTO SAJA BIAR TIDAK TERLALU CEPAT
+                ->map(fn($photo) => asset('storage/' . (is_array($photo) ? $photo['path'] ?? '' : $photo)))
+                ->values()
+                ->toArray();
+        @endphp
+        {{-- OPENING SLIDER LAYER --}}
+        <template x-if="isOpening">
+            <div x-transition.opacity.duration.800ms
+                class="fixed inset-0 z-9999 bg-[#2d1e18] flex items-center justify-center overflow-hidden">
+
+                <div class="relative w-full h-full max-w-md mx-auto" x-data="{
+                    activeSlide: 0,
+                    slides: @js($galleryPhotos),
+                    init() {
+                        if (this.slides.length > 0) {
+                            // Setiap slide tampil selama 1.6 detik (1600ms)
+                            // Dengan 3-4 foto, ini pas dengan total durasi 5 detik
+                            setInterval(() => {
+                                this.activeSlide = (this.activeSlide + 1) % this.slides.length
+                            }, 1600);
+                        }
+                    }
+                }">
+                    <template x-for="(img, index) in slides" :key="index">
+                        <div x-show="activeSlide === index" {{-- Transisi diperhalus (masuk 1000ms, keluar 1000ms) --}}
+                            x-transition:enter="transition ease-out duration-[1000ms]"
+                            x-transition:enter-start="opacity-0 scale-110"
+                            x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-[1000ms]"
+                            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                            class="absolute inset-0">
+                            <img :src="img" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black/50"></div>
+                        </div>
+                    </template>
+
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-white px-6">
+                        <div class="relative flex flex-col items-center">
+
+                            <h2
+                                class="font-abigail text-6xl md:text-7xl leading-none self-start -mb-4 opacity-90 text-shimmer tracking-normal">
+                                {{ $invitation->content['nama_pria'] }}
+                            </h2>
+
+                            <div class="flex items-center gap-4 w-full justify-center z-10">
+                                <div class="h-[0.5px] w-12 bg-white/30"></div>
+                                <span class="font-poppins text-[10px] tracking-[0.8em] uppercase opacity-60">And</span>
+                                <div class="h-[0.5px] w-12 bg-white/30"></div>
+                            </div>
+
+                            <h2
+                                class="font-abigail text-6xl md:text-7xl leading-none self-end -mt-4 opacity-90 text-shimmer tracking-normal">
+                                {{ $invitation->content['nama_wanita'] }}
+                            </h2>
+
+                            <div class="mt-12 flex flex-col items-center gap-3">
+                                <p class="font-poppins text-[8px] tracking-[1em] uppercase opacity-40">The Wedding of
+                                </p>
+                                <div class="w-20 h-px bg-white/20 overflow-hidden relative">
+                                    <div class="absolute inset-0 bg-white/80 animate-progress"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="absolute bottom-0 left-0 h-1 bg-white/20 w-full">
+                        <div class="h-full bg-white transition-all duration-5000 ease-linear"
+                            :style="isOpening ? 'width: 100%' : 'width: 0%'"></div>
+                    </div>
+                </div>
+            </div>
+        </template>
         {{-- TAMPILAN DEPAN --}}
         <div class="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-[#5a3a2e] via-[#5a3a2e]/60 to-transparent">
         </div>
@@ -71,11 +149,17 @@
             </div>
 
             <div class="flex flex-col items-center justify-center mt-auto pb-10">
-                <button @click="document.getElementById('weddingMusicFirst').play();" wire:click="open"
+                <button
+                    @click="
+        document.getElementById('weddingMusic').play();
+        isOpening = true;
+        setTimeout(() => { $wire.open() }, 5000);
+    "
                     class="group relative px-10 py-3 overflow-hidden rounded-full border border-white/30 bg-white/10 backdrop-blur-md transition-all duration-300 active:scale-95">
                     <div class="relative flex items-center gap-3">
-                        <span class="text-white text-[10px] tracking-[0.4em] uppercase font-light">Open
-                            Invitation</span>
+                        <span class="text-white text-[10px] tracking-[0.4em] uppercase font-light">
+                            Open Invitation
+                        </span>
                     </div>
                 </button>
                 <div class="mt-4 opacity-40">
@@ -84,6 +168,11 @@
             </div>
         </div>
     </div>
+    @persist('music')
+        <audio id="weddingMusic" loop>
+            <source src="{{ $invitation->getMusic() }}" type="audio/mpeg">
+        </audio>
+    @endpersist
 </div>
 <style>
     /* Inti dari Efek Sorot Cahaya pada Tulisan */

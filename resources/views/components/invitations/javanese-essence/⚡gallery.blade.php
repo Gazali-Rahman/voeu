@@ -39,7 +39,7 @@ new class extends Component {
     <div x-show="open" x-transition.opacity class="fixed inset-0 z-999 bg-black/90 flex items-center justify-center p-4"
         @click="open = false" style="display: none;">
         <button class="absolute top-10 right-10 text-white text-3xl font-light">&times;</button>
-        <img :src="activeImg" class="max-w-full max-h-[80vh] shadow-2xl border-4 border-[#5a3a2e]">
+        <img :src="activeImg" class="max-w-full max-h-[80vh] shadow-2xl ">
     </div>
 
     <div class="relative w-full mb-16 flex flex-col items-end px-6">
@@ -58,22 +58,25 @@ new class extends Component {
         </div>
     </div>
 
+    {{-- TOP PHOTOS SECTION --}}
     @if (count($topPhotos) > 0)
         <div class="px-6" x-data="{
             images: @js($topPhotos),
             activeMain: '{{ $topPhotos[0] ?? '' }}'
         }">
-            <div class="shadow-lg border border-[#5a3a2e]/10 p-2 bg-[#5a3a2e] cursor-pointer group overflow-hidden">
+            {{-- Main Display --}}
+            <div class="shadow-lg cursor-pointer group overflow-hidden">
                 <img :src="activeMain" @click="open = true; activeImg = activeMain"
                     class="w-full aspect-4/5 object-cover group-hover:scale-105 transition duration-700">
             </div>
 
+            {{-- Thumbnails --}}
             <div class="flex overflow-x-auto gap-3 mt-4 pb-4 snap-x [&::-webkit-scrollbar]:hidden">
                 <template x-for="(img, index) in images" :key="index">
                     <div @click="activeMain = img"
-                        class="shrink-0 w-20 aspect-square shadow-md border p-1 bg-[#5a3a2e] cursor-pointer snap-start transition-all duration-300"
-                        :class="activeMain === img ? 'border-[#5a3a2e] scale-105 opacity-100' :
-                            'border-[#5a3a2e]/10 opacity-50 hover:opacity-100'">
+                        class="shrink-0 w-20 aspect-square shadow-md cursor-pointer snap-start transition-all duration-300"
+                        :class="activeMain === img ? 'scale-105 opacity-100' :
+                            ' opacity-50 hover:opacity-100'">
                         <img :src="img" class="w-full h-full object-cover">
                     </div>
                 </template>
@@ -81,6 +84,7 @@ new class extends Component {
         </div>
     @endif
 
+    {{-- BOTTOM PHOTOS SECTION --}}
     @if (count($bottomPhotos) > 0)
         <div class="px-6 mt-6 space-y-4">
             <div class="flex items-center gap-2 opacity-50 mb-6">
@@ -90,12 +94,27 @@ new class extends Component {
                 </p>
             </div>
 
-            <div class="grid grid-cols-3 gap-2">
+            {{-- Menggunakan Grid 3 kolom agar bisa col-span-2 --}}
+            <div class="grid grid-cols-3 gap-2 auto-rows-auto">
                 @foreach ($bottomPhotos as $img)
+                    @php
+                        // Deteksi dimensi gambar
+                        // Kita asumsikan $img adalah URL lengkap, jadi kita ambil path lokalnya untuk getimagesize
+                        $path = str_replace(asset('storage'), storage_path('app/public'), $img);
+                        $isLandscape = false;
+
+                        if (file_exists($path)) {
+                            [$width, $height] = getimagesize($path);
+                            $isLandscape = $width > $height;
+                        }
+                    @endphp
+
                     <div @click="open = true; activeImg = '{{ $img }}'"
-                        class="shadow-md border border-[#5a3a2e]/10 p-1 bg-[#5a3a2e] cursor-pointer overflow-hidden group">
-                        <img src="{{ $img }}"
-                            class="w-full aspect-square object-cover group-hover:scale-110 transition duration-500">
+                        class="shadow-sm cursor-pointer overflow-hidden group {{ $isLandscape ? 'col-span-2' : 'col-span-1' }}">
+                        <img src="{{ $img }}" {{-- Aspect ratio disesuaikan: Portrait 3:4, Landscape 4:3 (biar tinggi sejajar) --}}
+                            class="w-full h-full  object-cover object-center transition duration-500 group-hover:scale-105 
+                               {{ $isLandscape ? 'aspect-4/3' : 'aspect-2/3' }}"
+                            loading="lazy">
                     </div>
                 @endforeach
             </div>
@@ -106,6 +125,8 @@ new class extends Component {
             </div>
         </div>
     @endif
+
+
 
     <div class="mt-20 flex flex-col items-center opacity-10">
         <div class="w-12 h-[0.5px] bg-[#5a3a2e]"></div>

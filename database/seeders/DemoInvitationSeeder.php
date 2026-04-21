@@ -50,10 +50,13 @@ class DemoInvitationSeeder extends Seeder
             if (File::exists($directoryPath)) {
                 $allFiles = File::files($directoryPath);
 
+                usort($allFiles, function ($a, $b) {
+                    return strnatcmp($a->getFilename(), $b->getFilename());
+                });
+
                 foreach ($allFiles as $file) {
                     $fileName = $file->getFilename();
 
-                    // Filter: Hanya ambil yang mengandung kata 'gallery'
                     if (str_contains(strtolower($fileName), 'gallery')) {
                         $label = pathinfo($fileName, PATHINFO_FILENAME);
 

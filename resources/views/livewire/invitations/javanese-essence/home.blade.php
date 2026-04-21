@@ -1,14 +1,24 @@
 <div class="max-w-md mx-auto h-screen bg-[#f5e9da]" x-data="{ isPlaying: true }" x-init="$nextTick(() => {
     const audio = document.getElementById('weddingMusic');
     if (audio) {
-        audio.play().catch(() => {
-            isPlaying = false; // Jika gagal autoplay, set ke false
-        });
+        // Cek apakah audio sudah jalan atau belum
+        if (!audio.paused) {
+            isPlaying = true;
+        } else {
+            // Jika belum jalan (misal direct access), coba play
+            audio.play().then(() => {
+                isPlaying = true;
+            }).catch(() => {
+                isPlaying = false;
+            });
+        }
     }
 })">
-    <audio id="weddingMusic" loop>
-        <source src="{{ $invitation->getMusic() }}" type="audio/mpeg">
-    </audio>
+    @persist('music')
+        <audio id="weddingMusic" loop>
+            <source src="{{ $invitation->getMusic() }}" type="audio/mpeg">
+        </audio>
+    @endpersist
     @livewire('invitations.javanese-essence.header', ['invitation' => $invitation])
     @livewire('invitations.javanese-essence.qoutes')
     @livewire('invitations.javanese-essence.bridgegroom', ['invitation' => $invitation])
