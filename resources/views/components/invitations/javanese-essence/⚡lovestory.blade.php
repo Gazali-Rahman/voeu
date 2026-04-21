@@ -56,18 +56,10 @@ new class extends Component {
                             {{ $story['title'] ?? '' }}
                         </h4>
 
-                        {{-- Cek apakah ini item terakhir untuk memberikan style khusus (seperti "Janji Suci") --}}
-                        @if ($loop->last)
-                            <div class="relative p-4 border border-[#5a3a2e]/10 bg-[#5a3a2e] shadow-sm mt-4">
-                                <p class="font-poppins text-[11px] leading-relaxed text-white ">
-                                    "{{ $story['story'] ?? '' }}"
-                                </p>
-                            </div>
-                        @else
-                            <p class="font-poppins text-[11px] leading-relaxed text-[#5a3a2e]/70 text-justify">
-                                {{ $story['story'] ?? '' }}
-                            </p>
-                        @endif
+                        <p class="font-poppins text-[11px] leading-relaxed text-[#5a3a2e]/70 text-justify">
+                            {{ $story['story'] ?? '' }}
+                        </p>
+
                     </div>
                 </div>
             @endforeach
