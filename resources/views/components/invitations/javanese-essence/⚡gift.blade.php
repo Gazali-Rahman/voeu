@@ -39,7 +39,7 @@ new class extends Component {
         @foreach ($gifts as $gift)
             <div class="relative" x-data="{ copied: false }">
                 <div
-                    class="relative w-full aspect-[1.58/1] rounded-2xl p-8 text-white shadow-2xl overflow-hidden group">
+                    class="relative w-full aspect-[1.58/1] rounded-2xl p-4 text-white shadow-2xl overflow-hidden group">
                     <div class="absolute inset-0 bg-[#2d1e18]"></div>
 
                     <div class="absolute -top-10 -right-20 opacity-20 rotate-180">
