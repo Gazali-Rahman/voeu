@@ -12,7 +12,7 @@
     @endif
 
     <div
-        class="w-full max-w-md mb-8 bg-white/80 backdrop-blur-sm p-10 rounded-[2.5rem] border border-white shadow-[0_20px_50px_rgba(0,0,0,0.02)]">
+        class="w-full max-w-md mb-8 bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-white shadow-[0_20px_50px_rgba(0,0,0,0.02)]">
         <div class="text-center mb-8">
             <h2 class="text-[10px] uppercase tracking-[0.5em] text-gray-400 font-medium">Order Confirmation</h2>
             <div class="h-px w-10 bg-neutral-200 mx-auto mt-4"></div>
@@ -42,7 +42,7 @@
             <div class="flex gap-2">
                 <input wire:model="promoCode" type="text" placeholder="ENTER CODE"
                     {{ $hasAppliedPromo ? 'readonly' : '' }}
-                    class="flex-1 {{ $hasAppliedPromo ? 'bg-gray-100 text-gray-400' : 'bg-neutral-50' }} border-neutral-100 rounded-xl px-4 py-3 text-[11px] uppercase tracking-widest focus:ring-1 focus:ring-black focus:border-black transition-all">
+                    class="flex-1 {{ $hasAppliedPromo ? 'bg-gray-100 text-gray-400' : 'bg-neutral-50' }} border-neutral-100 rounded-xl px-4 py-3 text-[10px] uppercase tracking-widest focus:ring-1 focus:ring-black focus:border-black transition-all">
 
                 @if (!$hasAppliedPromo)
                     <button wire:click="applyPromo"

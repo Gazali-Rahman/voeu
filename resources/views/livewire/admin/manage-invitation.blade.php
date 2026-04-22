@@ -67,7 +67,7 @@
                                 <span class="text-[11px] font-medium tracking-wider">{{ $item->slug }}</span>
                                 <span
                                     class="text-[8px] {{ str_starts_with($item->slug, 'demo-') ? 'text-amber-500' : 'text-gray-400' }} uppercase tracking-widest">
-                                    {{ str_starts_with($item->slug, 'demo-') ? 'Demo Account' : 'Customer' }}
+                                    {{ str_starts_with($item->slug, 'demo-') ? 'Demo Account' : $item->order->external_id ?? 'No External ID' }}
                                 </span>
                             </div>
                         </td>

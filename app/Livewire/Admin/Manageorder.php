@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Models\Order;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -65,6 +66,25 @@ class Manageorder extends Component
 
         // 3. Kembalikan URL lengkap
         return "https://wa.me/{$phone}?text=" . urlencode($text);
+    }
+
+    public function deleteOrder($id)
+    {
+        $order = Order::with('invitation')->findOrFail($id);
+
+        // 1. Bersihkan File di Storage jika ada undangan
+        if ($order->invitation) {
+            $directory = 'invitations/' . $order->invitation->slug;
+            if (Storage::disk('public')->exists($directory)) {
+                Storage::disk('public')->deleteDirectory($directory);
+            }
+        }
+
+        // 2. Hapus Order
+        // Karena onDelete('cascade'), data di tabel invitations otomatis terhapus
+        $order->delete();
+
+        session()->flash('success', 'Order dan semua asset terkait berhasil dihapus.');
     }
     public function render()
     {

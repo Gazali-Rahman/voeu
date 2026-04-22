@@ -93,7 +93,7 @@ class Cashflow extends Component
         $orders = Order::with('catalog')
             ->whereMonth('created_at', $this->month)
             ->whereYear('created_at', $this->year)
-            ->where('status', 'selesai')
+            ->where('status', 'proses')
             ->get();
 
         // 2. Ambil Transaksi Manual

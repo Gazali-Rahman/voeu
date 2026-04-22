@@ -37,8 +37,19 @@ class ManageInvitation extends Component
             }
         }
 
-        // 3. Opsional: Hapus folder folder slug jika kosong
-        // Storage::disk('public')->deleteDirectory('invitations/' . $invitation->slug);
+        // 3. Hapus OG Image (Thumbnail) dari Storage
+        if (isset($invitation->content['og_image'])) {
+            $ogPath = $invitation->content['og_image'];
+            if (!empty($ogPath) && Storage::disk('public')->exists($ogPath)) {
+                Storage::disk('public')->delete($ogPath);
+            }
+        }
+
+        // 4. Hapus Folder Slug (Folder Utama) dari Storage
+        $directory = 'invitations/' . $invitation->slug;
+        if (Storage::disk('public')->exists($directory)) {
+            Storage::disk('public')->deleteDirectory($directory);
+        }
 
         $invitation->delete();
 

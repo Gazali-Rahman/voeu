@@ -4,7 +4,9 @@
         <div class="mb-12 border-b border-gray-100 pb-8">
             <h2 class="text-2xl font-serif text-[#1a1a1a] tracking-tight">Create Digital Invitation</h2>
             <p class="text-[10px] text-gray-400 uppercase tracking-[0.3em] mt-2">Project: Voeu — Order
-                #{{ $order->id }}</p>
+                #{{ $order->external_id }}</p>
+            <p class="text-[10px] text-gray-400 uppercase tracking-[0.3em] mt-2">Template: {{ $order->catalog->name }}
+            </p>
         </div>
 
         <form wire:submit.prevent="save" class="space-y-12">
