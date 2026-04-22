@@ -78,7 +78,7 @@
         </div>
 
         <!-- 2. Tambahkan class mt-auto dan w-fit agar button berada di bawah -->
-        <button @click="document.getElementById('weddingMusicFirst').play();" wire:click="open"
+        <button @click="document.getElementById('weddingMusic').play();" wire:click="open"
             class="mt-auto mx-auto inline-flex justify-center items-center bg-white rounded-lg px-6 py-3 shadow-md hover:bg-gray-50 transition-all">
             <span class="font-poppins font-medium tracking-widest text-xs uppercase text-">Buka Undangan</span>
         </button>

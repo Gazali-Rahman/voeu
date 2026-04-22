@@ -1,4 +1,4 @@
-<div class="max-w-md mx-auto  bg-[#FFF8F0] overflow-hidden relative" x-data="{ isPlaying: true }" x-init="$nextTick(() => {
+<div class="overflow-hidden max-w-md mx-auto relative" x-data="{ isPlaying: true }" x-init="$nextTick(() => {
     const audio = document.getElementById('weddingMusic');
     if (audio) {
         audio.play().catch(() => {
@@ -6,20 +6,20 @@
         });
     }
 })">
+
     <!-- Audio Element -->
     <audio id="weddingMusic" loop>
         <source src="{{ $invitation->getMusic() }}" type="audio/mpeg">
     </audio>
-    <div class="px-4">
-        @livewire('invitations.tuscany-warmth.header', ['invitation' => $invitation])
-        @livewire('invitations.tuscany-warmth.qoutes', ['guestName' => $guestName])
-        @livewire('invitations.tuscany-warmth.bridgegroom', ['invitation' => $invitation])
-        @livewire('invitations.tuscany-warmth.acara', ['invitation' => $invitation])
-        @livewire('invitations.tuscany-warmth.gallery', ['invitation' => $invitation])
-        @livewire('invitations.tuscany-warmth.lovestory', ['invitation' => $invitation])
-        @livewire('invitations.tuscany-warmth.rsvp', ['invitation' => $invitation])
-        @livewire('invitations.tuscany-warmth.gift', ['invitation' => $invitation])
-    </div>
+
+    @livewire('invitations.eternal-serenity.header', ['invitation' => $invitation])
+    @livewire('invitations.eternal-serenity.qoutes')
+    @livewire('invitations.eternal-serenity.bridgegroom', ['invitation' => $invitation])
+    @livewire('invitations.eternal-serenity.acara', ['invitation' => $invitation])
+    @livewire('invitations.eternal-serenity.gallery', ['invitation' => $invitation])
+    @livewire('invitations.eternal-serenity.lovestory', ['invitation' => $invitation])
+    @livewire('invitations.eternal-serenity.rsvp', ['invitation' => $invitation])
+    @livewire('invitations.eternal-serenity.gift', ['invitation' => $invitation])
     @livewire('invitations.footer')
     <!-- Floating Music Toggle -->
     <div class="fixed bottom-6 right-6 z-99">
@@ -66,6 +66,7 @@
         </button>
     </div>
 </div>
+
 <style>
     @keyframes spin-slow {
         from {

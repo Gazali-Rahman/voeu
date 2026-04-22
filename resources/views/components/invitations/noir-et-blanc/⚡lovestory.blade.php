@@ -33,11 +33,12 @@ new class extends Component {
                             :class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'">
                             <span
                                 class="absolute -top-12 left-1/2 -translate-x-1/2 font-vogue text-[8rem] text-black/3 italic select-none z-0">{{ $story['year'] }}</span>
-                            <div class="relative z-10 px-4">
+                            <div class="relative z-10 px-4 text-center flex flex-col items-center">
                                 <h3 class="font-vogue text-xl text-black uppercase tracking-[0.3em] mb-3">
-                                    {{ $story['title'] }}</h3>
+                                    {{ $story['title'] }}
+                                </h3>
                                 <p
-                                    class="font-light text-[11px] text-gray-500 uppercase tracking-widest leading-relaxed max-w-[240px]">
+                                    class="font-light text-[11px] text-gray-500 uppercase tracking-widest leading-relaxed max-w-sm mx-auto">
                                     {{ $story['story'] }}
                                 </p>
                             </div>
@@ -60,7 +61,7 @@ new class extends Component {
                                 <h3 class="font-vogue text-xl text-black uppercase tracking-widest mb-3">
                                     {{ $story['title'] }}</h3>
                                 <p
-                                    class="font-light text-[11px] text-gray-500 uppercase tracking-widest leading-relaxed max-w-[200px]">
+                                    class="font-light text-[11px] text-gray-500 uppercase tracking-widest leading-relaxed max-w-sm">
                                     {{ $story['story'] }}
                                 </p>
                             </div>
@@ -79,7 +80,7 @@ new class extends Component {
                                 <h3 class="font-vogue text-xl text-black uppercase tracking-widest mb-3">
                                     {{ $story['title'] }}</h3>
                                 <p
-                                    class="font-light text-[11px] text-gray-500 uppercase tracking-widest leading-relaxed max-w-[200px] ml-auto">
+                                    class="font-light text-[11px] text-gray-500 uppercase tracking-widest leading-relaxed max-w-sm ml-auto">
                                     {{ $story['story'] }}
                                 </p>
                             </div>

@@ -57,7 +57,7 @@ new class extends Component {
         <div class="transition-all duration-1000 delay-500 transform flex flex-col items-center"
             :class="visible ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'">
             <div class="h-12 w-px bg-black/10"></div>
-            <img src="{{ asset('assets/png/1.png') }}" alt="Icon" class="w-5 h-5 my-3 opacity-60">
+            <img src="{{ asset('assets/png/noiretblanc/1.png') }}" alt="Icon" class="w-5 h-5 my-3 opacity-60">
             <div class="h-12 w-px bg-black/10"></div>
         </div>
     </div>
