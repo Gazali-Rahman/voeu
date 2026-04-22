@@ -149,6 +149,9 @@
             </div>
 
             <div class="flex flex-col items-center justify-center mt-auto pb-10">
+                <p class="font-poppins text-white text-xs opacity-80 uppercase tracking-widest">Kepada Yth</p>
+                <p class="font-poppins text-white text-[10px] uppercase tracking-[0.4em] mt-2 mb-4 opacity-60">
+                    {{ $guestName }}</p>
                 <button
                     @click="
         document.getElementById('weddingMusic').play();
