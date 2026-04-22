@@ -9,17 +9,22 @@ new class extends Component {
 
 <section class="relative flex flex-col py-24  overflow-hidden max-w-md mx-auto ">
 
-    <div class="relative w-full mb-28 flex flex-col items-start px-6">
-        <h3
+    <div x-data="{ show: false }" x-intersect="show = true" class="relative w-full mb-28 flex flex-col items-start px-6">
+        <h3 x-show="show" x-transition:enter="transition ease-in-out duration-1000 "
+            x-transition:enter-start="translate-x-full " x-transition:enter-end="translate-x-0"
             class="absolute -top-10 left-4 font-abigail text-[#5a3a2e]/5 text-[5rem] leading-none pointer-events-none uppercase">
             Event</h3>
 
         <div class="relative z-10 mt-6">
-            <h2 class="font-abigail text-[#5a3a2e] text-6xl leading-[0.8] tracking-tighter drop-shadow-sm">
+            <h2 x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-500"
+                x-transition:enter-start="translate-x-full " x-transition:enter-end="translate-x-0"
+                class="font-abigail text-[#5a3a2e] text-6xl leading-[0.8] tracking-tighter drop-shadow-sm">
                 The <br> <span class="ml-12 border-b border-[#5a3a2e]/10">Celebration</span>
             </h2>
 
-            <div class="mt-8 flex items-center gap-3 opacity-40">
+            <div x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-1000"
+                x-transition:enter-start="-translate-x-full " x-transition:enter-end="translate-x-0"
+                class="mt-8 flex items-center gap-3 opacity-40">
                 <div class="w-8 h-[0.5px] bg-[#5a3a2e]"></div>
                 <p class="font-poppins text-[#5a3a2e] text-[9px] tracking-[0.5em] uppercase">Save The Date</p>
             </div>
@@ -38,14 +43,18 @@ new class extends Component {
         </div>
 
 
-        <div class="relative z-10">
-            <div class="flex items-center gap-4 mb-8">
+        <div x-data="{ show: false }" x-intersect="show = true" class="relative z-10">
+            <div x-show="show" x-transition:enter="transition ease-in-out duration-1000 "
+                x-transition:enter-start="opacity-0 -translate-x-full "
+                x-transition:enter-end="opacity-100 translate-x-0" class="flex items-center gap-4 mb-8">
                 <img src="{{ asset('assets/png/javaneseessence/cincin1.png') }}" alt="Akad"
                     class="w-10 h-10 object-contain brightness-0 invert opacity-70">
                 <h3 class="font-abigail text-2xl text-white tracking-[0.2em] uppercase">Akad Nikah</h3>
             </div>
 
-            <div class="border-l border-white/10 pl-6 py-2">
+            <div x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-500"
+                x-transition:enter-start="opacity-0 -translate-x-full "
+                x-transition:enter-end="opacity-100 translate-x-0" class="border-l border-white/10 pl-6 py-2">
                 <p class="font-poppins text-lg tracking-[0.2em] text-[#fdfaf7] uppercase font-light">
                     {{ \Carbon\Carbon::parse($invitation->content['tanggal_akad'])->locale('id')->isoFormat('dddd, D MMMM Y') }}
                 </p>
@@ -74,14 +83,18 @@ new class extends Component {
             <div class="h-[0.5px] flex-1 bg-linear-to-l from-transparent to-white/10"></div>
         </div>
 
-        <div class="relative z-10 text-right">
-            <div class="flex items-center justify-end gap-4 mb-8">
+        <div x-data="{ show: false }" x-intersect="show = true" class="relative z-10 text-right">
+            <div x-show="show" x-transition:enter="transition ease-in-out duration-1000 "
+                x-transition:enter-start="translate-x-full opacity-0 "
+                x-transition:enter-end="opacity-100 translate-x-0" class="flex items-center justify-end gap-4 mb-8">
                 <h3 class="font-abigail text-2xl text-white tracking-[0.2em] uppercase">Resepsi</h3>
                 <img src="{{ asset('assets/png/javaneseessence/glas2.png') }}" alt="Resepsi"
                     class="w-15 h-15 object-contain brightness-0 invert opacity-70">
             </div>
 
-            <div class="border-r border-white/10 pr-6 py-2">
+            <div x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-500 "
+                x-transition:enter-start="translate-x-full opacity-0 "
+                x-transition:enter-end="opacity-100 translate-x-0" class="border-r border-white/10 pr-6 py-2">
                 <p class="font-poppins text-lg tracking-[0.2em] text-[#fdfaf7] uppercase font-light">
                     {{ \Carbon\Carbon::parse($invitation->content['tanggal_resepsi'])->locale('id')->isoFormat('dddd, D MMMM Y') }}
                 </p>

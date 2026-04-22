@@ -46,12 +46,16 @@ class Manageorder extends Component
         $text .= "- Nama Lengkap Wanita:\n";
         $text .= "- Orang Tua Wanita (Ayah & Ibu):\n\n";
 
-        $text .= "2. DETAIL ACARA (AKAD/RESEPSI)\n";
+        $text .= "2. DETAIL ACARA (AKAD)\n";
         $text .= "- Tanggal & Waktu:\n";
         $text .= "- Lokasi/Alamat Lengkap:\n";
-        $text .= "- Link Google Maps:\n\n";
 
-        $text .= "3. KONTEN TAMBAHAN\n";
+        $text .= "3. DETAIL ACARA (RESEPSI)\n";
+        $text .= "- Tanggal & Waktu:\n";
+        $text .= "- Lokasi/Alamat Lengkap:\n";
+        $text .= "- Link Google Maps:\n";
+
+        $text .= "4. KONTEN TAMBAHAN\n";
         $text .= "- Link Google Drive (Foto/Video):\n";
         $text .= "- Username IG (Mempelai):\n";
         $text .= "- No. Rekening/E-Wallet (Gift):\n";

@@ -11,23 +11,31 @@ new class extends Component {
 ?>
 
 <div class="relative h-screen w-full bg-cover bg-center overflow-hidden max-w-md mx-auto shadow-2xl flex flex-col justify-between"
-    style="background-image: url('{{ $invitation->getPhoto('c2') }}')">
+    x-data="{ show: false }" x-init="setTimeout(() => show = true, 100)" style="background-image: url('{{ $invitation->getPhoto('c2') }}')">
 
     <div class="absolute inset-0 bg-black/40"></div>
     <div class="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-black/90 via-black/50 to-transparent"></div>
 
     <div class="relative z-20 flex flex-col w-full px-8 pt-16">
 
-        <div class="flex items-baseline gap-3 mb-6 border-b border-white/20 pb-3 self-start">
+        <div x-show="show" x-transition:enter="transition ease-out duration-1000 delay-500"
+            x-transition:enter-start="opacity-0 -translate-x-full" x-transition:enter-end="opacity-100 translate-x-0"
+            class="flex items-baseline gap-3 mb-6 border-b border-white/20 pb-3 self-start">
             <span class="text-white text-[10px] tracking-[0.5em] uppercase font-light opacity-70">The Wedding Of</span>
         </div>
 
+        {{-- nama --}}
         <div class="relative flex flex-col">
-            <h1 class="font-abigail text-white text-[4.5rem] leading-none self-start drop-shadow-2xl">
+            <h1 x-show="show" x-transition:enter="transition ease-out duration-1000 delay-1000"
+                x-transition:enter-start="opacity-0 -translate-x-full"
+                x-transition:enter-end="opacity-100 translate-x-0"
+                class="font-abigail text-white text-[4.5rem] leading-none self-start drop-shadow-2xl">
                 {{ $invitation->content['nama_pria'] }}
             </h1>
 
-            <div class="flex items-center justify-end -mt-8">
+            <div x-show="show" x-transition:enter="transition ease-out duration-1000 delay-1000"
+                x-transition:enter-start="opacity-0 translate-x-full" x-transition:enter-end="opacity-100 translate-x-0"
+                class="flex items-center justify-end -mt-8">
                 <span class="text-white font-poppins text-[10px] tracking-[0.8em] uppercase mr-4 opacity-40">And</span>
                 <h1 class="font-abigail text-white text-[4.5rem] leading-none">
                     {{ $invitation->content['nama_wanita'] }}
@@ -35,8 +43,11 @@ new class extends Component {
             </div>
         </div>
 
-        <div class="self-end mt-6 text-right border-r-2 border-white/30 pr-4">
-            <p class="text-white text-[10px] font-light tracking-[0.4em] uppercase opacity-80">
+        {{-- tanggal --}}
+        <div x-show="show" x-transition:enter="transition ease-out duration-1000 delay-1500"
+            x-transition:enter-start="opacity-0 translate-x-full" x-transition:enter-end="opacity-100 translate-x-0"
+            class="self-end mt-6 text-right border-r-2 border-white/30 pr-4">
+            <p class="text-white text-[10px] font-light tracking-[0.4em]   uppercase opacity-80">
                 {{ Carbon\Carbon::parse($invitation->content['tanggal_resepsi'])->format('l') }}</p>
             <p class="text-white text-xl font-abigail tracking-[0.2em] mt-1">
                 {{ Carbon\Carbon::parse($invitation->content['tanggal_resepsi'])->format('F j, Y') }}</p>
@@ -44,7 +55,9 @@ new class extends Component {
     </div>
 
 
-    <div class="relative z-20 w-full px-6 pb-8">
+    <div x-show="show" x-transition:enter="transition ease-out duration-1000 delay-1500"
+        x-transition:enter-start="opacity-0 translate-y-full" x-transition:enter-end="opacity-100 translate-y-0"
+        class="relative z-20 w-full px-6 pb-8">
 
         <div class="relative bg-white/10 backdrop-blur-xs  border border-white/20 rounded-4xl py-6 px-4 overflow-hidden shadow-2xl"
             x-data="{
@@ -61,11 +74,17 @@ new class extends Component {
             }" x-init="update();
             setInterval(() => update(), 1000)">
 
-            <div class="absolute -bottom-30 w-[50%] left-[-40px] z-0 opacity-5 invert  pointer-events-none">
+            <div x-show="show" x-transition:enter="transition ease-out duration-1000 delay-2000"
+                x-transition:enter-start="opacity-0 invert -translate-x-full"
+                x-transition:enter-end="opacity-5 invert translate-x-0"
+                class="absolute -bottom-30 w-[50%] left-[-40px] z-0 opacity-5 invert  pointer-events-none">
                 <img src="{{ asset('assets/png/javaneseessence/cowo.png') }}"
                     class="h-full w-auto object-contain scale-110">
             </div>
-            <div class="absolute -bottom-25 w-[50%] right-[-40px] z-0 opacity-5 invert  pointer-events-none">
+            <div x-show="show" x-transition:enter="transition ease-out duration-1000 delay-2000"
+                x-transition:enter-start="opacity-0 invert translate-x-full"
+                x-transition:enter-end="opacity-5 invert translate-x-0"
+                class="absolute -bottom-25 w-[50%] right-[-40px] z-0 opacity-5 invert  pointer-events-none">
                 <img src="{{ asset('assets/png/javaneseessence/cewe.png') }}"
                     class="h-full w-auto object-contain scale-110">
             </div>

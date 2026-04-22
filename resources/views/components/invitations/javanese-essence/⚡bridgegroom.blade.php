@@ -14,17 +14,12 @@ new class extends Component {
 
 <section class="relative w-full  py-10 px-6 overflow-hidden max-w-md mx-auto ">
 
-    <div class="absolute top-20 left-[-20%] opacity-[0.05] grayscale pointer-events-none">
-        <img src="{{ asset('assets/png/javaneseessence/cowo.png') }}" class="w-80 h-auto rotate-12">
-    </div>
-    <div class="absolute top-[42%] right-[-20%] opacity-[0.05] grayscale pointer-events-none">
-        <img src="{{ asset('assets/png/javaneseessence/cewe.png') }}" class="w-80 h-auto -rotate-12">
-    </div>
-
     <div class="relative z-10 flex flex-col items-center">
 
-        <div class="mb-24 flex flex-col items-center">
-            <h2 class="font-abigail text-[#5a3a2e] text-5xl tracking-[0.2em] mb-2 uppercase opacity-90">The Profile</h2>
+        <div x-data="{ show: false }" x-intersect="show = true" class="mb-24 flex flex-col items-center">
+            <h2 x-show="show" x-transition:enter="transition ease-out duration-1000"
+                x-transition:enter-start="opacity-0 -translate-x-full " x-transition:enter-end="opacity-90 translate-x-0"
+                class="font-abigail text-[#5a3a2e] text-5xl tracking-[0.2em] mb-2 uppercase opacity-90">The Profile</h2>
             <div class="flex items-center gap-4">
                 <div class="h-px w-12 bg-[#5a3a2e]/20"></div>
                 <p class="text-[#5a3a2e]/50 text-[9px] tracking-[0.6em] uppercase font-light">Bridge & Groom</p>
@@ -32,24 +27,39 @@ new class extends Component {
             </div>
         </div>
 
-        <div class="relative w-full mb-40 flex flex-col items-start">
-            <h3
+        <div x-data="{ show: false }" x-intersect="show = true" class="relative w-full mb-40 flex flex-col items-start">
+            {{-- wayang cowo --}}
+            <div class="absolute -top-40 left-[-35%] opacity-[0.05] grayscale pointer-events-none">
+                <img src="{{ asset('assets/png/javaneseessence/cowo.png') }}" x-show="show"
+                    x-transition:enter="transition ease-out duration-1500"
+                    x-transition:enter-start="opacity-0 -translate-x-full "
+                    x-transition:enter-end="opacity-100 translate-x-0" class="w-80 h-auto rotate-12">
+            </div>
+            <h3 x-show="show" x-transition:enter="transition ease-in-out duration-1500 delay-500"
+                x-transition:enter-start="translate-x-full " x-transition:enter-end="translate-x-0"
                 class="absolute -top-12 left-4 font-abigail text-[#5a3a2e]/10 text-[9rem] leading-none pointer-events-none">
                 Bridge</h3>
 
             <div class="relative w-64 h-80 self-end mr-4">
                 <div class="absolute -inset-4 border border-[#5a3a2e]/10 -z-10"></div>
-                <div class="w-full h-full overflow-hidden shadow-2xl ">
+                <div x-show="show" x-transition:enter="transition ease-in-out duration-1500 delay-1000"
+                    x-transition:enter-start="opacity-0 translate-x-100"
+                    x-transition:enter-end="opacity-100 translate-x-0"
+                    class="w-full h-full overflow-hidden shadow-2xl ">
                     <img src="{{ $invitation->getPhoto('bridge') }}" class="w-full h-full object-cover">
                 </div>
-                <div class="absolute -bottom-10 -left-16">
+                <div x-show="show" x-transition:enter="transition ease-in-out duration-1500 delay-1500"
+                    x-transition:enter-start="opacity-0 -translate-x-100"
+                    x-transition:enter-end="opacity-100 translate-x-0" class="absolute -bottom-10 -left-16">
                     <h4 class="font-abigail text-[#5a3a2e] text-[5.5rem] leading-none drop-shadow-sm">
                         {{ $invitation->content['nama_pria'] }}
                     </h4>
                 </div>
             </div>
 
-            <div class="mt-16 ml-4 text-left border-l-2 border-[#5a3a2e]/10 pl-4">
+            <div x-show="show" x-transition:enter="transition ease-in-out duration-1500 delay-1500"
+                x-transition:enter-start="opacity-0 -translate-x-100" x-transition:enter-end="opacity-100 translate-x-0"
+                class="mt-16 ml-4 text-left border-l-2 border-[#5a3a2e]/10 pl-4">
                 <p class="font-poppins text-[#5a3a2e] text-[11px] tracking-[0.3em] uppercase font-bold mb-1">
                     {{ $invitation->content['nama_pria_lengkap'] }}</p>
                 <p class="font-poppins text-[#5a3a2e]/60 text-[10px] italic leading-relaxed">
@@ -61,24 +71,39 @@ new class extends Component {
         </div>
 
 
-        <div class="relative w-full mb-20 flex flex-col items-end">
-            <h3
+        <div x-data="{ show: false }" x-intersect="show = true" class="relative w-full mb-20 flex flex-col items-end">
+            {{-- wayang cewe  --}}
+            <div class="absolute -top-48 right-[-35%] opacity-[0.05] grayscale pointer-events-none">
+                <img src="{{ asset('assets/png/javaneseessence/cewe.png') }}" x-show="show"
+                    x-transition:enter="transition ease-out duration-1000 "
+                    x-transition:enter-start="opacity-0 translate-x-full "
+                    x-transition:enter-end="opacity-100 translate-x-0" class="w-80 h-auto -rotate-12">
+            </div>
+            <h3 x-show="show" x-transition:enter="transition ease-in-out duration-1500 delay-500"
+                x-transition:enter-start="-translate-x-full " x-transition:enter-end="translate-x-0"
                 class="absolute -top-12 right-4 font-abigail text-[#5a3a2e]/10 text-[9rem] leading-none pointer-events-none text-right">
                 Groom</h3>
 
             <div class="relative w-64 h-80 self-start ml-4">
                 <div class="absolute -inset-4 border border-[#5a3a2e]/10 -z-10"></div>
-                <div class="w-full h-full overflow-hidden shadow-2xl ">
+                <div x-show="show" x-transition:enter="transition ease-in-out duration-1500 delay-1000"
+                    x-transition:enter-start="opacity-0 -translate-x-100"
+                    x-transition:enter-end="opacity-100 translate-x-0"
+                    class="w-full h-full overflow-hidden shadow-2xl ">
                     <img src="{{ $invitation->getPhoto('groom') }}" class="w-full h-full object-cover">
                 </div>
-                <div class="absolute -bottom-10 -right-16 text-right">
+                <div x-show="show" x-transition:enter="transition ease-in-out duration-1500 delay-1500"
+                    x-transition:enter-start="opacity-0 translate-x-100"
+                    x-transition:enter-end="opacity-100 translate-x-0" class="absolute -bottom-10 -right-16 text-right">
                     <h4 class="font-abigail text-[#5a3a2e] text-[5.5rem] leading-none drop-shadow-sm">
                         {{ $invitation->content['nama_wanita'] }}
                     </h4>
                 </div>
             </div>
 
-            <div class="mt-16 mr-4 text-right border-r-2 border-[#5a3a2e]/10 pr-4">
+            <div x-show="show" x-transition:enter="transition ease-in-out duration-1500 delay-1500"
+                x-transition:enter-start="opacity-0 translate-x-100" x-transition:enter-end="opacity-100 translate-x-0"
+                class="mt-16 mr-4 text-right border-r-2 border-[#5a3a2e]/10 pr-4">
                 <p class="font-poppins text-[#5a3a2e] text-[11px] tracking-[0.3em] uppercase font-bold mb-1">
                     {{ $invitation->content['nama_wanita_lengkap'] }}
                 </p>

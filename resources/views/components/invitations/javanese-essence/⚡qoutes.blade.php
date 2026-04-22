@@ -17,27 +17,25 @@ new class extends Component {
 
     <div class="relative z-10 flex flex-col items-center text-center">
 
-        <div class="mb-4">
-            <img src="{{ asset('assets/png/javaneseessence/gunungan.png') }}" class="w-20 h-auto">
+        <div x-data="{ show: false }" x-intersect="show = true" class="mb-4">
+            <img src="{{ asset('assets/png/javaneseessence/gunungan.png') }}" x-show="show"
+                x-transition:enter="transition ease-out duration-1000 delay-500" x-transition:enter-start="opacity-0 "
+                x-transition:enter-end="opacity-100 " class="w-20 h-auto">
         </div>
 
-        <div class="flex flex-col gap-4">
-            <p class="font-poppins text-[#5a3a2e]/80 text-[10px] leading-relaxed tracking-widest">
+        <div x-data="{ show: false }" x-intersect="show = true" class="flex flex-col gap-4">
+            <p x-show="show" x-transition:enter="transition ease-out duration-1000 delay-500"
+                x-transition:enter-start="opacity-0 " x-transition:enter-end="opacity-100 "
+                class="font-poppins text-[#5a3a2e]/80 text-[10px] leading-relaxed tracking-widest">
                 Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu
                 sendiri, supaya kamu merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang.
             </p>
 
-            <p class="font-abigail text-[#5a3a2e] text-xl tracking-widest mt-2">
+            <p x-show="show" x-transition:enter="transition ease-out duration-1000 delay-800"
+                x-transition:enter-start="opacity-0 " x-transition:enter-end="opacity-100 "
+                class="font-abigail text-[#5a3a2e] text-xl tracking-widest mt-2">
                 QS. Ar-Rum: 21
             </p>
         </div>
-
-        {{-- <div class="mt-6 opacity-20 rotate-180">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 7L8 11H11V17H5V11L7 7H10ZM19 7L17 11H20V17H14V11L16 7H19Z" fill="#5a3a2e" />
-            </svg>
-        </div> --}}
-
-
     </div>
 </section>
