@@ -56,16 +56,21 @@ new class extends Component {
         <img :src="activeImg" class="max-w-full max-h-[80vh] shadow-2xl ">
     </div>
 
-    <div class="relative w-full mb-16 flex flex-col items-end px-6">
-        <h3
+    <div x-data="{ show: false }" x-intersect="show = true" class="relative w-full mb-16 flex flex-col items-end px-6">
+        <h3 x-show="show" x-transition:enter="transition ease-out duration-1000"
+            x-transition:enter-start="translate-x-100" x-transition:enter-end="translate-x-0"
             class="absolute -top-10 right-4 font-abigail text-[#5a3a2e]/5 text-[4rem] leading-none pointer-events-none uppercase">
             Moments
         </h3>
         <div class="relative z-10 mt-6 mr-4 text-right">
-            <h2 class="font-abigail text-[#5a3a2e] text-[4rem] leading-[0.8] tracking-tighter drop-shadow-sm">
+            <h2 x-show="show" x-transition:enter="transition ease-out duration-1000 delay-500"
+                x-transition:enter-start="opacity-0 -translate-x-100" x-transition:enter-end="opacity-100 translate-x-0"
+                class="font-abigail text-[#5a3a2e] text-[4rem] leading-[0.8] tracking-tighter drop-shadow-sm">
                 Our <br> <span class="mr-12 border-b border-[#5a3a2e]/10">Gallery</span>
             </h2>
-            <div class="mt-8 flex items-center justify-end gap-3 opacity-40">
+            <div x-show="show" x-transition:enter="transition ease-out duration-1000 delay-1000"
+                x-transition:enter-start="translate-x-100" x-transition:enter-end="translate-x-0"
+                class="mt-8 flex items-center justify-end gap-3 opacity-40">
                 <p class="font-poppins text-[#5a3a2e] text-[9px] tracking-[0.5em] uppercase">Captured Love</p>
                 <div class="w-8 h-[0.5px] bg-[#5a3a2e]"></div>
             </div>

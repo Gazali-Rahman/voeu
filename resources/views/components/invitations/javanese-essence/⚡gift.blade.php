@@ -15,19 +15,24 @@ new class extends Component {
 };
 ?>
 
-<section class="relative flex flex-col py-24 overflow-hidden max-w-md mx-auto">
+<section x-data="{ show: false }" x-intersect="show = true"
+    class="relative flex flex-col py-24 overflow-hidden max-w-md mx-auto">
 
     <div class="relative w-full mb-16 flex flex-col items-center px-6">
-        <h3
+        <h3 x-show="show" x-transition:enter="transition ease-in-out duration-1000 "
+            x-transition:enter-start="-translate-x-full " x-transition:enter-end="translate-x-0"
             class="absolute -top-10 font-abigail text-[#5a3a2e]/5 text-[5rem] leading-none pointer-events-none uppercase text-center w-full">
             Envelope
         </h3>
 
         <div class="relative z-10 text-center">
-            <h2 class="font-abigail text-[#5a3a2e] text-[3.5rem] leading-[0.8] tracking-tighter drop-shadow-sm">
+            <h2 x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-500"
+                x-transition:enter-start="opacity-0 translate-x-100 " x-transition:enter-end="opacity-100 translate-x-0"
+                class="font-abigail text-[#5a3a2e] text-[3.5rem] leading-[0.8] tracking-tighter drop-shadow-sm">
                 Digital <br> <span class="border-b border-[#5a3a2e]/10">Gift</span>
             </h2>
-            <p
+            <p x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-1000"
+                x-transition:enter-start="opacity-0 " x-transition:enter-end="opacity-100"
                 class="mt-8 font-poppins text-[#5a3a2e]/60 text-[10px] uppercase tracking-[0.3em] leading-relaxed max-w-[250px] mx-auto text-center">
                 Doa restu Anda adalah kado terindah, namun jika ingin memberi lebih, kami sediakan fitur ini.
             </p>
@@ -35,7 +40,8 @@ new class extends Component {
     </div>
 
     {{-- Loop melalui daftar gift (rekening/dompet digital) --}}
-    <div class="px-6 space-y-4">
+    <div x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-1500"
+        x-transition:enter-start="opacity-0 " x-transition:enter-end="opacity-100" class="px-6 space-y-4">
         @foreach ($gifts as $gift)
             <div class="relative" x-data="{ copied: false }">
                 <div class="relative w-full aspect-[1.58/1] rounded-2xl text-white shadow-2xl overflow-hidden group">

@@ -52,12 +52,15 @@ new class extends Component {
 ?>
 
 <section class="relative flex flex-col py-24 overflow-hidden max-w-md mx-auto">
-    <div class="relative w-full mb-20 flex flex-col items-start px-6">
-        <h3
+    <div x-data="{ show: false }" x-intersect="show = true" class="relative w-full mb-20 flex flex-col items-start px-6">
+        <h3 x-show="show" x-transition:enter="transition ease-in-out duration-1000 "
+            x-transition:enter-start="-translate-x-full " x-transition:enter-end="translate-x-0"
             class="absolute -top-10 left-4 font-abigail text-[#5a3a2e]/5 text-[5rem] leading-none pointer-events-none uppercase">
             Wishes</h3>
         <div class="relative z-10 mt-6 ml-4">
-            <h2 class="font-abigail text-[#5a3a2e] text-[4rem] leading-[0.8] tracking-tighter drop-shadow-sm">
+            <h2 x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-500"
+                x-transition:enter-start="opacity-0 translate-x-100 " x-transition:enter-end="opacity-100 translate-x-0"
+                class="font-abigail text-[#5a3a2e] text-[4rem] leading-[0.8] tracking-tighter drop-shadow-sm">
                 RSVP & <br> <span class="ml-12 border-b border-[#5a3a2e]/10">Wishes</span>
             </h2>
         </div>
@@ -68,13 +71,6 @@ new class extends Component {
         <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-full opacity-10 pointer-events-none rotate-180">
             <img src="{{ asset('assets/png/javaneseessence/bgawan.png') }}" class="w-full">
         </div>
-
-        @if (session()->has('success'))
-            <div
-                class="mb-4 p-3 bg-green-50 text-green-700 text-[10px] font-poppins uppercase tracking-widest text-center">
-                {{ session('success') }}
-            </div>
-        @endif
 
         <form wire:submit.prevent="send" class="relative z-10 space-y-6">
             @csrf
@@ -128,7 +124,12 @@ new class extends Component {
             <h4 class="font-abigail text-xl text-[#5a3a2e]">Wishes</h4>
             <div class="h-[0.5px] flex-1 bg-[#5a3a2e]/10"></div>
         </div>
-
+        @if (session()->has('success'))
+            <div
+                class="mb-4 p-3 bg-green-50 text-green-700 text-[10px] font-poppins uppercase tracking-widest text-center">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="max-h-[500px] overflow-y-auto pr-2 space-y-4 custom-scrollbar">
             @forelse ($wishes as $wish)
                 <div class="p-5 bg-white shadow-sm border border-[#5a3a2e]/5 rounded-sm">

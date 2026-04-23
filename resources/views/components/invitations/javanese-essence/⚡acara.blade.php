@@ -11,13 +11,13 @@ new class extends Component {
 
     <div x-data="{ show: false }" x-intersect="show = true" class="relative w-full mb-28 flex flex-col items-start px-6">
         <h3 x-show="show" x-transition:enter="transition ease-in-out duration-1000 "
-            x-transition:enter-start="translate-x-full " x-transition:enter-end="translate-x-0"
+            x-transition:enter-start="-translate-x-full " x-transition:enter-end="translate-x-0"
             class="absolute -top-10 left-4 font-abigail text-[#5a3a2e]/5 text-[5rem] leading-none pointer-events-none uppercase">
             Event</h3>
 
         <div class="relative z-10 mt-6">
             <h2 x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-500"
-                x-transition:enter-start="translate-x-full " x-transition:enter-end="translate-x-0"
+                x-transition:enter-start="opacity-0 translate-x-100 " x-transition:enter-end="opacity-100 translate-x-0"
                 class="font-abigail text-[#5a3a2e] text-6xl leading-[0.8] tracking-tighter drop-shadow-sm">
                 The <br> <span class="ml-12 border-b border-[#5a3a2e]/10">Celebration</span>
             </h2>
