@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use App\Models\Order;
 use App\Models\Promo;
-use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -182,8 +181,6 @@ class Payment extends Component
 
             $this->dispatch('pay-via-midtrans', snapToken: $snapToken);
         } catch (\Exception $e) {
-            Log::error('Midtrans Error for ' . $this->order->external_id . ': ' . $e->getMessage());
-
             // Menangani error 406 (Duplicate Order ID dengan harga berbeda)
             if (str_contains($e->getMessage(), '406')) {
                 session()->flash('error', 'Terdapat kendala sesi pembayaran. Silakan tunggu 1-2 menit atau hubungi CS.');

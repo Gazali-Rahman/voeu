@@ -3,7 +3,6 @@
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\WebhookController;
-use App\Livewire\Admin\AdminOrder;
 use App\Livewire\Admin\Createinvitation;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\Manageuser;
