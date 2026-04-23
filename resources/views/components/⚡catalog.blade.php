@@ -50,7 +50,7 @@ new class extends Component {
 
                     <div class="text-center space-y-4">
                         <div>
-                            <h3 class="text-[11px] uppercase tracking-[0.4em] text-[#1a1a1a] font-medium">
+                            <h3 class="text-[10px] uppercase tracking-[0.4em] text-[#1a1a1a] font-medium">
                                 {{ $item->name }}
                             </h3>
                             <p class="text-[9px] uppercase tracking-[0.3em] text-gray-400 mt-1">
