@@ -4,6 +4,7 @@
     <livewire:promo />
     <livewire:catalog />
     <livewire:review />
+    <livewire:contactus />
 
 
 </div>
