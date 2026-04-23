@@ -29,13 +29,15 @@ new class extends Component {
             'attendance' => 'required|in:hadir,berhalangan,ragu-ragu',
             'message' => 'required|min:5',
         ]);
-
+        // Bersihkan nama dan pesan
+        $cleanName = \App\Helpers\WordFilter::clean($this->name);
+        $cleanMessage = \App\Helpers\WordFilter::clean($this->message);
         // Simpan ke database
         rsvp::create([
             'invitation_id' => $this->invitation->id,
-            'name' => $this->name,
+            'name' => $cleanName,
             'attendance' => $this->attendance,
-            'message' => $this->message,
+            'message' => $cleanMessage,
         ]);
 
         // Reset form
