@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         $admin = User::create([
             'name' => 'gazali',
             'email' => 'admin@voeu.id', // Silakan ganti sesuai keinginan
-            'password' => Hash::make('password'), // Ganti dengan password yang aman
+            'password' => Hash::make('s3mbilan'), // Ganti dengan password yang aman
             'email_verified_at' => now(),
         ]);
 
