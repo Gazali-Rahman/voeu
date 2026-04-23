@@ -6,8 +6,8 @@ new class extends Component {
     public function with(): array
     {
         return [
-            'socials' => [['name' => 'Instagram', 'url' => '#'], ['name' => 'TikTok', 'url' => '#'], ['name' => 'Pinterest', 'url' => '#'], ['name' => 'WhatsApp', 'url' => '#']],
-            'links' => [['name' => 'Catalog', 'url' => '#'], ['name' => 'Reviews', 'url' => '#'], ['name' => 'Terms & Conditions', 'url' => '#'], ['name' => 'Privacy Policy', 'url' => '#']],
+            'socials' => [['name' => 'Instagram', 'url' => 'https://www.instagram.com/voeu.digitalinvitation/?utm_source=ig_web_button_share_sheet'], ['name' => 'WhatsApp', 'url' => 'https://wa.me/6285849871150']],
+            'links' => [['name' => 'Catalog', 'url' => '#catalog'], ['name' => 'Reviews', 'url' => '#reviews'], ['name' => 'Terms & Conditions', 'url' => '#'], ['name' => 'Privacy Policy', 'url' => '#']],
         ];
     }
 };

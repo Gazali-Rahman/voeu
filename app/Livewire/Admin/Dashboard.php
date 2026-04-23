@@ -14,7 +14,8 @@ class Dashboard extends Component
     {
         // 1. Ambil data statistik dasar
         $totalRevenue = Order::whereIn('status', ['paid', 'proses', 'selesai'])->sum('amount');
-        $totalOrders = Order::count();
+        // Khusus Total Order: Kecualikan yang external_id nya mengandung "DEMO-"
+        $totalOrders = Order::where('external_id', 'not like', 'DEMO-%')->count();
         $pendingOrders = Order::where('status', 'pending')->count();
 
         // Variabel yang menyebabkan error jika tidak ada:

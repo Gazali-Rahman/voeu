@@ -20,7 +20,7 @@ new class extends Component {
 };
 ?>
 
-<div class="max-w-7xl mx-auto px-6 py-12">
+<div id="promo" class="max-w-7xl mx-auto px-6 py-12">
     @if ($activePromos->count() > 0)
         <div class="mb-8">
             <h2 class="text-sm font-utama tracking-[0.4em] uppercase mb-1">Special Offers</h2>

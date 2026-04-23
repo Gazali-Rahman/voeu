@@ -40,49 +40,61 @@
                         </div>
 
                         <div
-                            class="flex flex-wrap items-center gap-4 md:gap-8 w-full md:w-auto justify-between md:justify-end">
-                            <div class="text-left md:text-right">
+                            class="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8 w-full md:w-auto justify-start md:justify-end">
+
+                            <div class="text-left md:text-right w-full md:w-auto">
                                 <p class="text-[9px] uppercase tracking-widest text-gray-400 mb-1">Status</p>
+
                                 @if ($order->status === 'selesai')
                                     <span
-                                        class="px-4 py-1.5 bg-green-50 text-green-600 rounded-full text-[9px] font-bold uppercase tracking-widest">Selesai</span>
+                                        class="inline-block px-4 py-1.5 bg-green-50 text-green-600 rounded-full text-[9px] font-bold uppercase tracking-widest">
+                                        Selesai
+                                    </span>
                                 @elseif($order->status === 'proses')
                                     <span
-                                        class="px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-[9px] font-bold uppercase tracking-widest animate-pulse">Proses</span>
+                                        class="inline-block px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-[9px] font-bold uppercase tracking-widest animate-pulse">
+                                        Proses
+                                    </span>
                                 @elseif($order->status === 'expired')
                                     <span
-                                        class="px-4 py-1.5 bg-red-50 text-red-600 rounded-full text-[9px] font-bold uppercase tracking-widest">Expired</span>
+                                        class="inline-block px-4 py-1.5 bg-red-50 text-red-600 rounded-full text-[9px] font-bold uppercase tracking-widest">
+                                        Expired
+                                    </span>
                                 @elseif($order->status === 'failed')
                                     <span
-                                        class="px-4 py-1.5 bg-red-50 text-red-600 rounded-full text-[9px] font-bold uppercase tracking-widest italic">Failed</span>
+                                        class="inline-block px-4 py-1.5 bg-red-50 text-red-600 rounded-full text-[9px] font-bold uppercase tracking-widest italic">
+                                        Failed
+                                    </span>
                                 @else
                                     <span
-                                        class="px-4 py-1.5 bg-amber-50 text-amber-600 rounded-full text-[9px] font-bold uppercase tracking-widest">Pending</span>
+                                        class="inline-block px-4 py-1.5 bg-amber-50 text-amber-600 rounded-full text-[9px] font-bold uppercase tracking-widest">
+                                        Pending
+                                    </span>
                                 @endif
                             </div>
 
-                            <div class="flex items-center gap-3">
+                            <div class="flex flex-col md:flex-row items-stretch md:items-center gap-3 w-full md:w-auto">
                                 @if ($order->status === 'pending')
                                     <a href="{{ route('payment', ['external_id' => $order->external_id]) }}"
                                         wire:navigate
-                                        class="bg-[#1a1a1a] text-white px-8 py-4 rounded-xl text-[9px] uppercase tracking-[0.3em] hover:bg-black transition-all text-center font-bold shadow-md">
+                                        class="bg-[#1a1a1a] text-white px-8 py-4 rounded-xl text-[9px] uppercase tracking-[0.3em] hover:bg-black transition-all text-center font-bold shadow-md w-full md:w-auto">
                                         Pay Now
                                     </a>
                                 @elseif($order->status === 'proses')
                                     <button disabled
-                                        class="bg-neutral-50 text-neutral-400 px-8 py-4 rounded-xl text-[9px] uppercase tracking-[0.3em] cursor-not-allowed text-center border border-neutral-100">
+                                        class="bg-neutral-50 text-neutral-400 px-8 py-4 rounded-xl text-[9px] uppercase tracking-[0.3em] cursor-not-allowed text-center border border-neutral-100 w-full md:w-auto">
                                         In Progress
                                     </button>
                                 @elseif($order->status === 'selesai')
                                     <a href="{{ route('invitation.dashboard', ['slug' => $order->slug]) }}"
                                         wire:navigate
-                                        class="bg-white border border-[#1a1a1a] text-[#1a1a1a] px-8 py-4 rounded-xl text-[9px] uppercase tracking-[0.3em] hover:bg-[#1a1a1a] hover:text-white transition-all text-center font-bold">
+                                        class="bg-white border border-[#1a1a1a] text-[#1a1a1a] px-8 py-4 rounded-xl text-[9px] uppercase tracking-[0.3em] hover:bg-[#1a1a1a] hover:text-white transition-all text-center font-bold w-full md:w-auto">
                                         Manage Link
                                     </a>
-                                    {{-- Hanya muncul jika belum ada rating untuk order ini --}}
+
                                     @if ($order->ratings->isEmpty())
                                         <button wire:click="openRatingModal('{{ $order->external_id }}')"
-                                            class="bg-[#F9F8F6] border border-neutral-200 text-neutral-600 px-8 py-4 rounded-xl text-[9px] uppercase tracking-[0.3em] hover:border-[#1a1a1a] hover:text-[#1a1a1a] transition-all text-center font-bold flex items-center justify-center gap-2">
+                                            class="bg-[#F9F8F6] border border-neutral-200 text-neutral-600 px-8 py-4 rounded-xl text-[9px] uppercase tracking-[0.3em] hover:border-[#1a1a1a] hover:text-[#1a1a1a] transition-all text-center font-bold flex items-center justify-center gap-2 w-full md:w-auto">
                                             <svg class="w-3 h-3 text-yellow-500" fill="currentColor"
                                                 viewBox="0 0 20 20">
                                                 <path

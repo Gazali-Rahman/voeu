@@ -29,9 +29,9 @@ new class extends Component {
             <div class="hidden md:flex items-center space-x-12">
                 <a href="/" wire:navigate
                     class="text-[10px] uppercase tracking-[0.4em] text-white hover:text-neutral-300 transition-all">Home</a>
-                <a href="#"
+                <a href="#catalog"
                     class="text-[10px] uppercase tracking-[0.4em] text-white hover:text-neutral-300 transition-all">Collection</a>
-                <a href="#"
+                <a href="#promo"
                     class="text-[10px] uppercase tracking-[0.4em] text-white hover:text-neutral-300 transition-all">Promo</a>
 
                 @auth
@@ -105,7 +105,7 @@ new class extends Component {
             <div class="px-8 py-12 flex flex-col space-y-10">
                 <a href="/" wire:navigate @click="mobileMenuOpen = false"
                     class="text-xs uppercase tracking-[0.5em] text-[#1a1a1a] hover:italic">Home</a>
-                <a href="#" @click="mobileMenuOpen = false"
+                <a href="#catalog" @click="mobileMenuOpen = false"
                     class="text-xs uppercase tracking-[0.5em] text-[#1a1a1a] hover:italic">Collection</a>
 
                 @auth
@@ -113,7 +113,7 @@ new class extends Component {
                         class="text-xs uppercase tracking-[0.5em] text-[#C5A25D] font-bold italic">My Orders</a>
                 @endauth
 
-                <a href="#" @click="mobileMenuOpen = false"
+                <a href="#promo" @click="mobileMenuOpen = false"
                     class="text-xs uppercase tracking-[0.5em] text-[#1a1a1a] hover:italic">Promo</a>
 
                 @guest
