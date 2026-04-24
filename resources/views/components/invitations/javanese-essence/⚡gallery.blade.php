@@ -42,8 +42,11 @@ new class extends Component {
         }
 
         // PECAH DATA: 5 foto pertama untuk di atas, sisanya untuk di bawah
-        $this->topPhotos = array_slice($allPhotos, 0, 5);
-        $this->bottomPhotos = array_slice($allPhotos, 5);
+        // Mengambil 10 foto terakhir untuk top
+        $this->topPhotos = array_slice($allPhotos, -10);
+
+        // Mengambil 10 foto pertama untuk bottom
+        $this->bottomPhotos = array_slice($allPhotos, 0, 10);
     }
 };
 ?>

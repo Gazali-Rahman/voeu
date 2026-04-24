@@ -27,7 +27,7 @@
     </div>
 
     <!-- 1. Tambahkan pb-10 agar button punya jarak aman di bawah -->
-    <div class="max-w-md min-h-screen flex flex-col px-4 text-center justify-start pt-10 pb-10 bg-cover bg-center bg-no-repeat mx-auto"
+    <div class="max-w-md h-screen flex flex-col px-4 text-center justify-start pt-10 pb-10 bg-cover bg-center bg-no-repeat mx-auto"
         style="background-image: url('{{ $invitation->getPhoto('c1') }}')">
 
         <div class="flex gap-4 items-center justify-center">
