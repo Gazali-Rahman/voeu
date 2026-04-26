@@ -40,7 +40,7 @@ new class extends Component {
                     <div class="absolute inset-0 border-[0.5px] border-black/20 translate-x-3 -translate-y-3 z-0"></div>
                     <div
                         class="aspect-3/4 overflow-hidden relative z-10 grayscale hover:grayscale-0 transition duration-1000">
-                        <img src="{{ $invitation->getPhoto('bridge') }}" class="w-full h-full object-cover">
+                        <img src="{{ $invitation->getPhoto('groom') }}" class="w-full h-full object-cover">
                     </div>
                 </div>
 
@@ -50,7 +50,7 @@ new class extends Component {
                     </h2>
                     <div class="flex items-center gap-2 mt-2">
                         <div class="w-12 h-px bg-black"></div>
-                        <span class="font-serif italic text-xs text-gray-400">the bridge</span>
+                        <span class="font-serif italic text-xs text-gray-400">the groom</span>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@ new class extends Component {
                     </div>
                     <div
                         class="aspect-3/4 overflow-hidden relative z-10 grayscale hover:grayscale-0 transition duration-1000">
-                        <img src="{{ $invitation->getPhoto('groom') }}" class="w-full h-full object-cover">
+                        <img src="{{ $invitation->getPhoto('bride') }}" class="w-full h-full object-cover">
                     </div>
                 </div>
 
@@ -101,7 +101,7 @@ new class extends Component {
                     </h2>
                     <div class="flex flex-row-reverse items-center gap-2 mt-2">
                         <div class="w-12 h-px bg-black"></div>
-                        <span class="font-serif italic text-xs text-gray-400">the groom</span>
+                        <span class="font-serif italic text-xs text-gray-400">the bride</span>
                     </div>
                 </div>
             </div>

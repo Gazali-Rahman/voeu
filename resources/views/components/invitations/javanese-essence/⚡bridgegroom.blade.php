@@ -22,7 +22,7 @@ new class extends Component {
                 class="font-abigail text-[#5a3a2e] text-5xl tracking-[0.2em] mb-2 uppercase opacity-90">The Profile</h2>
             <div class="flex items-center gap-4">
                 <div class="h-px w-12 bg-[#5a3a2e]/20"></div>
-                <p class="text-[#5a3a2e]/50 text-[9px] tracking-[0.6em] uppercase font-light">Bridge & Groom</p>
+                <p class="text-[#5a3a2e]/50 text-[9px] tracking-[0.6em] uppercase font-light">Bride & Groom</p>
                 <div class="h-px w-12 bg-[#5a3a2e]/20"></div>
             </div>
         </div>
@@ -38,7 +38,7 @@ new class extends Component {
             <h3 x-show="show" x-transition:enter="transition ease-in-out duration-1500 delay-500"
                 x-transition:enter-start="translate-x-full " x-transition:enter-end="translate-x-0"
                 class="absolute -top-12 left-4 font-abigail text-[#5a3a2e]/10 text-[9rem] leading-none pointer-events-none">
-                Bridge</h3>
+                Groom</h3>
 
             <div class="relative w-64 h-80 self-end mr-4">
                 <div class="absolute -inset-4 border border-[#5a3a2e]/10 -z-10"></div>
@@ -46,7 +46,7 @@ new class extends Component {
                     x-transition:enter-start="opacity-0 translate-x-100"
                     x-transition:enter-end="opacity-100 translate-x-0"
                     class="w-full h-full overflow-hidden shadow-2xl ">
-                    <img src="{{ $invitation->getPhoto('bridge') }}" class="w-full h-full object-cover">
+                    <img src="{{ $invitation->getPhoto('groom') }}" class="w-full h-full object-cover">
                 </div>
                 <div x-show="show" x-transition:enter="transition ease-in-out duration-1500 delay-1500"
                     x-transition:enter-start="opacity-0 -translate-x-100"
@@ -82,7 +82,7 @@ new class extends Component {
             <h3 x-show="show" x-transition:enter="transition ease-in-out duration-1500 delay-500"
                 x-transition:enter-start="-translate-x-full " x-transition:enter-end="translate-x-0"
                 class="absolute -top-12 right-4 font-abigail text-[#5a3a2e]/10 text-[9rem] leading-none pointer-events-none text-right">
-                Groom</h3>
+                Bride</h3>
 
             <div class="relative w-64 h-80 self-start ml-4">
                 <div class="absolute -inset-4 border border-[#5a3a2e]/10 -z-10"></div>
@@ -90,7 +90,7 @@ new class extends Component {
                     x-transition:enter-start="opacity-0 -translate-x-100"
                     x-transition:enter-end="opacity-100 translate-x-0"
                     class="w-full h-full overflow-hidden shadow-2xl ">
-                    <img src="{{ $invitation->getPhoto('groom') }}" class="w-full h-full object-cover">
+                    <img src="{{ $invitation->getPhoto('bride') }}" class="w-full h-full object-cover">
                 </div>
                 <div x-show="show" x-transition:enter="transition ease-in-out duration-1500 delay-1500"
                     x-transition:enter-start="opacity-0 translate-x-100"

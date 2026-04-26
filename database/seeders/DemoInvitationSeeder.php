@@ -43,7 +43,7 @@ class DemoInvitationSeeder extends Seeder
             $photos = [
                 ['label' => 'c1', 'path' => "demo/{$catalog->slug}/c1.png"],
                 ['label' => 'c2', 'path' => "demo/{$catalog->slug}/c2.png"],
-                ['label' => 'bridge', 'path' => "demo/{$catalog->slug}/bridge.png"],
+                ['label' => 'bride', 'path' => "demo/{$catalog->slug}/bride.png"],
                 ['label' => 'groom', 'path' => "demo/{$catalog->slug}/groom.png"],
             ];
             $directoryPath = public_path("storage/demo/{$catalog->slug}");

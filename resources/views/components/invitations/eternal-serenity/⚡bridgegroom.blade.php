@@ -28,7 +28,7 @@ new class extends Component {
             <!-- Frame Foto -->
             <div class="p-2 border-2 border-red-950/20 rounded-full mb-3">
                 <div class="rounded-full aspect-square w-48 bg-cover bg-center border-4 border-white shadow-lg"
-                    style="background-image: url('{{ $invitation->getPhoto('bridge') }}');">
+                    style="background-image: url('{{ $invitation->getPhoto('groom') }}');">
                 </div>
             </div>
 
@@ -60,7 +60,7 @@ new class extends Component {
             <!-- Frame Foto -->
             <div class="p-2 border-2 border-red-950/20 rounded-full mb-3">
                 <div class="rounded-full aspect-square w-48 bg-cover bg-center border-4 border-white shadow-lg"
-                    style="background-image: url('{{ $invitation->getPhoto('groom') }}');">
+                    style="background-image: url('{{ $invitation->getPhoto('bride') }}');">
                 </div>
             </div>
 

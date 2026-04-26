@@ -53,7 +53,7 @@ new class extends Component {
     <div class="relative flex flex-col items-start" x-data="{ show: false }" x-intersect="show = true">
         <!-- Foto Mempelai Pria -->
         <div class="relative w-[70%] z-10">
-            <img src="{{ $invitation->getphoto('bridge') }}" alt="Adrian" x-show="show"
+            <img src="{{ $invitation->getphoto('groom') }}" alt="Adrian" x-show="show"
                 x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 scale-95"
                 x-transition:enter-end="opacity-100 scale-100"
                 class="aspect-3/4 object-cover rounded-lg shadow-md border-white">
@@ -98,7 +98,7 @@ new class extends Component {
     <div class="relative flex flex-col items-end px-6" x-data="{ show: false }" x-intersect="show = true">
         <!-- Foto Mempelai Wanita -->
         <div class="relative w-[70%] z-10 text-right">
-            <img src="{{ $invitation->getphoto('groom') }}" alt="Celine" x-show="show"
+            <img src="{{ $invitation->getphoto('bride') }}" alt="Celine" x-show="show"
                 x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 scale-95"
                 x-transition:enter-end="opacity-100 scale-100"
                 class="aspect-3/4 object-cover rounded-lg shadow-md ml-auto">
