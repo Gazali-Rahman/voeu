@@ -6,7 +6,7 @@ new class extends Component {
 };
 ?>
 
-<section class="max-w-md mx-auto bg-[#EAE8E3] relative overflow-hidden py-16 px-10 flex flex-col items-center">
+<section class="bg-[#EAE8E3] relative py-16 px-4 flex flex-col items-center">
 
     <div class="w-full flex justify-between items-center mb-12 font-mono opacity-40">
         <span class="text-[8px] tracking-[0.3em]">FILE: 002/AN-NABA</span>
@@ -20,7 +20,7 @@ new class extends Component {
     <div class="relative z-10 flex flex-col items-center text-center">
 
         <div class="space-y-4">
-            <p class="font-poppins text-lg leading-relaxed tracking-widest text-black/70">
+            <p class="font-abigail text-lg leading-relaxed tracking-widest text-black/70">
                 "And we created you in pairs."
             </p>
 
@@ -36,9 +36,4 @@ new class extends Component {
         </div>
 
     </div>
-
-    <div class="w-full mt-12 flex justify-center font-mono opacity-30">
-        <span class="text-[7px] tracking-[0.5em] uppercase">Captured with love</span>
-    </div>
-
 </section>
