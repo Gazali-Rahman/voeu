@@ -39,7 +39,7 @@ new class extends Component {
 
 <div x-data="{ open: false, activeImg: '' }">
     @if (count($photos) > 0)
-        <section class="max-w-md mx-auto bg-[#EAE8E3] relative py-20 px-4 min-h-screen">
+        <section class="relative py-20 px-4 min-h-screen">
 
             <div class="mb-12 flex justify-between items-end border-b border-black/10 pb-6 px-2">
                 <div class="flex flex-col">
@@ -111,7 +111,7 @@ new class extends Component {
 
     <template x-teleport="body">
         <div x-show="open" x-transition.opacity.duration.300ms
-            class="fixed inset-0 z-[999] flex items-center justify-center bg-[#EAE8E3]/95 p-4 backdrop-blur-md"
+            class="fixed inset-0 z-999 flex items-center justify-center bg-[#EAE8E3]/95 p-4 backdrop-blur-md"
             @click="open = false">
             <div class="relative w-full h-full flex flex-col items-center justify-center">
                 <img :src="activeImg" class="max-w-full max-h-[80vh] object-contain shadow-2xl">

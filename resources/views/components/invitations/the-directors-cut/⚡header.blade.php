@@ -25,7 +25,7 @@ new class extends Component {
     }
 }" x-init="updateCountdown();
 setInterval(() => updateCountdown(), 1000)"
-    class=" bg-black h-screen relative overflow-hidden flex flex-col justify-center items-center">
+    class="h-screen relative overflow-hidden flex flex-col justify-center items-center">
 
     <div class="absolute inset-0 z-0">
         <img src="{{ $invitation->getPhoto('c2') }}" class="w-full h-full object-cover " alt="Background Couple">

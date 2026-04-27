@@ -14,14 +14,14 @@ new class extends Component {
     }
 };
 ?>
-<section class="max-w-md mx-auto bg-[#EAE8E3] py-24 px-8 relative overflow-hidden">
+<section class=" py-24 px-6 relative overflow-hidden">
 
     <div class="relative mb-16 text-center">
         <h2 class="font-abigail text-5xl text-black/80 mb-3">Wedding Gift</h2>
         <div class="flex justify-center items-center gap-3">
-            <div class="h-[1px] w-8 bg-black/20"></div>
+            <div class="h-px w-8 bg-black/20"></div>
             <p class="font-mono text-[9px] tracking-[0.4em] uppercase text-black/40">Digital Envelope</p>
-            <div class="h-[1px] w-8 bg-black/20"></div>
+            <div class="h-px w-8 bg-black/20"></div>
         </div>
         <p class="mt-8 text-[12px] text-black/50 leading-relaxed max-w-[240px] mx-auto font-light">
             Your presence is enough, but if you wish to give a gift, we provide a digital envelope below.

@@ -1,4 +1,4 @@
-<div class="max-w-md mx-auto">
+<div class="max-w-md mx-auto bg-[#EAE8E3]">
     @livewire('invitations.the-directors-cut.header', ['invitation' => $invitation])
     @livewire('invitations.the-directors-cut.qoutes')
     @livewire('invitations.the-directors-cut.bridgegroom', ['invitation' => $invitation])

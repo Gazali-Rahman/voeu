@@ -54,16 +54,16 @@ new class extends Component {
 };
 ?>
 
-<section class="max-w-md mx-auto bg-[#EAE8E3] py-24 px-6 relative overflow-hidden min-h-screen">
+<section class="py-24 px-6 relative overflow-hidden min-h-screen">
 
 
 
     <div class="relative mb-16 text-center">
         <h2 class="font-abigail text-5xl text-black/80 mb-3">RSVP</h2>
         <div class="flex justify-center items-center gap-3">
-            <div class="h-[1px] w-8 bg-black/20"></div>
+            <div class="h-px w-8 bg-black/20"></div>
             <p class="font-mono text-[9px] tracking-[0.4em] uppercase text-black/40">Confirm Presence</p>
-            <div class="h-[1px] w-8 bg-black/20"></div>
+            <div class="h-px w-8 bg-black/20"></div>
         </div>
     </div>
 
@@ -166,7 +166,7 @@ new class extends Component {
                         {{ $wish->message }}
                     </p>
 
-                    <div class="w-8 h-[1px] bg-black/10 mt-2 group-hover:w-full transition-all duration-700"></div>
+                    <div class="w-8 h-px bg-black/10 mt-2 group-hover:w-full transition-all duration-700"></div>
                 </div>
             @empty
                 <div class="text-center py-10">
@@ -178,7 +178,7 @@ new class extends Component {
 
     <div class="mt-20 pt-10 border-t border-black/5 flex justify-center">
         <div class="flex flex-col items-center gap-4">
-            <div class="w-[1px] h-12 bg-black/10"></div>
+            <div class="w-px h-12 bg-black/10"></div>
             <p class="font-mono text-[8px] tracking-[0.4em] uppercase text-black/20">End of Record</p>
         </div>
     </div>

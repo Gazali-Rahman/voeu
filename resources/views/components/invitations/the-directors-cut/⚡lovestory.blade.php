@@ -16,11 +16,11 @@ new class extends Component {
 
 <div>
     @if (count($stories) > 0)
-        <section class="max-w-md mx-auto bg-[#EAE8E3] py-24 px-8 relative overflow-hidden">
+        <section class="py-24 px-6 relative overflow-hidden">
             <div class="relative mb-20">
                 <h2 class="font-abigail text-5xl text-black/80 mb-3 tracking-wide">Love Story</h2>
                 <div class="flex items-center gap-3">
-                    <div class="h-[1px] w-10 bg-black/30"></div>
+                    <div class="h-px w-10 bg-black/30"></div>
                     <p class="font-mono text-[9px] tracking-[0.4em] uppercase text-black/40">The Chronicles</p>
                 </div>
             </div>
@@ -48,7 +48,7 @@ new class extends Component {
                             </h3>
 
                             <div class="relative">
-                                <div class="absolute -left-4 top-0 h-full w-[1px] bg-black/5"></div>
+                                <div class="absolute -left-4 top-0 h-full w-px bg-black/5"></div>
 
                                 <p
                                     class="text-[13px] text-black/60 leading-relaxed font-normal text-justify tracking-tight">
@@ -58,7 +58,7 @@ new class extends Component {
                         </div>
 
                         <div
-                            class="absolute -right-2 -top-4 font-mono text-[50px] text-black/[0.03] font-bold select-none pointer-events-none">
+                            class="absolute -right-2 -top-4 font-mono text-[50px] text-black/3 font-bold select-none pointer-events-none">
                             {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
                         </div>
                     </div>
@@ -66,7 +66,7 @@ new class extends Component {
             </div>
 
             <div class="mt-28 flex flex-col items-center">
-                <div class="h-16 w-[1px] bg-black/10 mb-6"></div>
+                <div class="h-16 w-px bg-black/10 mb-6"></div>
                 <p class="font-mono text-[8px] tracking-[0.8em] uppercase text-black/20">Archive Closed</p>
             </div>
 
