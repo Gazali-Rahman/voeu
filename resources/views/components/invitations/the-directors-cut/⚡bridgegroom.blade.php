@@ -10,30 +10,40 @@ new class extends Component {
 };
 ?>
 
-<section class=" relative py-20 px-4">
+<section class="relative py-20 px-4">
 
-    <div class="mb-20 flex flex-col items-center text-center px-6">
-        <div class="flex items-center gap-3 font-mono text-[9px] tracking-[0.4em] uppercase text-black/30 mb-2">
+    <div x-data="{ show: false }" x-intersect="show = true" class="mb-20 flex flex-col items-center text-center px-6">
+        <div x-show="show" x-transition:enter="transition ease-in-out duration-1000" x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            class="flex items-center gap-3 font-mono text-[9px] tracking-[0.4em] uppercase text-black/30 mb-2">
             <div class="w-2 h-[0.5px] bg-black/30"></div>
             <span>Profile Selection</span>
             <div class="w-2 h-[0.5px] bg-black/30"></div>
         </div>
-        <h1 class="font-abigail text-4xl text-black/80">Bride & Groom</h1>
-        <p class="font-mono text-[8px] tracking-[0.5em] uppercase text-black/40 mt-4">
+        <h1 x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-500"
+            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+            class="font-abigail text-4xl text-black/80">Bride & Groom</h1>
+        <p x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-1000"
+            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+            class="font-mono text-[8px] tracking-[0.5em] uppercase text-black/40 mt-4">
             [ ID: {{ Carbon\Carbon::parse($invitation->content['tanggal_resepsi'])->format('d.m.y') }} / SUBJECTS: 02 ]
         </p>
     </div>
 
     <div class="space-y-32 relative z-10">
 
-        <div class="relative">
-            <div class="absolute -top-8 left-4 font-mono text-[9px] text-black/30 tracking-widest">
+        <div x-data="{ show: false }" x-intersect="show = true" class="relative">
+            <div x-show="show" x-transition:enter="transition ease-in-out duration-1000"
+                x-transition:enter-start="opacity-0 -translate-x-full" x-transition:enter-end="opacity-100"
+                class="absolute -top-8 left-4 font-mono text-[9px] text-black/30 tracking-widest">
                 REF: 001/BRIDE
             </div>
 
             <div class="flex items-start gap-6">
                 <div class="relative w-[55%] aspect-4/5 bg-neutral-300 shadow-sm ml-2">
-                    <img src="{{ $invitation->getPhoto('bride') }}"
+                    <img x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-500"
+                        x-transition:enter-start="opacity-0 -translate-x-full" x-transition:enter-end="opacity-100"
+                        src="{{ $invitation->getPhoto('bride') }}"
                         class="w-full h-full object-cover grayscale-[0.1] contrast-[1.05]" alt="Bride">
 
                     <div class="absolute -inset-3 pointer-events-none opacity-40">
@@ -43,12 +53,18 @@ new class extends Component {
                 </div>
 
                 <div class="flex-1 pt-4">
-                    <div class="font-mono text-[7px] tracking-[0.3em] text-black/40 mb-2 uppercase italic">Verified
+                    <div x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-1000"
+                        x-transition:enter-start="opacity-0 translate-x-full" x-transition:enter-end="opacity-100"
+                        class="font-mono text-[7px] tracking-[0.3em] text-black/40 mb-2 uppercase italic">Verified
                         Bride</div>
-                    <h2 class="font-abigail text-2xl text-black/80 leading-none">
+                    <h2 x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-1200"
+                        x-transition:enter-start="opacity-0 translate-x-full" x-transition:enter-end="opacity-100"
+                        class="font-abigail text-2xl text-black/80 leading-none">
                         {{ $invitation->content['nama_wanita_lengkap'] }}</h2>
 
-                    <div class="mt-4 flex flex-col gap-4">
+                    <div x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-1500"
+                        x-transition:enter-start="opacity-0 translate-x-full" x-transition:enter-end="opacity-100"
+                        class="mt-4 flex flex-col gap-4">
                         <div class="h-[0.5px] w-full bg-black/10"></div>
                         <p class="font-mono text-[8px] leading-relaxed text-black/50 uppercase tracking-tighter">
                             {{ $invitation->content['label_ortu_wanita'] }} <br>
@@ -60,14 +76,18 @@ new class extends Component {
             </div>
         </div>
 
-        <div class="relative">
-            <div class="absolute -top-8 right-4 font-mono text-[9px] text-black/30 tracking-widest text-right">
+        <div x-data="{ show: false }" x-intersect="show = true" class="relative">
+            <div x-show="show" x-transition:enter="transition ease-in-out duration-1000 "
+                x-transition:enter-start="opacity-0 translate-x-full" x-transition:enter-end="opacity-100"
+                class="absolute -top-8 right-4 font-mono text-[9px] text-black/30 tracking-widest text-right">
                 REF: 002/GROOM
             </div>
 
             <div class="flex flex-row-reverse items-start gap-6">
                 <div class="relative w-[55%] aspect-4/5 bg-neutral-300 shadow-sm mr-2">
-                    <img src="{{ $invitation->getPhoto('groom') }}"
+                    <img x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-500"
+                        x-transition:enter-start="opacity-0 translate-x-full" x-transition:enter-end="opacity-100"
+                        src="{{ $invitation->getPhoto('groom') }}"
                         class="w-full h-full object-cover grayscale-[0.1] contrast-[1.05]" alt="Groom">
 
                     <div class="absolute -inset-3 pointer-events-none opacity-40">
@@ -77,13 +97,19 @@ new class extends Component {
                 </div>
 
                 <div class="flex-1 pt-4 text-right">
-                    <div class="font-mono text-[7px] tracking-[0.3em] text-black/40 mb-2 uppercase italic">Verified
+                    <div x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-1000"
+                        x-transition:enter-start="opacity-0 -translate-x-full" x-transition:enter-end="opacity-100"
+                        class="font-mono text-[7px] tracking-[0.3em] text-black/40 mb-2 uppercase italic">Verified
                         Groom</div>
-                    <h2 class="font-abigail text-2xl text-black/80 leading-none">
+                    <h2 x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-1200"
+                        x-transition:enter-start="opacity-0 -translate-x-full" x-transition:enter-end="opacity-100"
+                        class="font-abigail text-2xl text-black/80 leading-none">
                         {{ $invitation->content['nama_pria_lengkap'] }}
                     </h2>
 
-                    <div class="mt-4 flex flex-col items-end gap-4">
+                    <div x-show="show" x-transition:enter="transition ease-in-out duration-1000 delay-1500"
+                        x-transition:enter-start="opacity-0 -translate-x-full" x-transition:enter-end="opacity-100"
+                        class="mt-4 flex flex-col items-end gap-4">
                         <div class="h-[0.5px] w-full bg-black/10"></div>
                         <p class="font-mono text-[8px] leading-relaxed text-black/50 uppercase tracking-tighter">
                             {{ $invitation->content['label_ortu_pria'] }} <br>

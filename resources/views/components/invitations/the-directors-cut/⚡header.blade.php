@@ -47,22 +47,30 @@ setInterval(() => updateCountdown(), 1000)"
         </div>
         <span class="text-[8px] uppercase tracking-[0.2em] text-white/90">RAW 4K f/2.8</span>
     </div>
-    <div class="relative z-10 flex flex-col items-center w-full px-10">
+    <div x-data="{ show: false }" x-init="setTimeout(() => show = true, 100)" class="relative z-10 flex flex-col items-center w-full px-10">
         <div class="text-center">
-            <h1 class="font-abigail text-4xl text-white drop-shadow-xl mb-4">
+            <h1 x-show="show" x-transition:enter="transition ease-in-out duration-1000"
+                x-transition:enter-start="opacity-0 translate-x-full" x-transition:enter-end="opacity-100"
+                class="font-abigail text-4xl text-white drop-shadow-xl mb-4">
                 {{ $invitation->content['nama_pria'] }}
             </h1>
-            <div class="flex items-center justify-center gap-6 mb-4">
+            <div x-show="show" x-transition:enter="transition ease-in-out duration-1000"
+                x-transition:enter-start="opacity-0 " x-transition:enter-end="opacity-100"
+                class="flex items-center justify-center gap-6 mb-4">
                 <div class="h-[0.5px] w-12 bg-white/30"></div>
                 <span class="font-mono text-xs text-white/60 tracking-widest uppercase text-[10px]">With</span>
                 <div class="h-[0.5px] w-12 bg-white/30"></div>
             </div>
-            <h1 class="font-abigail text-4xl text-white drop-shadow-xl">
+            <h1 x-show="show" x-transition:enter="transition ease-in-out duration-1000"
+                x-transition:enter-start="opacity-0 -translate-x-full" x-transition:enter-end="opacity-100"
+                class="font-abigail text-4xl text-white drop-shadow-xl">
                 {{ $invitation->content['nama_wanita'] }}
             </h1>
         </div>
 
-        <div class="mt-12 flex flex-col items-center gap-3">
+        <div x-show="show" x-transition:enter="transition ease-in-out duration-1000"
+            x-transition:enter-start="opacity-0 " x-transition:enter-end="opacity-100"
+            class="mt-12 flex flex-col items-center gap-3">
             <div class="px-6 py-1.5 border border-white/20 rounded-full backdrop-blur-sm">
                 <p class="text-[9px] font-mono tracking-[0.4em] text-white uppercase">
                     {{ \Carbon\Carbon::parse($invitation->content['tanggal_resepsi'])->format('d . m . Y') }}
@@ -70,7 +78,7 @@ setInterval(() => updateCountdown(), 1000)"
             </div>
             <p
                 class="text-[8px] font-mono tracking-[0.2em] text-white/40 uppercase max-w-[200px] text-center leading-relaxed">
-                Live from: {{ $invitation->content['tempat_resepsi'] }}
+                {{ $invitation->content['tempat_resepsi'] }}
             </p>
         </div>
     </div>

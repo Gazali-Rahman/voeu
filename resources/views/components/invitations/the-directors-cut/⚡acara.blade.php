@@ -10,7 +10,7 @@ new class extends Component {
 };
 ?>
 
-<section class=" relative py-20 px-6">
+<section class="relative py-20 px-6">
     <div class="mb-12 flex flex-col items-center text-center">
         <div class="font-mono text-[9px] tracking-[0.4em] uppercase text-black/40 mb-2">Schedule & Location</div>
         <h1 class="font-abigail text-5xl text-black/90">The Ceremony</h1>
