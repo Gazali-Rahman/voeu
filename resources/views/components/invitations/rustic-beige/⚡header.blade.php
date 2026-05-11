@@ -36,9 +36,11 @@ new class extends Component {
             </p>
 
             <!-- Teks Rata Kanan -->
-            <h2 class="text-[3.5rem] font-['Abigail'] text-[#3E2C23] leading-none">Romeo</h2>
+            <h2 class="text-[3.5rem] font-['Abigail'] text-[#3E2C23] leading-none">
+                {{ $invitation->content['nama_pria'] }}</h2>
             <span class="text-xl font-['Abigail'] text-[#3E2C23]/50 my-1 pr-16">&</span>
-            <h2 class="text-[3.5rem] font-['Abigail'] text-[#3E2C23] leading-none">Juliet</h2>
+            <h2 class="text-[3.5rem] font-['Abigail'] text-[#3E2C23] leading-none">
+                {{ $invitation->content['nama_wanita'] }}</h2>
 
             <!-- Garis & Tanggal -->
             <div class="mt-6 flex items-center justify-end gap-3 w-full">
