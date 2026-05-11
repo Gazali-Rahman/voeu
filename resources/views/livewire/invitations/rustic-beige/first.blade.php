@@ -1,5 +1,5 @@
 <div
-    class="max-w-md mx-auto h-screen flex flex-col items-center justify-between py-8 relative overflow-hidden bg-amber-50">
+    class="max-w-md mx-auto h-screen flex flex-col items-center justify-between py-8 relative overflow-hidden bg-[#FFF8F0]">
 
     <div class="text-center z-10 flex flex-col items-center mt-2 relative">
         <p class="text-[10px] tracking-[0.3em] font-['Poppins'] text-gray-400 uppercase mb-3">The Wedding Of</p>
