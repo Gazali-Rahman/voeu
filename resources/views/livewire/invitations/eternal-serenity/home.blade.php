@@ -23,7 +23,11 @@
         @livewire('invitations.eternal-serenity.lovestory', ['invitation' => $invitation])
     @endif
     @livewire('invitations.eternal-serenity.rsvp', ['invitation' => $invitation])
-    @livewire('invitations.eternal-serenity.gift', ['invitation' => $invitation])
+    @if (
+        !empty($invitation->content['gifts']) &&
+            collect($invitation->content['gifts'])->filter(fn($gift) => $gift['bank_name'] !== '' || $gift['account_number'] !== '')->isNotEmpty())
+        @livewire('invitations.eternal-serenity.gift', ['invitation' => $invitation])
+    @endif
     @livewire('invitations.footer')
     <!-- Floating Music Toggle -->
     <div class="fixed bottom-6 right-6 z-99">
