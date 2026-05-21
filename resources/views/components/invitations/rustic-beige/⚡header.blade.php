@@ -12,12 +12,13 @@ new class extends Component {
 
         <!-- 1. Background Pagar (Silhouette) -->
         <div class="absolute w-full h-full z-0 -right-50 opacity-5 pointer-events-none">
-            <img src="{{ asset('assets/png/catalog6/pagar.png') }}" alt="Siluet Pagar" class="w-full h-full object-cover">
+            <img src="{{ asset('assets/png/rusticbeige/pagar.png') }}" alt="Siluet Pagar"
+                class="w-full h-full object-cover">
         </div>
 
         <!-- 2. Bunga (Pojok Kiri Bawah) -->
         <div class="absolute -bottom-10 -left-15 w-70 z-20 drop-shadow-lg pointer-events-none">
-            <img src="{{ asset('assets/png/catalog6/bunga1.png') }}" alt="Bunga" class="w-full object-cover">
+            <img src="{{ asset('assets/png/rusticbeige/bunga1.png') }}" alt="Bunga" class="w-full object-cover">
         </div>
 
         <!-- 3. Bagian Visual: Foto Menggantung dari Atas -->
@@ -44,7 +45,7 @@ new class extends Component {
 
             <!-- Garis & Tanggal -->
             <div class="mt-6 flex items-center justify-end gap-3 w-full">
-                <div class="h-[1px] w-12 bg-[#3E2C23]/30"></div>
+                <div class="h-px w-12 bg-[#3E2C23]/30"></div>
                 <p class="text-[10px] font-['Poppins'] text-[#3E2C23]/80 tracking-[0.2em] font-medium uppercase">
                     24 . 12 . 2026
                 </p>

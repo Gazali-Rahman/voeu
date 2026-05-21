@@ -126,17 +126,19 @@ new class extends Component {
 
                 <!-- ORNAMEN BUNGA DI DALAM DETAIL (Opacity Pudar) -->
                 <div class="absolute -bottom-6 -left-6 w-35 z-0 pointer-events-none">
-                    <img src="{{ asset('assets/png/catalog6/bunga1.png') }}" alt="Bunga" class="w-full object-cover">
+                    <img src="{{ asset('assets/png/rusticbeige/bunga1.png') }}" alt="Bunga"
+                        class="w-full object-cover">
                 </div>
                 <div class="absolute -bottom-6 -right-6 w-35 z-0 pointer-events-none">
-                    <img src="{{ asset('assets/png/catalog6/bunga3.png') }}" alt="Bunga" class="w-full object-cover">
+                    <img src="{{ asset('assets/png/rusticbeige/bunga3.png') }}" alt="Bunga"
+                        class="w-full object-cover">
                 </div>
 
                 <!-- ========================= -->
                 <!-- KONTEN AKAD -->
                 <!-- ========================= -->
                 <div class="relative z-10 w-full flex flex-col items-center">
-                    <img src="{{ asset('assets/png/catalog6/cincin1.png') }}" alt="Akad"
+                    <img src="{{ asset('assets/png/rusticbeige/cincin1.png') }}" alt="Akad"
                         class="w-20 object-cover mb-4">
                     <h3 class="text-[2rem] font-['Abigail'] text-[#3E2C23] mb-5">Akad Nikah</h3>
 
@@ -174,7 +176,7 @@ new class extends Component {
                 <!-- Pemisah Akad & Resepsi -->
                 <div class="w-full relative my-8 flex justify-center items-center z-10">
                     <div class="absolute  px-3 text-[#3E2C23]/40">
-                        <img src="{{ asset('assets/png/catalog6/bunga2.png') }}" alt=""
+                        <img src="{{ asset('assets/png/rusticbeige/bunga2.png') }}" alt=""
                             class="w-20 object-cover">
                     </div>
                 </div>
@@ -183,7 +185,7 @@ new class extends Component {
                 <!-- KONTEN RESEPSI -->
                 <!-- ========================= -->
                 <div class="relative z-10 w-full flex flex-col items-center">
-                    <img src="{{ asset('assets/png/catalog6/glas2.png') }}" alt="Resepsi"
+                    <img src="{{ asset('assets/png/rusticbeige/glas2.png') }}" alt="Resepsi"
                         class="w-20 object-cover mb-4">
                     <h3 class="text-[2rem] font-['Abigail'] text-[#3E2C23] mb-5">Resepsi</h3>
 

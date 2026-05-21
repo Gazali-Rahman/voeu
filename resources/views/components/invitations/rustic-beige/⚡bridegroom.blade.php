@@ -26,7 +26,7 @@ new class extends Component {
         <div class="flex flex-col items-center w-full z-10 text-center">
 
             <!-- Wrapper Foto Pria -->
-            <div class="relative w-48 h-[19rem] mb-8">
+            <div class="relative w-48 h-76 mb-8">
                 <div
                     class="w-full h-full rounded-t-full rounded-b-full overflow-hidden shadow-md border-4 border-white bg-gray-50 relative z-10">
                     <img src="{{ $invitation->getPhoto('groom') }}" alt="Groom"
@@ -35,7 +35,8 @@ new class extends Component {
 
                 <!-- Bunga Pria (Kanan Bawah) -->
                 <div class="absolute -bottom-6 -right-8 w-36  z-0 pointer-events-none drop-shadow-md">
-                    <img src="{{ asset('assets/png/catalog6/bunga3.png') }}" alt="Bunga" class="w-full object-cover">
+                    <img src="{{ asset('assets/png/rusticbeige/bunga3.png') }}" alt="Bunga"
+                        class="w-full object-cover">
                 </div>
             </div>
 
@@ -68,7 +69,7 @@ new class extends Component {
         <!-- ========================================== -->
         <div class="my-14 flex flex-col items-center z-10">
 
-            <img src="{{ asset('assets/png/catalog6/bunga2.png ') }}" class="w-20" alt="">
+            <img src="{{ asset('assets/png/rusticbeige/bunga2.png ') }}" class="w-20" alt="">
         </div>
 
         <!-- ========================================== -->
@@ -77,7 +78,7 @@ new class extends Component {
         <div class="flex flex-col items-center w-full z-10 text-center mb-6">
 
             <!-- Wrapper Foto Wanita -->
-            <div class="relative w-48 h-[19rem] mb-8">
+            <div class="relative w-48 h-76 mb-8">
                 <div
                     class="w-full h-full rounded-t-full rounded-b-full overflow-hidden shadow-md border-4 border-white  bg-gray-50 relative z-10">
                     <img src="{{ $invitation->getPhoto('bride') }}" alt="Bride"
@@ -86,7 +87,8 @@ new class extends Component {
 
                 <!-- Bunga Wanita (Kiri Atas) -->
                 <div class="absolute -bottom-6 -left-8 w-36 z-0 pointer-events-none drop-shadow-md">
-                    <img src="{{ asset('assets/png/catalog6/bunga1.png') }}" alt="Bunga" class="w-full object-cover">
+                    <img src="{{ asset('assets/png/rusticbeige/bunga1.png') }}" alt="Bunga"
+                        class="w-full object-cover">
                 </div>
             </div>
 

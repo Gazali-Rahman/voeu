@@ -46,14 +46,14 @@ new class extends Component {
         </div>
 
         <div class="absolute top-0 -right-10 w-48 z-0  -rotate-90 pointer-events-none">
-            <img src="{{ asset('assets/png/catalog6/bunga3.png') }}" alt="Bunga" class="w-full object-cover">
+            <img src="{{ asset('assets/png/rusticbeige/bunga3.png') }}" alt="Bunga" class="w-full object-cover">
         </div>
 
         <div class="w-full flex flex-col gap-6 z-10 relative">
 
             <div class="flex items-end gap-4 w-full">
                 <div
-                    class="w-3/5 h-72 rounded-t-full rounded-b-[2rem] overflow-hidden shadow-lg border-4 border-white bg-gray-50 flex items-center justify-center">
+                    class="w-3/5 h-72 rounded-t-full rounded-b-4xl overflow-hidden shadow-lg border-4 border-white bg-gray-50 flex items-center justify-center">
 
                     <img src="{{ asset('storage/' . $gallery[0]['path']) }}" alt="Gallery 1"
                         class="w-full h-full object-cover object-center">
@@ -61,7 +61,7 @@ new class extends Component {
                 </div>
 
                 <div
-                    class="w-2/5 h-44 rounded-tr-[2rem] rounded-bl-[2rem] rounded-tl-md rounded-br-md overflow-hidden shadow-lg border-4 border-white bg-gray-50 mb-4 flex items-center justify-center">
+                    class="w-2/5 h-44 rounded-tr-4xl rounded-bl-4xl rounded-tl-md rounded-br-md overflow-hidden shadow-lg border-4 border-white bg-gray-50 mb-4 flex items-center justify-center">
 
                     <img src="{{ asset('storage/' . $gallery[1]['path']) }}" alt="Gallery 2"
                         class="w-full h-full object-cover object-center">
@@ -70,7 +70,7 @@ new class extends Component {
             </div>
 
             <div class="py-6 px-4 text-center flex flex-col items-center">
-                <img src="{{ asset('assets/png/catalog6/bunga2.png') }}" alt="Bunga" class="w-20 h-auto mb-3">
+                <img src="{{ asset('assets/png/rusticbeige/bunga2.png') }}" alt="Bunga" class="w-20 h-auto mb-3">
                 <p class="text-[11px] font-['Poppins'] text-[#3E2C23]/80 leading-relaxed tracking-wide italic">
                     "Dalam senyummu aku melihat sesuatu yang lebih indah dari bintang-bintang di langit."
                 </p>
@@ -79,12 +79,12 @@ new class extends Component {
             <div x-data="{ mainPhoto: '{{ count($gallery) > 0 ? asset('storage/' . $gallery[0]['path']) : $invitation->getPhoto('gallery1') }}' }" class="w-full flex flex-col gap-4 mt-4">
 
                 <div
-                    class="w-full h-[32rem] rounded-[2.5rem] overflow-hidden shadow-xl border-4 border-white bg-gray-50 relative flex items-center justify-center">
+                    class="w-full h-128 rounded-[2.5rem] overflow-hidden shadow-xl border-4 border-white bg-gray-50 relative flex items-center justify-center">
                     <img :src="mainPhoto" alt="Main Gallery"
                         class="w-full h-full object-cover object-center transition-all duration-500">
 
                     <div
-                        class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none">
+                        class="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent pointer-events-none">
                     </div>
                     <p
                         class="absolute bottom-6 left-6 text-[10px] font-['Poppins'] text-white/90 uppercase tracking-[0.4em] drop-shadow-md">
@@ -101,7 +101,7 @@ new class extends Component {
                         @endphp
 
                         <button @click="mainPhoto = '{{ $imgUrl }}'"
-                            class="flex-shrink-0 w-20 h-20 rounded-2xl overflow-hidden shadow-sm border-2 transition-all duration-300 snap-center focus:outline-none"
+                            class="shrink-0 w-20 h-20 rounded-2xl overflow-hidden shadow-sm border-2 transition-all duration-300 snap-center focus:outline-none"
                             :class="mainPhoto === '{{ $imgUrl }}' ? 'border-[#3E2C23] scale-105 opacity-100 shadow-md' :
                                 'border-white/50 opacity-60 hover:opacity-100'">
                             <img src="{{ $imgUrl }}" class="w-full h-full object-cover object-center">

@@ -30,7 +30,7 @@ new class extends Component {
         </div>
 
         <div class="absolute top-0 -left-6 w-40 z-0 rotate-90 pointer-events-none">
-            <img src="{{ asset('assets/png/catalog6/bunga1.png') }}" alt="Bunga" class="w-full object-cover">
+            <img src="{{ asset('assets/png/rusticbeige/bunga1.png') }}" alt="Bunga" class="w-full object-cover">
         </div>
 
         <div class="w-full max-w-sm relative z-10 flex flex-col items-center">
@@ -43,10 +43,10 @@ new class extends Component {
 
                 @forelse($gifts as $index => $gift)
                     <div x-data="{ copied: false }"
-                        class="bg-[#F5EBE1] border border-[#3E2C23]/10 rounded-[2rem] p-6 shadow-sm relative overflow-hidden group hover:shadow-md transition-all duration-300">
+                        class="bg-[#F5EBE1] border border-[#3E2C23]/10 rounded-4xl p-6 shadow-sm relative overflow-hidden group hover:shadow-md transition-all duration-300">
 
                         <div class="absolute -bottom-10 -right-10 w-50 pointer-events-none">
-                            <img src="{{ asset('assets/png/catalog6/bunga3.png') }}" alt="Ornamen"
+                            <img src="{{ asset('assets/png/rusticbeige/bunga3.png') }}" alt="Ornamen"
                                 class="w-full object-cover">
                         </div>
 
@@ -90,7 +90,7 @@ new class extends Component {
 
                     </div>
                 @empty
-                    <div class="text-center py-10 bg-[#F5EBE1] border border-[#3E2C23]/10 rounded-[2rem]">
+                    <div class="text-center py-10 bg-[#F5EBE1] border border-[#3E2C23]/10 rounded-4xl">
                         <p class="text-[10px] font-['Poppins'] text-[#3E2C23]/50 italic">Fitur amplop digital saat ini
                             tidak diaktifkan.</p>
                     </div>

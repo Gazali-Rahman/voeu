@@ -85,10 +85,10 @@ new class extends Component {
             class="w-full max-w-sm relative bg-[#F5EBE1] border border-[#3E2C23]/20 rounded-[2.5rem] shadow-xl p-8 z-10 overflow-hidden">
 
             <div class="absolute -bottom-6 -left-6 w-30 z-0   pointer-events-none">
-                <img src="{{ asset('assets/png/catalog6/bunga1.png') }}" alt="Bunga" class="w-full object-cover">
+                <img src="{{ asset('assets/png/rusticbeige/bunga1.png') }}" alt="Bunga" class="w-full object-cover">
             </div>
             <div class="absolute -top-6 -right-6 w-30 z-0 -rotate-90  pointer-events-none ">
-                <img src="{{ asset('assets/png/catalog6/bunga3.png') }}" alt="Bunga" class="w-full object-cover">
+                <img src="{{ asset('assets/png/rusticbeige/bunga3.png') }}" alt="Bunga" class="w-full object-cover">
             </div>
 
             <div class="relative z-10">
@@ -179,7 +179,7 @@ new class extends Component {
 
             <div class="text-center mb-8 flex flex-col items-center">
                 <h3 class="text-3xl font-['Abigail'] text-[#3E2C23] mb-2">Guestbook</h3>
-                <div class="w-10 h-[1px] bg-[#3E2C23]/20 mb-3"></div>
+                <div class="w-10 h-px bg-[#3E2C23]/20 mb-3"></div>
                 <p class="text-[9px] font-['Poppins'] text-[#3E2C23]/60 uppercase tracking-[0.3em]">
                     Pesan & Doa Restu
                 </p>
@@ -189,7 +189,7 @@ new class extends Component {
 
                 @forelse($wishes as $wish)
                     <div
-                        class="bg-[#F5EBE1] border border-[#3E2C23]/10 rounded-[1.5rem] p-5 shadow-sm hover:shadow-md transition-shadow duration-300 relative flex-shrink-0">
+                        class="bg-[#F5EBE1] border border-[#3E2C23]/10 rounded-3xl p-5 shadow-sm hover:shadow-md transition-shadow duration-300 relative shrink-0">
 
                         <div class="flex justify-between items-start mb-3 relative z-10">
                             <h4 class="text-[11px] font-semibold font-['Poppins'] text-[#3E2C23]">

@@ -17,7 +17,9 @@
     @livewire('invitations.eternal-serenity.bridgegroom', ['invitation' => $invitation])
     @livewire('invitations.eternal-serenity.acara', ['invitation' => $invitation])
     @livewire('invitations.eternal-serenity.gallery', ['invitation' => $invitation])
-    @livewire('invitations.eternal-serenity.lovestory', ['invitation' => $invitation])
+    @if (!empty($invitation->content['love_stories']))
+        @livewire('invitations.eternal-serenity.lovestory', ['invitation' => $invitation])
+    @endif
     @livewire('invitations.eternal-serenity.rsvp', ['invitation' => $invitation])
     @livewire('invitations.eternal-serenity.gift', ['invitation' => $invitation])
     @livewire('invitations.footer')

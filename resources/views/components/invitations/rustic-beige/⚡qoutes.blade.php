@@ -20,10 +20,10 @@ new class extends Component {
 
             <!-- Ornamen Pembuka (Garis & Ikon Hati Kecil) -->
             <div class="flex items-center justify-center gap-4 mb-10 w-full">
-                <div class="h-[1px] w-10 bg-[#3E2C23]/20"></div>
+                <div class="h-px w-10 bg-[#3E2C23]/20"></div>
                 <!-- Ikon Hati (Heroicons) -->
-                <img src="{{ asset('assets/png/catalog6/bunga2.png') }}" class="w-20" alt="">
-                <div class="h-[1px] w-10 bg-[#3E2C23]/20"></div>
+                <img src="{{ asset('assets/png/rusticbeige/bunga2.png') }}" class="w-20" alt="">
+                <div class="h-px w-10 bg-[#3E2C23]/20"></div>
             </div>
 
             <!-- Teks Kutipan -->
@@ -45,7 +45,7 @@ new class extends Component {
             </div>
 
             <!-- Garis Penutup -->
-            <div class="h-[1px] w-16 bg-[#3E2C23]/20 mt-10"></div>
+            <div class="h-px w-16 bg-[#3E2C23]/20 mt-10"></div>
 
         </div>
     </div>

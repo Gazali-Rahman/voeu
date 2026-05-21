@@ -32,14 +32,14 @@ new class extends Component {
         </div>
         {{-- 
         <div class="absolute top-10 -left-10 w-40 z-0 opacity-30 pointer-events-none">
-            <img src="{{ asset('assets/png/catalog6/bunga3.png') }}" alt="Bunga" class="w-full object-cover">
+            <img src="{{ asset('assets/png/rusticbeige/bunga3.png') }}" alt="Bunga" class="w-full object-cover">
         </div> --}}
 
         <div class="w-full max-w-sm relative z-10">
 
             @if (count($stories) > 0)
                 <div
-                    class="absolute left-[1.35rem] top-8 bottom-8 w-[1px] bg-gradient-to-b from-transparent via-[#3E2C23]/20 to-transparent">
+                    class="absolute left-[1.35rem] top-8 bottom-8 w-px bg-linear-to-b from-transparent via-[#3E2C23]/20 to-transparent">
                 </div>
 
                 <div class="flex flex-col gap-8">
@@ -51,10 +51,10 @@ new class extends Component {
                             </div>
 
                             <div
-                                class="bg-[#F5EBE1] border border-[#3E2C23]/10 rounded-[2rem] p-6 shadow-sm relative overflow-hidden group hover:shadow-md transition-all duration-300">
+                                class="bg-[#F5EBE1] border border-[#3E2C23]/10 rounded-4xl p-6 shadow-sm relative overflow-hidden group hover:shadow-md transition-all duration-300">
 
                                 <div class="absolute -top-4 -right-4 w-25  -rotate-90 pointer-events-none">
-                                    <img src="{{ asset('assets/png/catalog6/bunga3.png') }}" alt="Ornamen"
+                                    <img src="{{ asset('assets/png/rusticbeige/bunga3.png') }}" alt="Ornamen"
                                         class="w-full object-cover">
                                 </div>
 
@@ -76,7 +76,7 @@ new class extends Component {
                     @endforeach
                 </div>
             @else
-                <div class="text-center py-10 bg-gray-50 border border-[#3E2C23]/10 rounded-[2rem]">
+                <div class="text-center py-10 bg-gray-50 border border-[#3E2C23]/10 rounded-4xl">
                     <p class="text-[10px] font-['Poppins'] text-[#3E2C23]/50 italic">Kisah cinta kami akan segera
                         dibagikan di sini.</p>
                 </div>

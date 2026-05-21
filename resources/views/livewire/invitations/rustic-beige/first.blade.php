@@ -18,7 +18,7 @@
     <div class="relative w-48 h-72 my-auto">
 
         <div class="absolute bottom-0 right-1/2 w-32 z-0">
-            <img src="{{ asset('assets/png/catalog6/pagar.png') }}" alt="" class="w-full object-cover">
+            <img src="{{ asset('assets/png/rusticbeige/pagar.png') }}" alt="" class="w-full object-cover">
         </div>
 
         <div class="absolute inset-0 z-10 w-full h-full rounded-t-full overflow-hidden shadow-lg bg-white">
@@ -26,7 +26,7 @@
         </div>
 
         <div class="absolute -top-14 -right-14 w-48 h-auto z-0 pointer-events-none">
-            <img src="{{ asset('assets/png/catalog6/bunga3.png') }}" alt="" class="w-full object-cover">
+            <img src="{{ asset('assets/png/rusticbeige/bunga3.png') }}" alt="" class="w-full object-cover">
         </div>
 
     </div>
