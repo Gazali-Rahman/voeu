@@ -35,8 +35,8 @@ new class extends Component {
             <h3 class="font-utama text-red-950 text-4xl mb-2">{{ $invitation->content['nama_pria'] }}</h3>
             <div class="w-10 h-px bg-red-950/30 mb-3"></div>
             <p class="font-poppins text-red-950/70 text-sm text-center leading-relaxed">
-                {{ $invitation->content['label_ortu_pria'] }} {{ $invitation->content['ayah_pria'] }} <br> &
-                {{ $invitation->content['ibu_pria'] }}
+                {{ $invitation->content['label_ortu_pria'] }} Bpk. {{ $invitation->content['ayah_pria'] }} <br> &
+                Ibu. {{ $invitation->content['ibu_pria'] }}
             </p>
         </div>
     </div>
@@ -67,8 +67,8 @@ new class extends Component {
             <h3 class="font-utama text-red-950 text-4xl mb-2">{{ $invitation->content['nama_wanita'] }}</h3>
             <div class="w-10 h-px bg-red-950/30 mb-3"></div>
             <p class="font-poppins text-red-950/70 text-sm text-center leading-relaxed">
-                {{ $invitation->content['label_ortu_wanita'] }} {{ $invitation->content['ayah_wanita'] }} <br> &
-                {{ $invitation->content['ibu_wanita'] }}
+                {{ $invitation->content['label_ortu_wanita'] }} Bpk. {{ $invitation->content['ayah_wanita'] }} <br> &
+                Ibu. {{ $invitation->content['ibu_wanita'] }}
             </p>
         </div>
     </div>

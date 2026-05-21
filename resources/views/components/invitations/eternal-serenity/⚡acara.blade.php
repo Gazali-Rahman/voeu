@@ -57,6 +57,12 @@ new class extends Component {
                     {{ Carbon\Carbon::parse($invitation->content['tanggal_akad'])->locale('id')->isoFormat('HH:mm') }} —
                     Selesai
                 </p>
+                <p class="text-white/80 font-poppins text-xs tracking-[0.3em] uppercase mt-6">
+                    {{ $invitation->content['tempat_resepsi'] }}
+                </p>
+                <p class="text-white/80 font-poppins text-xs tracking-[0.3em] uppercase mt-2">
+                    {{ $invitation->content['alamat_resepsi'] }}
+                </p>
             </div>
         </div>
 
