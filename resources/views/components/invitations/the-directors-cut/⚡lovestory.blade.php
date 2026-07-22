@@ -17,9 +17,9 @@ new class extends Component {
 <div>
     @if (count($stories) > 0)
         <section class="py-24 px-6 relative overflow-hidden">
-            <div class="relative mb-20">
-                <h2 class="font-abigail text-5xl text-black/80 mb-3 tracking-wide">Love Story</h2>
-                <div class="flex items-center gap-3">
+            <div x-data="{ show: false }" x-intersect="show = true" class="relative mb-20">
+                <h2 x-show="show" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="font-abigail text-5xl text-black/80 mb-3 tracking-wide">Love Story</h2>
+                <div x-show="show" x-transition:enter="transition ease-out duration-1000 delay-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="flex items-center gap-3">
                     <div class="h-px w-10 bg-black/30"></div>
                     <p class="font-mono text-[9px] tracking-[0.4em] uppercase text-black/40">The Chronicles</p>
                 </div>
@@ -27,7 +27,7 @@ new class extends Component {
 
             <div class="relative border-l border-black/10 ml-2 pl-8 space-y-20">
                 @foreach ($stories as $index => $story)
-                    <div class="relative group" wire:key="story-{{ $index }}">
+                    <div x-data="{ show: false }" x-intersect="show = true" class="relative group" wire:key="story-{{ $index }}">
 
                         <div class="absolute -left-[36.5px] top-1 w-4 h-4 bg-[#EAE8E3] flex items-center justify-center">
                             <div
@@ -35,14 +35,14 @@ new class extends Component {
                             </div>
                         </div>
 
-                        <div class="mb-5">
+                        <div x-show="show" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 translate-x-4" x-transition:enter-end="opacity-100 translate-x-0" class="mb-5">
                             <span
                                 class="font-mono text-[10px] tracking-[0.4em] text-white bg-black px-4 py-1.5 rounded-sm uppercase inline-block shadow-sm">
                                 {{ $story['year'] ?? '0000' }}
                             </span>
                         </div>
 
-                        <div class="space-y-4">
+                        <div x-show="show" x-transition:enter="transition ease-out duration-1000 delay-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="space-y-4">
                             <h3 class="font-abigail text-3xl text-black/80 leading-tight">
                                 {{ $story['title'] ?? 'The Beginning' }}
                             </h3>
@@ -57,7 +57,7 @@ new class extends Component {
                             </div>
                         </div>
 
-                        <div
+                        <div x-show="show" x-transition:enter="transition ease-out duration-1000 delay-500" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
                             class="absolute -right-2 -top-4 font-mono text-[50px] text-black/3 font-bold select-none pointer-events-none">
                             {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
                         </div>
@@ -65,9 +65,9 @@ new class extends Component {
                 @endforeach
             </div>
 
-            <div class="mt-28 flex flex-col items-center">
-                <div class="h-16 w-px bg-black/10 mb-6"></div>
-                <p class="font-mono text-[8px] tracking-[0.8em] uppercase text-black/20">Archive Closed</p>
+            <div x-data="{ show: false }" x-intersect="show = true" class="mt-28 flex flex-col items-center">
+                <div x-show="show" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="h-16 w-px bg-black/10 mb-6"></div>
+                <p x-show="show" x-transition:enter="transition ease-out duration-1000 delay-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="font-mono text-[8px] tracking-[0.8em] uppercase text-black/20">Archive Closed</p>
             </div>
 
         </section>

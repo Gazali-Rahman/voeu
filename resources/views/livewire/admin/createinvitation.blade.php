@@ -1,5 +1,7 @@
-<div class="min-h-screen bg-[#fcfcfc] py-12 px-4 font-sans">
-    <div class="max-w-5xl mx-auto">
+<div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/compressorjs/1.2.1/compressor.min.js"></script>
+    <div class="min-h-screen bg-[#fcfcfc] py-12 px-4 font-sans">
+        <div class="max-w-5xl mx-auto">
 
         <div class="mb-12 border-b border-gray-100 pb-8">
             <h2 class="text-2xl font-serif text-[#1a1a1a] tracking-tight">Create Digital Invitation</h2>
@@ -325,7 +327,36 @@
                             </div>
                         @endif
 
-                        <input type="file" wire:model="og_image_file"
+                        <input type="file" 
+                            x-data="{
+                                handleUpload(event) {
+                                    const file = event.target.files[0];
+                                    if (!file) return;
+                                    
+                                    const originalSize = (file.size / 1024).toFixed(2);
+                                    
+                                    new Compressor(file, {
+                                        quality: 0.8,
+                                        maxWidth: 1080,
+                                        mimeType: 'image/webp',
+                                        success: (compressedResult) => {
+                                            const compressedSize = (compressedResult.size / 1024).toFixed(2);
+                                            console.log(`[OG Image] Berhasil dikompresi dari ${originalSize} KB menjadi ${compressedSize} KB`);
+                                            
+                                            const newFileName = file.name.split('.')[0] + '.webp';
+                                            const newFile = new File([compressedResult], newFileName, {
+                                                type: 'image/webp',
+                                            });
+                                            @this.upload('og_image_file', newFile);
+                                        },
+                                        error(err) {
+                                            console.error('Compression error:', err.message);
+                                        },
+                                    });
+                                }
+                            }" 
+                            x-on:change="handleUpload"
+                            accept="image/*"
                             class="absolute inset-0 opacity-0 cursor-pointer">
                     </div>
 
@@ -377,7 +408,36 @@
                                         <span class="text-[8px] uppercase tracking-widest">Select Image</span>
                                     </div>
                                 @endif
-                                <input type="file" wire:model="photo_slots.{{ $index }}.file"
+                                <input type="file" 
+                                    x-data="{
+                                        handleUpload(event) {
+                                            const file = event.target.files[0];
+                                            if (!file) return;
+                                            
+                                            const originalSize = (file.size / 1024).toFixed(2);
+                                            
+                                            new Compressor(file, {
+                                                quality: 0.8,
+                                                maxWidth: 1080,
+                                                mimeType: 'image/webp',
+                                                success: (compressedResult) => {
+                                                    const compressedSize = (compressedResult.size / 1024).toFixed(2);
+                                                    console.log(`[Photo Slot {{ $index }}] Berhasil dikompresi dari ${originalSize} KB menjadi ${compressedSize} KB`);
+                                                    
+                                                    const newFileName = file.name.split('.')[0] + '.webp';
+                                                    const newFile = new File([compressedResult], newFileName, {
+                                                        type: 'image/webp',
+                                                    });
+                                                    @this.upload('photo_slots.' + {{ $index }} + '.file', newFile);
+                                                },
+                                                error(err) {
+                                                    console.error('Compression error:', err.message);
+                                                },
+                                            });
+                                        }
+                                    }" 
+                                    x-on:change="handleUpload"
+                                    accept="image/*"
                                     class="absolute inset-0 opacity-0 cursor-pointer">
                             </div>
                             @error('photo_slots.' . $index . '.file')
@@ -452,6 +512,8 @@
                     </svg>
                 </button>
             </div>
+            </div>
         </form>
     </div>
+</div>
 </div>

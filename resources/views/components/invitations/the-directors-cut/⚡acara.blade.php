@@ -11,15 +11,15 @@ new class extends Component {
 ?>
 
 <section class="relative py-20 px-6">
-    <div class="mb-12 flex flex-col items-center text-center">
-        <div class="font-mono text-[9px] tracking-[0.4em] uppercase text-black/40 mb-2">Schedule & Location</div>
-        <h1 class="font-abigail text-5xl text-black/90">The Ceremony</h1>
+    <div x-data="{ show: false }" x-intersect="show = true" class="mb-12 flex flex-col items-center text-center">
+        <div x-show="show" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="font-mono text-[9px] tracking-[0.4em] uppercase text-black/40 mb-2">Schedule & Location</div>
+        <h1 x-show="show" x-transition:enter="transition ease-out duration-1000 delay-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="font-abigail text-5xl text-black/90">The Ceremony</h1>
     </div>
 
     <div class="border-t border-black/20 relative z-10">
 
-        <div class="flex flex-col py-6 border-b border-black/20">
-            <div class="flex justify-between items-center mb-6">
+        <div x-data="{ show: false }" x-intersect="show = true" class="flex flex-col py-6 border-b border-black/20">
+            <div x-show="show" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 -translate-x-4" x-transition:enter-end="opacity-100 translate-x-0" class="flex justify-between items-center mb-6">
                 <span class="bg-black text-[#EAE8E3] font-mono text-[8px] px-2 py-1 tracking-[0.2em] uppercase">Seq 01:
                     Akad</span>
                 <span
@@ -27,11 +27,11 @@ new class extends Component {
                     - END</span>
             </div>
 
-            <h2 class="font-sans font-bold text-xl tracking-tight text-black/80 uppercase mb-4">
+            <h2 x-show="show" x-transition:enter="transition ease-out duration-1000 delay-300" x-transition:enter-start="opacity-0 -translate-x-4" x-transition:enter-end="opacity-100 translate-x-0" class="font-sans font-bold text-xl tracking-tight text-black/80 uppercase mb-4">
                 {{ Carbon\Carbon::parse($invitation->content['tanggal_akad'])->locale('id')->isoFormat('dddd, DD MMM YYYY') }}
             </h2>
 
-            <div class="grid grid-cols-3 gap-4">
+            <div x-show="show" x-transition:enter="transition ease-out duration-1000 delay-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="grid grid-cols-3 gap-4">
                 <div class="col-span-1 border-t border-black/20 pt-2">
                     <p class="font-mono text-[8px] tracking-[0.2em] text-black/40 uppercase">Location</p>
                 </div>
@@ -47,8 +47,8 @@ new class extends Component {
             </div>
         </div>
 
-        <div class="flex flex-col py-6 border-b border-black/20">
-            <div class="flex justify-between items-center mb-6">
+        <div x-data="{ show: false }" x-intersect="show = true" class="flex flex-col py-6 border-b border-black/20">
+            <div x-show="show" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 translate-x-4" x-transition:enter-end="opacity-100 translate-x-0" class="flex justify-between items-center mb-6">
                 <span class="bg-black text-[#EAE8E3] font-mono text-[8px] px-2 py-1 tracking-[0.2em] uppercase">Seq 02:
                     Resepsi</span>
                 <span
@@ -56,11 +56,11 @@ new class extends Component {
                     - END</span>
             </div>
 
-            <h2 class="font-sans font-bold text-xl tracking-tight text-black/80 uppercase mb-4">
+            <h2 x-show="show" x-transition:enter="transition ease-out duration-1000 delay-300" x-transition:enter-start="opacity-0 translate-x-4" x-transition:enter-end="opacity-100 translate-x-0" class="font-sans font-bold text-xl tracking-tight text-black/80 uppercase mb-4">
                 {{ Carbon\Carbon::parse($invitation->content['tanggal_resepsi'])->locale('id')->isoFormat('dddd, DD MMM YYYY') }}
             </h2>
 
-            <div class="grid grid-cols-3 gap-4">
+            <div x-show="show" x-transition:enter="transition ease-out duration-1000 delay-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="grid grid-cols-3 gap-4">
                 <div class="col-span-1 border-t border-black/20 pt-2">
                     <p class="font-mono text-[8px] tracking-[0.2em] text-black/40 uppercase">Location</p>
                 </div>
@@ -77,8 +77,8 @@ new class extends Component {
         </div>
     </div>
 
-    <div class="pt-12 flex flex-col items-center">
-        <a href="{{ $invitation->content['maps'] }}" target="_blank"
+    <div x-data="{ show: false }" x-intersect="show = true" class="pt-12 flex flex-col items-center">
+        <a x-show="show" x-transition:enter="transition ease-out duration-1000 delay-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" href="{{ $invitation->content['maps'] }}" target="_blank"
             class="inline-flex flex-col items-center group w-full">
             <div
                 class="w-full border border-black/80 flex justify-between items-center px-6 py-4 hover:bg-black hover:text-[#EAE8E3] transition-all duration-300">
