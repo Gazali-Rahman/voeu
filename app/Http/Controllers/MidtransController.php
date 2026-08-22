@@ -62,6 +62,31 @@ class MidtransController extends Controller
             });
         }
 
+        // --- NOTIFIKASI TELEGRAM OTOMATIS ---
+        if ($isSuccess) {
+            $botToken = env('TELEGRAM_BOT_TOKEN');
+            $adminId = env('TELEGRAM_ADMIN_ID');
+            
+            if ($botToken && $adminId) {
+                $catalogName = $order->catalog ? $order->catalog->name : 'N/A';
+                $amount = number_format($order->amount, 0, ',', '.');
+                
+                $text = "🚨 *ORDERAN BARU LUNAS!*\n\n"
+                      . "👤 Nama: {$order->customer_name}\n"
+                      . "📱 WA: {$order->customer_phone}\n"
+                      . "💰 Total: Rp {$amount}\n"
+                      . "🏷 Template: {$catalogName}\n\n"
+                      . "Pesanan sudah otomatis berstatus PROSES. Segera dicek ya Bos!";
+
+                // Kirim Notifikasi via Telegram API
+                \Illuminate\Support\Facades\Http::post("https://api.telegram.org/bot{$botToken}/sendMessage", [
+                    'chat_id' => $adminId,
+                    'text' => $text,
+                    'parse_mode' => 'Markdown'
+                ]);
+            }
+        }
+
         return response()->json(['message' => 'Callback handled successfully']);
     }
 }
