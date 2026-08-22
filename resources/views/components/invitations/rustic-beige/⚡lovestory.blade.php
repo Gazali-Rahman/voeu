@@ -20,11 +20,13 @@ new class extends Component {
 <div>
     <div class="py-20 px-6 relative flex flex-col items-center overflow-hidden ">
 
-        <div class="text-center z-10 mb-12">
-            <p class="text-[9px] font-['Poppins'] text-[#3E2C23]/60 uppercase tracking-[0.5em] mb-3">
+        <div class="text-center z-10 mb-12" x-data="{ show: false }" x-intersect.half.once="show = true">
+            <p class="text-[9px] font-['Poppins'] text-[#3E2C23]/60 uppercase tracking-[0.5em] mb-3"
+               x-show="show" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
                 Our Journey
             </p>
-            <h2 class="text-4xl font-['Abigail'] text-[#3E2C23] drop-shadow-sm">Love Story</h2>
+            <h2 class="text-4xl font-['Abigail'] text-[#3E2C23] drop-shadow-sm"
+                x-show="show" x-transition:enter="transition ease-out duration-700 delay-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">Love Story</h2>
         </div>
 
         <div class="absolute top-1/4 -right-16 transform rotate-90 origin-center z-0 opacity-[0.03] pointer-events-none">
@@ -44,13 +46,15 @@ new class extends Component {
 
                 <div class="flex flex-col gap-8">
                     @foreach ($stories as $index => $story)
-                        <div class="relative pl-14">
+                        <div class="relative pl-14" x-data="{ show: false }" x-intersect.half.once="show = true">
 
                             <div
+                                x-show="show" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 scale-50" x-transition:enter-end="opacity-100 scale-100"
                                 class="absolute left-4 top-5 w-3.5 h-3.5 rounded-full bg-white border-[3px] border-[#3E2C23] shadow-sm z-10">
                             </div>
 
                             <div
+                                x-show="show" x-transition:enter="transition ease-out duration-1000 delay-300" x-transition:enter-start="opacity-0 translate-x-10" x-transition:enter-end="opacity-100 translate-x-0"
                                 class="bg-[#F5EBE1] border border-[#3E2C23]/10 rounded-4xl p-6 shadow-sm relative overflow-hidden group hover:shadow-md transition-all duration-300">
 
                                 <div class="absolute -top-4 -right-4 w-25  -rotate-90 pointer-events-none">

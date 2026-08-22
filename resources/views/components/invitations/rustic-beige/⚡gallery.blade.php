@@ -34,11 +34,13 @@ new class extends Component {
 
     <div class="py-20 px-6 relative flex flex-col items-center overflow-hidden">
 
-        <div class="text-center z-10 mb-12">
-            <p class="text-[9px] font-['Poppins'] text-[#3E2C23]/60 uppercase tracking-[0.5em] mb-3">
+        <div class="text-center z-10 mb-12" x-data="{ show: false }" x-intersect.half.once="show = true">
+            <p class="text-[9px] font-['Poppins'] text-[#3E2C23]/60 uppercase tracking-[0.5em] mb-3"
+               x-show="show" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
                 Our Memories
             </p>
-            <h2 class="text-4xl font-['Abigail'] text-[#3E2C23] drop-shadow-sm">Gallery</h2>
+            <h2 class="text-4xl font-['Abigail'] text-[#3E2C23] drop-shadow-sm"
+                x-show="show" x-transition:enter="transition ease-out duration-700 delay-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">Gallery</h2>
         </div>
 
         <div class="absolute top-1/3 -left-20 transform -rotate-90 origin-center z-0 opacity-[0.03] pointer-events-none">
@@ -51,8 +53,9 @@ new class extends Component {
 
         <div class="w-full flex flex-col gap-6 z-10 relative">
 
-            <div class="flex items-end gap-4 w-full">
+            <div class="flex items-end gap-4 w-full" x-data="{ show: false }" x-intersect.half.once="show = true">
                 <div
+                    x-show="show" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 -translate-x-10" x-transition:enter-end="opacity-100 translate-x-0"
                     class="w-3/5 h-72 rounded-t-full rounded-b-4xl overflow-hidden shadow-lg border-4 border-white bg-gray-50 flex items-center justify-center">
 
                     <img src="{{ asset('storage/' . $gallery[0]['path']) }}" alt="Gallery 1"
@@ -61,6 +64,7 @@ new class extends Component {
                 </div>
 
                 <div
+                    x-show="show" x-transition:enter="transition ease-out duration-1000 delay-300" x-transition:enter-start="opacity-0 translate-x-10" x-transition:enter-end="opacity-100 translate-x-0"
                     class="w-2/5 h-44 rounded-tr-4xl rounded-bl-4xl rounded-tl-md rounded-br-md overflow-hidden shadow-lg border-4 border-white bg-gray-50 mb-4 flex items-center justify-center">
 
                     <img src="{{ asset('storage/' . $gallery[1]['path']) }}" alt="Gallery 2"
@@ -69,16 +73,19 @@ new class extends Component {
                 </div>
             </div>
 
-            <div class="py-6 px-4 text-center flex flex-col items-center">
-                <img src="{{ asset('assets/png/rusticbeige/bunga2.png') }}" alt="Bunga" class="w-20 h-auto mb-3">
-                <p class="text-[11px] font-['Poppins'] text-[#3E2C23]/80 leading-relaxed tracking-wide italic">
+            <div class="py-6 px-4 text-center flex flex-col items-center" x-data="{ show: false }" x-intersect.half.once="show = true">
+                <img src="{{ asset('assets/png/rusticbeige/bunga2.png') }}" alt="Bunga" class="w-20 h-auto mb-3"
+                     x-show="show" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 scale-50 -rotate-45" x-transition:enter-end="opacity-100 scale-100 rotate-0">
+                <p class="text-[11px] font-['Poppins'] text-[#3E2C23]/80 leading-relaxed tracking-wide italic"
+                   x-show="show" x-transition:enter="transition ease-out duration-1000 delay-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
                     "Dalam senyummu aku melihat sesuatu yang lebih indah dari bintang-bintang di langit."
                 </p>
             </div>
 
-            <div x-data="{ mainPhoto: '{{ count($gallery) > 0 ? asset('storage/' . $gallery[0]['path']) : $invitation->getPhoto('gallery1') }}' }" class="w-full flex flex-col gap-4 mt-4">
+            <div x-data="{ show: false, mainPhoto: '{{ count($gallery) > 0 ? asset('storage/' . $gallery[0]['path']) : $invitation->getPhoto('gallery1') }}' }" x-intersect.half.once="show = true" class="w-full flex flex-col gap-4 mt-4">
 
                 <div
+                    x-show="show" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
                     class="w-full h-128 rounded-[2.5rem] overflow-hidden shadow-xl border-4 border-white bg-gray-50 relative flex items-center justify-center">
                     <img :src="mainPhoto" alt="Main Gallery"
                         class="w-full h-full object-cover object-center transition-all duration-500">
@@ -92,7 +99,8 @@ new class extends Component {
                     </p>
                 </div>
 
-                <div class="flex gap-3 overflow-x-auto py-2 snap-x hide-scroll w-full">
+                <div class="flex gap-3 overflow-x-auto py-2 snap-x hide-scroll w-full"
+                     x-show="show" x-transition:enter="transition ease-out duration-1000 delay-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
 
                     @foreach ($gallery as $item)
                         @php

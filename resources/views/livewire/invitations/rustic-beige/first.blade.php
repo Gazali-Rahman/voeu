@@ -1,5 +1,31 @@
-<div
+<div x-data="{ loading: true }" x-init="setTimeout(() => loading = false, 2500)"
     class="max-w-md mx-auto h-screen flex flex-col items-center justify-between py-8 relative overflow-hidden bg-[#FFF8F0]">
+
+    <!-- 1. LOADING SCREEN LAYER -->
+    <div x-show="loading" x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0" class="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-[#FFF8F0]">
+
+        <!-- Logo Brand Voeu dengan Efek Sorot Cahaya -->
+        <div class="relative flex flex-col items-center">
+
+            <!-- Teks Logo Utama -->
+            <h1 class="font-utama text-7xl tracking-[0.3em] uppercase leading-none text-[#3E2C23] text-shimmer">
+                Voeu
+            </h1>
+
+            <!-- Tagline dengan animasi fade tipis -->
+            <div class="mt-4 overflow-hidden">
+                <span class="font-poppins text-[10px] tracking-[1em] text-[#3E2C23] uppercase opacity-30 animate-pulse">
+                    Digital Invitation
+                </span>
+            </div>
+        </div>
+
+        <!-- Progress Bar Halus -->
+        <div class="mt-16 w-32 h-px bg-[#3E2C23]/10 overflow-hidden">
+            <div class="h-full bg-[#3E2C23] animate-progress"></div>
+        </div>
+    </div>
 
     <div class="text-center z-10 flex flex-col items-center mt-2 relative">
         <p class="text-[10px] tracking-[0.3em] font-['Poppins'] text-gray-400 uppercase mb-3">The Wedding Of</p>
@@ -46,3 +72,40 @@
     </div>
 
 </div>
+
+<style>
+    /* Inti dari Efek Sorot Cahaya pada Tulisan */
+    .text-shimmer {
+        background: linear-gradient(to right,
+                #3E2C23 20%,
+                #FFF8F0 40%,
+                #FFF8F0 60%,
+                #3E2C23 80%);
+        background-size: 200% auto;
+        color: #3E2C23;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shine 3s linear infinite;
+    }
+
+    @keyframes shine {
+        to {
+            background-position: 200% center;
+        }
+    }
+
+    @keyframes progress {
+        0% {
+            transform: translateX(-100%);
+        }
+
+        100% {
+            transform: translateX(100%);
+        }
+    }
+
+    .animate-progress {
+        animation: progress 2.5s infinite ease-in-out;
+    }
+</style>

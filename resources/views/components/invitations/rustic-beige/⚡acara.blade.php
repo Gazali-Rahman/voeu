@@ -24,11 +24,13 @@ new class extends Component {
             </svg>
         </div> --}}
         <!-- HEADER SECTION -->
-        <div class="text-center z-10 mb-8">
-            <p class="text-[9px] font-['Poppins'] text-[#3E2C23]/60 uppercase tracking-[0.5em] mb-3">
+        <div class="text-center z-10 mb-8" x-data="{ show: false }" x-intersect.half.once="show = true">
+            <p class="text-[9px] font-['Poppins'] text-[#3E2C23]/60 uppercase tracking-[0.5em] mb-3"
+               x-show="show" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
                 Rangkaian Acara
             </p>
-            <h2 class="text-4xl font-['Abigail'] text-[#3E2C23] drop-shadow-sm">Wedding Events</h2>
+            <h2 class="text-4xl font-['Abigail'] text-[#3E2C23] drop-shadow-sm"
+                x-show="show" x-transition:enter="transition ease-out duration-700 delay-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">Wedding Events</h2>
         </div>
 
         <!-- ========================================== -->
@@ -39,8 +41,9 @@ new class extends Component {
 
             <!-- --- BAGIAN ATAS: FOTO & COUNTDOWN (Alpine.js Inline Livewire-Safe) --- -->
             <!-- Kita ubah h-60 menjadi aspect-square agar kotaknya proporsional -->
-            <div class="relative w-full h-72" x-data="{
-                targetDate: '2026-05-24T08:00:00',
+            <div class="relative w-full h-72" x-intersect.half.once="show = true" x-data="{
+                show: false,
+                targetDate: '{{ \Carbon\Carbon::parse($invitation->content['tanggal_resepsi'] ?? now())->toIso8601String() }}',
                 days: '00',
                 hours: '00',
                 minutes: '00',
@@ -69,19 +72,22 @@ new class extends Component {
 
                 <!-- Foto Pasangan: Kembalikan ke w-full h-full agar mengisi area aspect-square -->
                 <img src="{{ $invitation->getPhoto('c1') }}" alt="Pasangan"
-                    class="w-full h-full object-cover object-center">
+                    class="w-full h-full object-cover object-center"
+                    x-show="show" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 scale-105" x-transition:enter-end="opacity-100 scale-100">
 
                 <!-- Overlay Gelap agar Teks Countdown Terbaca -->
-                <div class="absolute inset-0 bg-black/40"></div>
+                <div class="absolute inset-0 bg-black/40" x-show="show" x-transition.opacity.duration.1000ms></div>
 
                 <!-- Teks Countdown -->
                 <div class="absolute inset-0 z-10 flex flex-col items-center pt-8 pb-6 px-6 text-white text-center">
 
-                    <p class="text-[10px] font-['Poppins'] uppercase tracking-[0.4em] text-white/90 drop-shadow-md">
+                    <p class="text-[10px] font-['Poppins'] uppercase tracking-[0.4em] text-white/90 drop-shadow-md"
+                       x-show="show" x-transition:enter="transition ease-out duration-700 delay-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
                         Menuju Hari Bahagia
                     </p>
 
-                    <div class="flex flex-col items-center justify-center my-auto">
+                    <div class="flex flex-col items-center justify-center my-auto"
+                         x-show="show" x-transition:enter="transition ease-out duration-700 delay-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
 
                         <div class="flex items-start justify-center gap-2 font-['Abigail']">
                             <div class="flex flex-col items-center w-12">
@@ -111,7 +117,8 @@ new class extends Component {
 
                     </div>
 
-                    <div class=" pt-4 border-t border-white/20 w-4/5">
+                    <div class=" pt-4 border-t border-white/20 w-4/5"
+                         x-show="show" x-transition:enter="transition ease-out duration-700 delay-700" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
                         <p
                             class="text-[9px] font-['Poppins'] text-white/80 leading-relaxed tracking-wider drop-shadow-md">
                             "Kami sangat menantikan momen indah ini untuk dirayakan bersama Anda."
@@ -137,38 +144,44 @@ new class extends Component {
                 <!-- ========================= -->
                 <!-- KONTEN AKAD -->
                 <!-- ========================= -->
-                <div class="relative z-10 w-full flex flex-col items-center">
+                <div class="relative z-10 w-full flex flex-col items-center" 
+                     x-data="{ show: false, count: 0, target: {{ (int) \Carbon\Carbon::parse($invitation->content['tanggal_akad'] ?? now())->format('d') }} }" 
+                     x-intersect.half.once="show = true; setTimeout(() => { let i = setInterval(() => { if (count < target) count++; else clearInterval(i); }, 80) }, 500)">
                     <img src="{{ asset('assets/png/rusticbeige/cincin1.png') }}" alt="Akad"
-                        class="w-20 object-cover mb-4">
-                    <h3 class="text-[2rem] font-['Abigail'] text-[#3E2C23] mb-5">Akad Nikah</h3>
+                        class="w-20 object-cover mb-4" x-show="show" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 scale-50" x-transition:enter-end="opacity-100 scale-100">
+                    <h3 class="text-[2rem] font-['Abigail'] text-[#3E2C23] mb-5"
+                        x-show="show" x-transition:enter="transition ease-out duration-700 delay-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">Akad Nikah</h3>
 
                     <!-- Format Tanggal Baru -->
-                    <div class="flex flex-col items-center justify-center w-full mb-4">
+                    <div class="flex flex-col items-center justify-center w-full mb-4"
+                         x-show="show" x-transition:enter="transition ease-out duration-700 delay-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
                         <div class="flex items-center justify-center gap-3">
                             <!-- Kiri: Hari (Rata Kanan) -->
                             <p
                                 class="text-[9px] font-['Poppins'] text-[#3E2C23]/80 uppercase tracking-widest text-right w-20">
-                                Minggu</p>
+                                {{ \Carbon\Carbon::parse($invitation->content['tanggal_akad'] ?? now())->translatedFormat('l') }}</p>
                             <!-- Tengah: Tanggal Super Besar -->
-                            <p class="text-[3.5rem] font-['Abigail'] text-[#3E2C23] leading-none drop-shadow-sm">24</p>
+                            <p class="text-[3.5rem] font-['Abigail'] text-[#3E2C23] leading-none drop-shadow-sm" x-text="String(count).padStart(2, '0')">00</p>
                             <!-- Kanan: Bulan (Rata Kiri) -->
                             <p
                                 class="text-[9px] font-['Poppins'] text-[#3E2C23]/80 uppercase tracking-widest text-left w-20">
-                                Desember</p>
+                                {{ \Carbon\Carbon::parse($invitation->content['tanggal_akad'] ?? now())->translatedFormat('F') }}</p>
                         </div>
                         <!-- Bawah: Tahun -->
-                        <p class="text-[11px] font-['Poppins'] text-[#3E2C23] tracking-[0.4em] font-medium mt-2">2026
+                        <p class="text-[11px] font-['Poppins'] text-[#3E2C23] tracking-[0.4em] font-medium mt-2">{{ \Carbon\Carbon::parse($invitation->content['tanggal_akad'] ?? now())->translatedFormat('Y') }}
                         </p>
                     </div>
 
-                    <p class="text-[11px] font-['Poppins'] text-[#3E2C23]/80 font-medium tracking-wide mb-5">
-                        08:00 WIB - Selesai
+                    <p class="text-[11px] font-['Poppins'] text-[#3E2C23]/80 font-medium tracking-wide mb-5"
+                       x-show="show" x-transition:enter="transition ease-out duration-700 delay-700" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
+                        {{ \Carbon\Carbon::parse($invitation->content['tanggal_akad'] ?? now())->translatedFormat('H:i') }} WIB - Selesai
                     </p>
 
-                    <div class="mb-5 border-t border-[#3E2C23]/20 pt-4 w-3/4">
-                        <p class="text-[12px] font-['Poppins'] text-[#3E2C23] font-semibold mb-1">Masjid Al-Ikhlas</p>
+                    <div class="mb-5 border-t border-[#3E2C23]/20 pt-4 w-3/4"
+                         x-show="show" x-transition:enter="transition ease-out duration-700 delay-[900ms]" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
+                        <p class="text-[12px] font-['Poppins'] text-[#3E2C23] font-semibold mb-1">{{ $invitation->content['tempat_akad'] ?? 'Tempat Akad' }}</p>
                         <p class="text-[10px] font-['Poppins'] text-[#3E2C23]/70 leading-relaxed px-4">
-                            Jl. Sudirman No. 123, Jakarta Selatan
+                            {{ $invitation->content['alamat_akad'] ?? 'Alamat Akad' }}
                         </p>
                     </div>
                 </div>
@@ -184,44 +197,50 @@ new class extends Component {
                 <!-- ========================= -->
                 <!-- KONTEN RESEPSI -->
                 <!-- ========================= -->
-                <div class="relative z-10 w-full flex flex-col items-center">
+                <div class="relative z-10 w-full flex flex-col items-center" 
+                     x-data="{ show: false, count: 0, target: {{ (int) \Carbon\Carbon::parse($invitation->content['tanggal_resepsi'] ?? now())->format('d') }} }" 
+                     x-intersect.half.once="show = true; setTimeout(() => { let i = setInterval(() => { if (count < target) count++; else clearInterval(i); }, 80) }, 500)">
                     <img src="{{ asset('assets/png/rusticbeige/glas2.png') }}" alt="Resepsi"
-                        class="w-20 object-cover mb-4">
-                    <h3 class="text-[2rem] font-['Abigail'] text-[#3E2C23] mb-5">Resepsi</h3>
+                        class="w-20 object-cover mb-4" x-show="show" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 scale-50" x-transition:enter-end="opacity-100 scale-100">
+                    <h3 class="text-[2rem] font-['Abigail'] text-[#3E2C23] mb-5"
+                        x-show="show" x-transition:enter="transition ease-out duration-700 delay-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">Resepsi</h3>
 
                     <!-- Format Tanggal Baru -->
-                    <div class="flex flex-col items-center justify-center w-full mb-4">
+                    <div class="flex flex-col items-center justify-center w-full mb-4"
+                         x-show="show" x-transition:enter="transition ease-out duration-700 delay-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
                         <div class="flex items-center justify-center gap-3">
                             <!-- Kiri: Hari (Rata Kanan) -->
                             <p
                                 class="text-[9px] font-['Poppins'] text-[#3E2C23]/80 uppercase tracking-widest text-right w-20">
-                                Minggu</p>
+                                {{ \Carbon\Carbon::parse($invitation->content['tanggal_resepsi'] ?? now())->translatedFormat('l') }}</p>
                             <!-- Tengah: Tanggal Super Besar -->
-                            <p class="text-[3.5rem] font-['Abigail'] text-[#3E2C23] leading-none drop-shadow-sm">24</p>
+                            <p class="text-[3.5rem] font-['Abigail'] text-[#3E2C23] leading-none drop-shadow-sm" x-text="String(count).padStart(2, '0')">00</p>
                             <!-- Kanan: Bulan (Rata Kiri) -->
                             <p
                                 class="text-[9px] font-['Poppins'] text-[#3E2C23]/80 uppercase tracking-widest text-left w-20">
-                                Desember</p>
+                                {{ \Carbon\Carbon::parse($invitation->content['tanggal_resepsi'] ?? now())->translatedFormat('F') }}</p>
                         </div>
                         <!-- Bawah: Tahun -->
-                        <p class="text-[11px] font-['Poppins'] text-[#3E2C23] tracking-[0.4em] font-medium mt-2">2026
+                        <p class="text-[11px] font-['Poppins'] text-[#3E2C23] tracking-[0.4em] font-medium mt-2">{{ \Carbon\Carbon::parse($invitation->content['tanggal_resepsi'] ?? now())->translatedFormat('Y') }}
                         </p>
                     </div>
 
-                    <p class="text-[11px] font-['Poppins'] text-[#3E2C23]/80 font-medium tracking-wide mb-5">
-                        11:00 WIB - Selesai
+                    <p class="text-[11px] font-['Poppins'] text-[#3E2C23]/80 font-medium tracking-wide mb-5"
+                       x-show="show" x-transition:enter="transition ease-out duration-700 delay-700" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
+                        {{ \Carbon\Carbon::parse($invitation->content['tanggal_resepsi'] ?? now())->translatedFormat('H:i') }} WIB - Selesai
                     </p>
 
-                    <div class="mb-6 border-t border-[#3E2C23]/20 pt-4 w-3/4">
-                        <p class="text-[12px] font-['Poppins'] text-[#3E2C23] font-semibold mb-1">Grand Ballroom
-                            Nusantara</p>
+                    <div class="mb-6 border-t border-[#3E2C23]/20 pt-4 w-3/4"
+                         x-show="show" x-transition:enter="transition ease-out duration-700 delay-[900ms]" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
+                        <p class="text-[12px] font-['Poppins'] text-[#3E2C23] font-semibold mb-1">{{ $invitation->content['tempat_resepsi'] ?? 'Tempat Resepsi' }}</p>
                         <p class="text-[10px] font-['Poppins'] text-[#3E2C23]/70 leading-relaxed px-4">
-                            Jl. Jenderal Sudirman No. 456, Jakarta Selatan
+                            {{ $invitation->content['alamat_resepsi'] ?? 'Alamat Resepsi' }}
                         </p>
                     </div>
 
                     <!-- Tombol Maps -->
-                    <a href="#"
+                    <a href="{{ $invitation->content['maps'] ?? '#' }}" target="_blank"
+                        x-show="show" x-transition:enter="transition ease-out duration-700 delay-[1100ms]" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
                         class="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border border-[#3E2C23]/40 text-[#3E2C23] text-[9px] font-['Poppins'] tracking-widest uppercase hover:bg-[#3E2C23] hover:text-white transition duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-3.5 h-3.5">
