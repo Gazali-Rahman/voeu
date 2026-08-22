@@ -50,7 +50,7 @@ class TelegramWebhookController extends Controller
      */
     private function askGemini($message)
     {
-        $apiKey = env('GEMINI_API_KEY');
+        $apiKey = env('GROQ_API_KEY');
 
         // --- INJEKSI KONTEKS DATA (BUSINESS SNAPSHOT) ---
         // 1. Data Pengguna
@@ -101,19 +101,23 @@ class TelegramWebhookController extends Controller
             . "3. Gunakan gaya bahasa profesional namun santai.";
 
         // Daftar model Gemini yang diurutkan dari yang paling mutakhir (terbaik) hingga yang paling lama (terjelek)
+        // $models = [
+        //     'gemini-3.7-flash',
+        //     'gemini-3.6-flash',
+        //     'gemini-3.5-flash',
+        //     'gemini-3.5-flash-lite',
+        //     'gemini-3.1-flash-lite',
+        //     'gemini-3-flash',
+        //     'gemini-2.5-flash',
+        //     'gemini-2.5-flash-lite',
+        // ];
         $models = [
-            'gemini-3.7-flash',
-            'gemini-3.6-flash',
-            'gemini-3.5-flash',
-            'gemini-3.5-flash-lite',
-            'gemini-3.1-flash-lite',
-            'gemini-3-flash',
-            'gemini-2.5-flash',
-            'gemini-2.5-flash-lite',
+            'qwen/qwen3.6-27b',
         ];
 
         foreach ($models as $modelName) {
-            $url = 'https://generativelanguage.googleapis.com/v1beta/models/' . $modelName . ':generateContent?key=' . $apiKey;
+            // $url = 'https://generativelanguage.googleapis.com/v1beta/models/' . $modelName . ':generateContent?key=' . $apiKey;
+            $url = 'https://api.groq.com/openai/v1/models/' . $modelName . ':generateContent?key=' . $apiKey;
 
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json'
