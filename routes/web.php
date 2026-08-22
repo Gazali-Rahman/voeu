@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\WebhookController;
+use App\Http\Controllers\Api\TelegramWebhookController;
 use App\Livewire\Admin\Createinvitation;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\Manageuser;
@@ -51,6 +52,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 });
 Route::post('/webhook/xendit', [WebhookController::class, 'handleXendit']);
 Route::post('/midtrans/callback', [MidtransController::class, 'callback']);
+
+// Telegram Agent AI Webhook Routes
+Route::post('/webhook/telegram', [TelegramWebhookController::class, 'handle']);
+Route::get('/telegram/set-webhook', [TelegramWebhookController::class, 'setWebhook']);
 
 // Invitation Routes
 Route::get('/v/{slug}', Show::class)->name('invitation.v');

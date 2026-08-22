@@ -19,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->validateCsrfTokens(except: [
             '/webhook/xendit',
             '/midtrans/callback',
+            '/webhook/telegram',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
