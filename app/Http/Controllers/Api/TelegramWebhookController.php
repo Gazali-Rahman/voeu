@@ -61,12 +61,28 @@ class TelegramWebhookController extends Controller
         // 1. Data Pengguna
         $totalUsers = \App\Models\User::count();
 
-        // 2. Data Pesanan & Keuangan
+        // 2. Data Pesanan & Keuangan (All-Time)
         $orders = \App\Models\Order::all();
         $totalOrders = $orders->count();
         $paidOrders = $orders->where('status', 'selesai')->count();
         $pendingOrders = $orders->where('status', 'pending')->count();
         $totalRevenue = $orders->where('status', 'selesai')->sum('amount');
+
+        // 2.1 Metrik Berdasarkan Waktu (Bulan Ini, Minggu Ini, Hari Ini)
+        $now = now();
+        $todayStart = $now->copy()->startOfDay();
+        $weekStart = $now->copy()->startOfWeek();
+        $monthStart = $now->copy()->startOfMonth();
+
+        // Query langsung ke DB agar lebih efisien dan akurat untuk metrik waktu
+        $revenueToday = \App\Models\Order::where('status', 'selesai')->where('created_at', '>=', $todayStart)->sum('amount');
+        $ordersToday = \App\Models\Order::where('status', 'selesai')->where('created_at', '>=', $todayStart)->count();
+
+        $revenueWeek = \App\Models\Order::where('status', 'selesai')->where('created_at', '>=', $weekStart)->sum('amount');
+        $ordersWeek = \App\Models\Order::where('status', 'selesai')->where('created_at', '>=', $weekStart)->count();
+
+        $revenueMonth = \App\Models\Order::where('status', 'selesai')->where('created_at', '>=', $monthStart)->sum('amount');
+        $ordersMonth = \App\Models\Order::where('status', 'selesai')->where('created_at', '>=', $monthStart)->count();
 
         // 3. Kinerja Katalog/Template
         $catalogs = \App\Models\Catalog::where('is_active', 1)->get();
@@ -89,12 +105,15 @@ class TelegramWebhookController extends Controller
         }
 
         // 5. Merangkai Laporan (Dashboard)
-        $snapshot = "DATA BISNIS SAAT INI:\n"
-            . "Total Pengguna Terdaftar: {$totalUsers}\n"
-            . "Total Pesanan Keseluruhan: {$totalOrders} (Selesai: {$paidOrders}, Pending: {$pendingOrders})\n"
-            . "Total Pendapatan Kotor (Selesai): Rp " . number_format($totalRevenue, 0, ',', '.') . "\n\n"
-            . "Rincian Kinerja Template (Katalog):\n" . $catalogInfo . "\n"
-            . "Promo Aktif:\n" . $promoInfo;
+        $snapshot = "WAKTU SAAT INI: " . $now->translatedFormat('l, d F Y H:i') . "\n\n"
+            . "--- METRIK PENJUALAN ---\n"
+            . "Total (Semua Waktu): Rp " . number_format($totalRevenue, 0, ',', '.') . " (Selesai: {$paidOrders} pesanan, Pending: {$pendingOrders} pesanan)\n"
+            . "Bulan Ini: Rp " . number_format($revenueMonth, 0, ',', '.') . " ({$ordersMonth} pesanan lunas)\n"
+            . "Minggu Ini: Rp " . number_format($revenueWeek, 0, ',', '.') . " ({$ordersWeek} pesanan lunas)\n"
+            . "Hari Ini: Rp " . number_format($revenueToday, 0, ',', '.') . " ({$ordersToday} pesanan lunas)\n\n"
+            . "Total Pengguna Terdaftar: {$totalUsers}\n\n"
+            . "--- KINERJA TEMPLATE ---\n" . $catalogInfo . "\n"
+            . "--- PROMO AKTIF ---\n" . $promoInfo;
 
         // 6. System Prompt Sang Analis
         $systemPrompt = "Anda adalah 'Voeu Analyst', Penasihat Bisnis dan Data Analyst tingkat tinggi untuk layanan undangan digital SerbaDigital. "
