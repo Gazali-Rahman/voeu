@@ -31,14 +31,21 @@ class TelegramWebhookController extends Controller
             return response()->json(['status' => 'success']);
         }
 
-        // 3. Teruskan ke Gemini
+        // 3. Teruskan ke AI
         try {
-            $aiResponseText = $this->askGemini($text);
+            $aiResponse = $this->askAI($text);
+
+            // Hapus blok <think>...</think> (Monolog internal dari model tipe Reasoning seperti Qwen/DeepSeek)
+            $cleanText = preg_replace('/<think>.*?<\/think>/s', '', $aiResponse['text']);
+            $cleanText = trim($cleanText);
+
+            // Format pesan dengan watermark
+            $replyText = $cleanText . "\n\n_🤖 Dijawab oleh " . $aiResponse['model'] . " (" . ucfirst($aiResponse['provider']) . ")_";
 
             // 4. Kirim balik balasan ke Telegram
-            $this->sendMessage($chatId, $aiResponseText);
+            $this->sendMessage($chatId, $replyText);
         } catch (\Exception $e) {
-            Log::error("Telegram/Gemini Error: " . $e->getMessage());
+            Log::error("Telegram/AI Error: " . $e->getMessage());
             $this->sendMessage($chatId, "Maaf, sistem AI sedang mengalami gangguan saat ini.");
         }
 
@@ -46,12 +53,10 @@ class TelegramWebhookController extends Controller
     }
 
     /**
-     * Kirim chat ke Google AI Studio (Gemini) dan dapatkan string balasannya.
+     * Kirim chat ke AI (Mencoba Groq terlebih dahulu, lalu fallback ke Gemini).
      */
-    private function askGemini($message)
+    private function askAI($message)
     {
-        $apiKey = env('GROQ_API_KEY');
-
         // --- INJEKSI KONTEKS DATA (BUSINESS SNAPSHOT) ---
         // 1. Data Pengguna
         $totalUsers = \App\Models\User::count();
@@ -91,7 +96,7 @@ class TelegramWebhookController extends Controller
             . "Rincian Kinerja Template (Katalog):\n" . $catalogInfo . "\n"
             . "Promo Aktif:\n" . $promoInfo;
 
-        // 6. System Prompt Sang Analis (Disesuaikan agar tidak berlebihan)
+        // 6. System Prompt Sang Analis
         $systemPrompt = "Anda adalah 'Voeu Analyst', Penasihat Bisnis dan Data Analyst tingkat tinggi untuk layanan undangan digital SerbaDigital. "
             . "Berikut adalah Data Bisnis saat ini:\n\n"
             . $snapshot . "\n\n"
@@ -100,54 +105,81 @@ class TelegramWebhookController extends Controller
             . "2. JANGAN pernah memberikan analisis panjang lebar, tabel, insight, atau saran strategi KECUALI pengguna secara eksplisit memintanya (misal: 'Tolong berikan analisa' atau 'Apa saranmu?'). "
             . "3. Gunakan gaya bahasa profesional namun santai.";
 
-        // Daftar model Gemini yang diurutkan dari yang paling mutakhir (terbaik) hingga yang paling lama (terjelek)
-        // $models = [
-        //     'gemini-3.7-flash',
-        //     'gemini-3.6-flash',
-        //     'gemini-3.5-flash',
-        //     'gemini-3.5-flash-lite',
-        //     'gemini-3.1-flash-lite',
-        //     'gemini-3-flash',
-        //     'gemini-2.5-flash',
-        //     'gemini-2.5-flash-lite',
-        // ];
-        $models = [
-            'qwen/qwen3.6-27b',
+        // --- DAFTAR ANTRIAN AI (Groq -> Gemini) ---
+        $aiQueue = [
+            // Kasta Utama: GROQ (Sangat cepat)
+            ['provider' => 'groq', 'model' => 'qwen/qwen3.6-27b'],
+            ['provider' => 'groq', 'model' => 'openai/gpt-oss-120b'],
+            ['provider' => 'groq', 'model' => 'openai/gpt-oss-20b'],
+            ['provider' => 'groq', 'model' => 'groq/compound'],
+
+            // Ban Serep: GEMINI
+            ['provider' => 'gemini', 'model' => 'gemini-3.7-flash'],
+            ['provider' => 'gemini', 'model' => 'gemini-3.6-flash'],
+            ['provider' => 'gemini', 'model' => 'gemini-3.5-flash'],
+            ['provider' => 'gemini', 'model' => 'gemini-3.5-flash-lite'],
+            ['provider' => 'gemini', 'model' => 'gemini-3.1-flash-lite'],
+
         ];
 
-        foreach ($models as $modelName) {
-            // $url = 'https://generativelanguage.googleapis.com/v1beta/models/' . $modelName . ':generateContent?key=' . $apiKey;
-            $url = 'https://api.groq.com/openai/v1/' . $modelName . ':generateContent?key=' . $apiKey;
+        $groqKey = env('GROQ_API_KEY');
+        $geminiKey = env('GEMINI_API_KEY');
 
-            $response = Http::withHeaders([
-                'Content-Type' => 'application/json'
-            ])->timeout(20)->post($url, [
-                'system_instruction' => [
-                    'parts' => [
-                        ['text' => $systemPrompt]
-                    ]
-                ],
-                'contents' => [
-                    [
-                        'role' => 'user',
-                        'parts' => [
-                            ['text' => $message]
-                        ]
-                    ]
-                ]
-            ]);
+        foreach ($aiQueue as $ai) {
+            $provider = $ai['provider'];
+            $modelName = $ai['model'];
 
-            // Jika berhasil, langsung ambil datanya dan keluar dari loop
-            if ($response->successful()) {
-                $data = $response->json();
-                return $data['candidates'][0]['content']['parts'][0]['text'] ?? "Maaf, saya tidak mengerti respons dari AI.";
+            // Jika API Key tidak ada, lewati provider ini
+            if ($provider === 'groq' && empty($groqKey)) continue;
+            if ($provider === 'gemini' && empty($geminiKey)) continue;
+
+            if ($provider === 'groq') {
+                $response = Http::withHeaders([
+                    'Authorization' => 'Bearer ' . $groqKey,
+                    'Content-Type' => 'application/json'
+                ])->timeout(20)->post('https://api.groq.com/openai/v1/chat/completions', [
+                    'model' => $modelName,
+                    'messages' => [
+                        ['role' => 'system', 'content' => $systemPrompt],
+                        ['role' => 'user', 'content' => $message]
+                    ]
+                ]);
+
+                if ($response->successful()) {
+                    $data = $response->json();
+                    return [
+                        'text' => $data['choices'][0]['message']['content'] ?? "Maaf, saya tidak mengerti respons dari Groq.",
+                        'provider' => 'groq',
+                        'model' => $modelName
+                    ];
+                }
+            } else if ($provider === 'gemini') {
+                $url = 'https://generativelanguage.googleapis.com/v1beta/models/' . $modelName . ':generateContent?key=' . $geminiKey;
+
+                $response = Http::withHeaders([
+                    'Content-Type' => 'application/json'
+                ])->timeout(20)->post($url, [
+                    'system_instruction' => [
+                        'parts' => [['text' => $systemPrompt]]
+                    ],
+                    'contents' => [
+                        ['role' => 'user', 'parts' => [['text' => $message]]]
+                    ]
+                ]);
+
+                if ($response->successful()) {
+                    $data = $response->json();
+                    return [
+                        'text' => $data['candidates'][0]['content']['parts'][0]['text'] ?? "Maaf, saya tidak mengerti respons dari Gemini.",
+                        'provider' => 'gemini',
+                        'model' => $modelName
+                    ];
+                }
             }
-
-            // Jika error 404 (model belum dirilis/tidak ada) atau 429 (limit), lanjut ke model berikutnya di array
         }
 
-        // Jika semua model dalam daftar gagal (API key salah, server down, dll)
-        throw new \Exception("Semua model Gemini gagal diakses. Error terakhir: " . ($response->body() ?? 'Tidak ada respons.'));
+        // Jika semua gagal
+        throw new \Exception("Semua model Groq & Gemini gagal diakses.");
     }
 
     /**
