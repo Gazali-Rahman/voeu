@@ -117,7 +117,7 @@ class TelegramWebhookController extends Controller
 
         foreach ($models as $modelName) {
             // $url = 'https://generativelanguage.googleapis.com/v1beta/models/' . $modelName . ':generateContent?key=' . $apiKey;
-            $url = 'https://api.groq.com/openai/v1' . $modelName . ':generateContent?key=' . $apiKey;
+            $url = 'https://api.groq.com/openai/v1/' . $modelName . ':generateContent?key=' . $apiKey;
 
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json'
