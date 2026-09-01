@@ -1,2 +1,9 @@
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /login
+Disallow: /register
+Disallow: /checkout/
+Disallow: /my-orders
+Disallow: /webhook/
+
+Sitemap: https://voeu.id/sitemap.xml

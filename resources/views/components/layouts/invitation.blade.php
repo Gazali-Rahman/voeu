@@ -4,40 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{-- SEO & Dynamic Title --}}
-    @php
-
-        $title = isset($invitation)
-            ? $invitation->content['nama_pria'] . ' & ' . $invitation->content['nama_wanita']
-            : 'Voeu Digital Invitation';
-        $description = 'The Wedding of ' . $title;
-        // Ambil foto pertama dari dynamic_photos sebagai preview thumb
-        $ogImage = asset('assets/img/default-thumbnail.jpg'); // Default awal
-
-        if (isset($invitation) && !empty($invitation->content['og_image'])) {
-            $ogImage = asset('storage/' . $invitation->content['og_image']);
-        }
-    @endphp
-
-    <title>{{ $title }}</title>
+    {!! SEO::generate() !!}
     <link rel="icon" type="image/png" href="{{ asset('assets/png/logovoeu.png') }}">
-
-    {{-- Meta Tag untuk WhatsApp/FB/IG --}}
-    <meta name="description" content="{{ $description }}">
-    <meta property="og:title" content="{{ $title }}">
-    <meta property="og:description" content="{{ $description }}">
-    <meta property="og:image" content="{{ $ogImage }}">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="500">
-    <meta property="og:image:height" content="500">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:type" content="website">
-
-    {{-- Twitter --}}
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ $title }}">
-    <meta name="twitter:description" content="{{ $description }}">
-    <meta name="twitter:image" content="{{ $ogImage }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

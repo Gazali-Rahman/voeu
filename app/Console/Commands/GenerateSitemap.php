@@ -25,13 +25,18 @@ class GenerateSitemap extends Command
 
         // Cara 2: Manual (Lebih detail untuk SEO)
         $sitemap = \Spatie\Sitemap\Sitemap::create()
-            ->add(Url::create('/')->setPriority(1.0))
-            ->add(Url::create('/#promo')->setPriority(0.8))
-            ->add(Url::create('/#catalog')->setPriority(0.8));
+            ->add(Url::create('/')->setPriority(1.0)->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)->setLastModificationDate(now()))
+            ->add(Url::create('/#promo')->setPriority(0.8)->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)->setLastModificationDate(now()))
+            ->add(Url::create('/#catalog')->setPriority(0.8)->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)->setLastModificationDate(now()));
 
         // Tambahkan semua produk katalog dari database
         Catalog::all()->each(function (Catalog $catalog) use ($sitemap) {
-            $sitemap->add(Url::create("/v/demo-{$catalog->slug}"));
+            $sitemap->add(
+                Url::create("/v/demo-{$catalog->slug}")
+                    ->setPriority(0.9)
+                    ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+                    ->setLastModificationDate($catalog->updated_at)
+            );
         });
 
 
