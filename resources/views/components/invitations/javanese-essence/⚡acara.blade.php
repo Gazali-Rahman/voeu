@@ -119,7 +119,7 @@ new class extends Component {
     </div>
 
     <div class="mt-14 flex flex-col items-center w-full  px-8">
-        <a href="https://maps.app.goo.gl/1BgPxjovRRLksG249?g_st=ic" target="_blank"
+        <a href="{{ $invitation->content['maps'] }}" target="_blank"
             class="w-full relative flex items-center justify-center bg-[#2d1e18] border border-[#5a3a2e]/30 py-5 transition-all duration-500 rounded-2xl">
             <span class="relative z-10 font-poppins text-[10px] tracking-[0.4em] uppercase text-[#fdfaf7]">
                 View Location
