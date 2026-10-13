@@ -127,78 +127,96 @@ class TelegramWebhookController extends Controller
         // --- DAFTAR ANTRIAN AI (Groq -> Gemini) ---
         $aiQueue = [
             // Kasta Utama: GROQ (Sangat cepat)
-            ['provider' => 'groq', 'model' => 'qwen/qwen3.6-27b'],
             ['provider' => 'groq', 'model' => 'openai/gpt-oss-120b'],
             ['provider' => 'groq', 'model' => 'openai/gpt-oss-20b'],
-            ['provider' => 'groq', 'model' => 'groq/compound'],
+            ['provider' => 'groq', 'model' => 'qwen/qwen3.8-27b'],
 
             // Ban Serep: GEMINI
+            ['provider' => 'gemini', 'model' => 'gemini-3.8-flash'],
             ['provider' => 'gemini', 'model' => 'gemini-3.7-flash'],
             ['provider' => 'gemini', 'model' => 'gemini-3.6-flash'],
             ['provider' => 'gemini', 'model' => 'gemini-3.5-flash'],
-            ['provider' => 'gemini', 'model' => 'gemini-3.5-flash-lite'],
             ['provider' => 'gemini', 'model' => 'gemini-3.1-flash-lite'],
-
         ];
 
-        $groqKey = env('GROQ_API_KEY');
-        $geminiKey = env('GEMINI_API_KEY');
+        $groqKey = config('services.groq.api_key') ?? env('GROQ_API_KEY');
+        $geminiKey = config('services.gemini.api_key') ?? env('GEMINI_API_KEY');
+
+        $lastErrors = [];
 
         foreach ($aiQueue as $ai) {
             $provider = $ai['provider'];
             $modelName = $ai['model'];
 
             // Jika API Key tidak ada, lewati provider ini
-            if ($provider === 'groq' && empty($groqKey)) continue;
-            if ($provider === 'gemini' && empty($geminiKey)) continue;
+            if ($provider === 'groq' && empty($groqKey)) {
+                $lastErrors[] = "Groq: API key belum diisi";
+                continue;
+            }
+            if ($provider === 'gemini' && empty($geminiKey)) {
+                $lastErrors[] = "Gemini: API key belum diisi";
+                continue;
+            }
 
-            if ($provider === 'groq') {
-                $response = Http::withHeaders([
-                    'Authorization' => 'Bearer ' . $groqKey,
-                    'Content-Type' => 'application/json'
-                ])->timeout(20)->post('https://api.groq.com/openai/v1/chat/completions', [
-                    'model' => $modelName,
-                    'messages' => [
-                        ['role' => 'system', 'content' => $systemPrompt],
-                        ['role' => 'user', 'content' => $message]
-                    ]
-                ]);
+            try {
+                if ($provider === 'groq') {
+                    $response = Http::withHeaders([
+                        'Authorization' => 'Bearer ' . $groqKey,
+                        'Content-Type' => 'application/json'
+                    ])->timeout(20)->post('https://api.groq.com/openai/v1/chat/completions', [
+                        'model' => $modelName,
+                        'messages' => [
+                            ['role' => 'system', 'content' => $systemPrompt],
+                            ['role' => 'user', 'content' => $message]
+                        ]
+                    ]);
 
-                if ($response->successful()) {
-                    $data = $response->json();
-                    return [
-                        'text' => $data['choices'][0]['message']['content'] ?? "Maaf, saya tidak mengerti respons dari Groq.",
-                        'provider' => 'groq',
-                        'model' => $modelName
-                    ];
+                    if ($response->successful()) {
+                        $data = $response->json();
+                        return [
+                            'text' => $data['choices'][0]['message']['content'] ?? "Maaf, saya tidak mengerti respons dari Groq.",
+                            'provider' => 'groq',
+                            'model' => $modelName
+                        ];
+                    }
+
+                    $lastErrors[] = "Groq ({$modelName}) HTTP {$response->status()}: " . $response->body();
+                    Log::warning("Groq model {$modelName} gagal: HTTP " . $response->status() . " - " . $response->body());
+                } else if ($provider === 'gemini') {
+                    $url = 'https://generativelanguage.googleapis.com/v1beta/models/' . $modelName . ':generateContent?key=' . $geminiKey;
+
+                    $response = Http::withHeaders([
+                        'Content-Type' => 'application/json'
+                    ])->timeout(20)->post($url, [
+                        'system_instruction' => [
+                            'parts' => [['text' => $systemPrompt]]
+                        ],
+                        'contents' => [
+                            ['role' => 'user', 'parts' => [['text' => $message]]]
+                        ]
+                    ]);
+
+                    if ($response->successful()) {
+                        $data = $response->json();
+                        return [
+                            'text' => $data['candidates'][0]['content']['parts'][0]['text'] ?? "Maaf, saya tidak mengerti respons dari Gemini.",
+                            'provider' => 'gemini',
+                            'model' => $modelName
+                        ];
+                    }
+
+                    $lastErrors[] = "Gemini ({$modelName}) HTTP {$response->status()}: " . $response->body();
+                    Log::warning("Gemini model {$modelName} gagal: HTTP " . $response->status() . " - " . $response->body());
                 }
-            } else if ($provider === 'gemini') {
-                $url = 'https://generativelanguage.googleapis.com/v1beta/models/' . $modelName . ':generateContent?key=' . $geminiKey;
-
-                $response = Http::withHeaders([
-                    'Content-Type' => 'application/json'
-                ])->timeout(20)->post($url, [
-                    'system_instruction' => [
-                        'parts' => [['text' => $systemPrompt]]
-                    ],
-                    'contents' => [
-                        ['role' => 'user', 'parts' => [['text' => $message]]]
-                    ]
-                ]);
-
-                if ($response->successful()) {
-                    $data = $response->json();
-                    return [
-                        'text' => $data['candidates'][0]['content']['parts'][0]['text'] ?? "Maaf, saya tidak mengerti respons dari Gemini.",
-                        'provider' => 'gemini',
-                        'model' => $modelName
-                    ];
-                }
+            } catch (\Throwable $e) {
+                $lastErrors[] = "{$provider} ({$modelName}) Exception: " . $e->getMessage();
+                Log::warning("Koneksi {$provider} ({$modelName}) error: " . $e->getMessage());
+                continue;
             }
         }
 
         // Jika semua gagal
-        throw new \Exception("Semua model Groq & Gemini gagal diakses.");
+        throw new \Exception("Semua model Groq & Gemini gagal diakses. Detail: " . implode(" | ", array_slice($lastErrors, 0, 3)));
     }
 
     /**
@@ -206,7 +224,12 @@ class TelegramWebhookController extends Controller
      */
     private function sendMessage($chatId, $text)
     {
-        $botToken = env('TELEGRAM_BOT_TOKEN');
+        $botToken = config('services.telegram.bot_token') ?? env('TELEGRAM_BOT_TOKEN');
+        if (empty($botToken)) {
+            Log::error("Telegram Bot Token tidak ditemukan saat ingin mengirim pesan.");
+            return;
+        }
+
         $url = "https://api.telegram.org/bot{$botToken}/sendMessage";
 
         Http::post($url, [
@@ -221,7 +244,14 @@ class TelegramWebhookController extends Controller
      */
     public function setWebhook(Request $request)
     {
-        $botToken = env('TELEGRAM_BOT_TOKEN');
+        $botToken = config('services.telegram.bot_token') ?? env('TELEGRAM_BOT_TOKEN');
+
+        if (empty($botToken)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'TELEGRAM_BOT_TOKEN belum diatur atau terbaca kosong di server! Pastikan TELEGRAM_BOT_TOKEN sudah ada di file .env server production dan jalankan `php artisan config:clear` jika config di-cache.',
+            ], 500);
+        }
 
         // Telegram mensyaratkan HTTPS. Kita paksa menggunakan https://
         $host = $request->getHost();

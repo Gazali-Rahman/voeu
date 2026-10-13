@@ -47,4 +47,14 @@ return [
         'is_sanitized' => true,
         'is_3ds' => true,
     ],
+    'telegram' => [
+        'bot_token' => env('TELEGRAM_BOT_TOKEN'),
+        'admin_id' => env('TELEGRAM_ADMIN_ID'),
+    ],
+    'groq' => [
+        'api_key' => env('GROQ_API_KEY'),
+    ],
+    'gemini' => [
+        'api_key' => env('GEMINI_API_KEY'),
+    ],
 ];

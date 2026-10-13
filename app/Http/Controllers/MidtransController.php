@@ -64,8 +64,8 @@ class MidtransController extends Controller
 
         // --- NOTIFIKASI TELEGRAM OTOMATIS ---
         if ($isSuccess) {
-            $botToken = env('TELEGRAM_BOT_TOKEN');
-            $adminId = env('TELEGRAM_ADMIN_ID');
+            $botToken = config('services.telegram.bot_token') ?? env('TELEGRAM_BOT_TOKEN');
+            $adminId = config('services.telegram.admin_id') ?? env('TELEGRAM_ADMIN_ID');
             
             if ($botToken && $adminId) {
                 $catalogName = $order->catalog ? $order->catalog->name : 'N/A';
