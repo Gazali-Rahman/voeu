@@ -56,6 +56,7 @@ Route::post('/midtrans/callback', [MidtransController::class, 'callback']);
 // Telegram Agent AI Webhook Routes
 Route::post('/webhook/telegram', [TelegramWebhookController::class, 'handle']);
 Route::get('/telegram/set-webhook', [TelegramWebhookController::class, 'setWebhook']);
+Route::get('/telegram/resend-latest-order', [TelegramWebhookController::class, 'resendLatestOrder']);
 
 // Invitation Routes
 Route::get('/v/{slug}', Show::class)->name('invitation.v');

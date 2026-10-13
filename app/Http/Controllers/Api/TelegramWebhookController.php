@@ -64,9 +64,10 @@ class TelegramWebhookController extends Controller
         // 2. Data Pesanan & Keuangan (All-Time)
         $orders = \App\Models\Order::all();
         $totalOrders = $orders->count();
-        $paidOrders = $orders->where('status', 'selesai')->count();
+        $paidStatuses = ['proses', 'selesai', 'paid'];
+        $paidOrders = $orders->whereIn('status', $paidStatuses)->count();
         $pendingOrders = $orders->where('status', 'pending')->count();
-        $totalRevenue = $orders->where('status', 'selesai')->sum('amount');
+        $totalRevenue = $orders->whereIn('status', $paidStatuses)->sum('amount');
 
         // 2.1 Metrik Berdasarkan Waktu (Bulan Ini, Minggu Ini, Hari Ini)
         $now = now();
@@ -75,20 +76,20 @@ class TelegramWebhookController extends Controller
         $monthStart = $now->copy()->startOfMonth();
 
         // Query langsung ke DB agar lebih efisien dan akurat untuk metrik waktu
-        $revenueToday = \App\Models\Order::where('status', 'selesai')->where('created_at', '>=', $todayStart)->sum('amount');
-        $ordersToday = \App\Models\Order::where('status', 'selesai')->where('created_at', '>=', $todayStart)->count();
+        $revenueToday = \App\Models\Order::whereIn('status', $paidStatuses)->where('created_at', '>=', $todayStart)->sum('amount');
+        $ordersToday = \App\Models\Order::whereIn('status', $paidStatuses)->where('created_at', '>=', $todayStart)->count();
 
-        $revenueWeek = \App\Models\Order::where('status', 'selesai')->where('created_at', '>=', $weekStart)->sum('amount');
-        $ordersWeek = \App\Models\Order::where('status', 'selesai')->where('created_at', '>=', $weekStart)->count();
+        $revenueWeek = \App\Models\Order::whereIn('status', $paidStatuses)->where('created_at', '>=', $weekStart)->sum('amount');
+        $ordersWeek = \App\Models\Order::whereIn('status', $paidStatuses)->where('created_at', '>=', $weekStart)->count();
 
-        $revenueMonth = \App\Models\Order::where('status', 'selesai')->where('created_at', '>=', $monthStart)->sum('amount');
-        $ordersMonth = \App\Models\Order::where('status', 'selesai')->where('created_at', '>=', $monthStart)->count();
+        $revenueMonth = \App\Models\Order::whereIn('status', $paidStatuses)->where('created_at', '>=', $monthStart)->sum('amount');
+        $ordersMonth = \App\Models\Order::whereIn('status', $paidStatuses)->where('created_at', '>=', $monthStart)->count();
 
         // 3. Kinerja Katalog/Template
         $catalogs = \App\Models\Catalog::where('is_active', 1)->get();
         $catalogInfo = "";
         foreach ($catalogs as $cat) {
-            $sold = $orders->where('catalog_id', $cat->id)->where('status', 'selesai')->count();
+            $sold = $orders->where('catalog_id', $cat->id)->whereIn('status', $paidStatuses)->count();
             $catalogInfo .= "- {$cat->name} (Rp " . number_format($cat->price, 0, ',', '.') . ") | Terjual: {$sold} kali\n";
         }
 
@@ -263,6 +264,63 @@ class TelegramWebhookController extends Controller
 
         return response()->json([
             'webhook_url' => $webhookUrl,
+            'telegram_response' => $response->json()
+        ]);
+    }
+
+    /**
+     * Helper route untuk mentrigger ulang notifikasi order terbaru via browser
+     */
+    public function resendLatestOrder(Request $request)
+    {
+        $botToken = config('services.telegram.bot_token') ?? env('TELEGRAM_BOT_TOKEN');
+        $adminId = config('services.telegram.admin_id') ?? env('TELEGRAM_ADMIN_ID');
+
+        if (empty($botToken) || empty($adminId)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'TELEGRAM_BOT_TOKEN atau TELEGRAM_ADMIN_ID belum diatur!'
+            ], 500);
+        }
+
+        $orderId = $request->query('id');
+        if ($orderId) {
+            $order = \App\Models\Order::with('catalog')->where('id', $orderId)->orWhere('external_id', $orderId)->first();
+        } else {
+            $order = \App\Models\Order::with('catalog')
+                ->whereIn('status', ['proses', 'paid', 'selesai'])
+                ->latest()
+                ->first();
+        }
+
+        if (!$order) {
+            return response()->json(['status' => 'error', 'message' => 'Pesanan tidak ditemukan!'], 404);
+        }
+
+        $catalogName = $order->catalog ? $order->catalog->name : 'N/A';
+        $amount = number_format($order->amount, 0, ',', '.');
+
+        $text = "🚨 *ORDERAN BARU LUNAS!*\n\n"
+              . "👤 Nama: {$order->customer_name}\n"
+              . "📱 WA: {$order->customer_phone}\n"
+              . "💰 Total: Rp {$amount}\n"
+              . "🏷 Template: {$catalogName}\n\n"
+              . "Pesanan sudah otomatis berstatus PROSES. Segera dicek ya Bos!";
+
+        $response = Http::post("https://api.telegram.org/bot{$botToken}/sendMessage", [
+            'chat_id' => $adminId,
+            'text' => $text,
+            'parse_mode' => 'Markdown'
+        ]);
+
+        return response()->json([
+            'status' => $response->successful() ? 'success' : 'error',
+            'order' => [
+                'external_id' => $order->external_id,
+                'customer_name' => $order->customer_name,
+                'amount' => $order->amount,
+                'status' => $order->status
+            ],
             'telegram_response' => $response->json()
         ]);
     }
