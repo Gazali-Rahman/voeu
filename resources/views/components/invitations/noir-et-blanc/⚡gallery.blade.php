@@ -4,20 +4,31 @@ use Livewire\Component;
 new class extends Component {
     public $invitation;
     public $galleryPhotos = [];
+    public $hasGallery = false;
+
     public function mount($invitation)
     {
         $this->invitation = $invitation;
-        // Ambil foto gallery secara berurutan
-        for ($i = 1; $i <= 5; $i++) {
-            $photo = $this->invitation->getPhoto("gallery$i");
-            if ($photo) {
-                $this->galleryPhotos[] = $photo;
-            }
-        }
+
+        // Ambil gallery photos langsung dari dynamic_photos
+        $content = is_string($invitation->content)
+            ? json_decode($invitation->content, true)
+            : $invitation->content;
+
+        $photos = collect($content['dynamic_photos'] ?? [])
+            ->filter(fn($item) => isset($item['label']) && str_contains($item['label'], 'gallery'))
+            ->values();
+
+        $this->hasGallery = $photos->isNotEmpty();
+
+        $this->galleryPhotos = $photos
+            ->map(fn($photo) => asset('storage/' . $photo['path']))
+            ->toArray();
     }
 };
 ?>
 
+@if($hasGallery)
 <!-- Section: Gallery (The Lookbook) -->
 <!-- Jarak & Padding tetap sama: py-24 px-6 -->
 <div class="bg-white py-24 px-6 overflow-hidden" x-data="{
@@ -113,3 +124,4 @@ new class extends Component {
         </div>
     </div>
 </div>
+@endif

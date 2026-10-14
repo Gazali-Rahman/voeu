@@ -10,6 +10,7 @@ new class extends Component {
     }
 };
 ?>
+@if(!empty($invitation->content['love_stories']))
 <!-- Section: Love Story (The Narrative) -->
 <div class="bg-white px-8 py-24 relative overflow-hidden">
 
@@ -24,7 +25,6 @@ new class extends Component {
     </div>
 
     <div class="relative space-y-32">
-        @if (isset($invitation->content['love_stories']))
             @foreach ($invitation->content['love_stories'] as $story)
                 @if ($loop->last)
                     <div class="relative flex flex-col items-center text-center" x-data="{ show: false }"
@@ -90,9 +90,9 @@ new class extends Component {
                     </div>
                 @endif
             @endforeach
-        @endif
     </div>
 
     <!-- Background Accent Line -->
     <div class="absolute left-1/2 top-0 bottom-0 w-[0.5px] bg-black/3 -z-10"></div>
 </div>
+@endif
