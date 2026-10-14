@@ -10,6 +10,8 @@ new class extends Component {
     }
 };
 ?>
+
+<div>
 @if(!empty($invitation->content['love_stories']))
 <!-- Section: Love Story (The Narrative) -->
 <div class="bg-white px-8 py-24 relative overflow-hidden">
@@ -96,3 +98,4 @@ new class extends Component {
     <div class="absolute left-1/2 top-0 bottom-0 w-[0.5px] bg-black/3 -z-10"></div>
 </div>
 @endif
+</div>

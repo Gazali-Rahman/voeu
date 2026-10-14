@@ -28,6 +28,7 @@ new class extends Component {
 };
 ?>
 
+<div>
 @if($hasGallery)
 <!-- Section: Gallery (The Lookbook) -->
 <!-- Jarak & Padding tetap sama: py-24 px-6 -->
@@ -125,3 +126,4 @@ new class extends Component {
     </div>
 </div>
 @endif
+</div>
