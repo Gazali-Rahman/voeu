@@ -60,7 +60,7 @@ new class extends Component {
                     <p class="font-serif italic text-xs text-white/50 mt-1 uppercase tracking-widest">
                         {{ \Carbon\Carbon::parse($invitation->content['tanggal_akad'])->locale('id')->isoFormat('HH:mm') }}
                         -
-                        {{ \Carbon\Carbon::parse($invitation->content['tanggal_resepsi'])->locale('id')->isoFormat('HH:mm') }}
+                        Selesai
                     </p>
 
                     <div class="mt-8">
