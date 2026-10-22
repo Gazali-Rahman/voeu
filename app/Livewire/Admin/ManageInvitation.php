@@ -65,7 +65,7 @@ class ManageInvitation extends Component
             ]);
 
             session()->flash('success', 'Data demo untuk seluruh katalog berhasil dibuat!');
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             session()->flash('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
