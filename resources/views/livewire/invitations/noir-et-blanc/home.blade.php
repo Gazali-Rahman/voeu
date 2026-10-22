@@ -12,7 +12,7 @@
     </audio>
     @livewire('invitations.noir-et-blanc.header', ['invitation' => $invitation])
     @livewire('invitations.noir-et-blanc.qoutes')
-    @livewire('invitations.noir-et-blanc.bridgegroom', ['invitation' => $invitation])
+    @livewire('invitations.noir-et-blanc.bridegroom', ['invitation' => $invitation])
     @livewire('invitations.noir-et-blanc.acara', ['invitation' => $invitation])
     @livewire('invitations.noir-et-blanc.gallery', ['invitation' => $invitation])
     @livewire('invitations.noir-et-blanc.lovestory', ['invitation' => $invitation])

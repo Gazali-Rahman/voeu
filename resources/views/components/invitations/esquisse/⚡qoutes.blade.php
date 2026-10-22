@@ -11,7 +11,7 @@ new class extends Component {
 <!-- Gunakan warna background yang sama dengan atasnya agar transisinya mulus -->
 <div class="w-full bg-[#F9F8F6] py-20 px-8 flex flex-col items-center justify-center text-center relative">
 
-    <img src="{{ asset('assets/png/catalog7/kertas.png') }}" class="w-20 h-auto mb-5" alt="">
+    <img src="{{ asset('assets/png/esquisse/kertas.png') }}" class="w-20 h-auto mb-5" alt="">
 
     <!-- Arti QS. Ar-Rum: 21 -->
     <!-- leading-relaxed memberi jarak antar baris, max-w-md membatasi lebar paragraf -->

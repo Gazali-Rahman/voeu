@@ -21,7 +21,7 @@
     @endpersist
     @livewire('invitations.javanese-essence.header', ['invitation' => $invitation])
     @livewire('invitations.javanese-essence.qoutes')
-    @livewire('invitations.javanese-essence.bridgegroom', ['invitation' => $invitation])
+    @livewire('invitations.javanese-essence.bridegroom', ['invitation' => $invitation])
     @livewire('invitations.javanese-essence.acara', ['invitation' => $invitation])
     @livewire('invitations.javanese-essence.gallery', ['invitation' => $invitation])
     @livewire('invitations.javanese-essence.lovestory', ['invitation' => $invitation])

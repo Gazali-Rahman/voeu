@@ -14,7 +14,7 @@
 
     @livewire('invitations.the-directors-cut.header', ['invitation' => $invitation])
     @livewire('invitations.the-directors-cut.qoutes')
-    @livewire('invitations.the-directors-cut.bridgegroom', ['invitation' => $invitation])
+    @livewire('invitations.the-directors-cut.bridegroom', ['invitation' => $invitation])
     @livewire('invitations.the-directors-cut.acara', ['invitation' => $invitation])
     @livewire('invitations.the-directors-cut.gallery', ['invitation' => $invitation])
     @livewire('invitations.the-directors-cut.lovestory', ['invitation' => $invitation])

@@ -15,7 +15,7 @@ new class extends Component {
 <div
     class="relative max-w-md mx-auto h-screen bg-[#F9F8F6] overflow-hidden flex items-center justify-center text-gray-800">
 
-    <img src="{{ asset('assets/png/catalog7/bg3.png') }}"
+    <img src="{{ asset('assets/png/esquisse/bg3.png') }}"
         class="absolute inset-0 w-full h-full object-cover opacity-8 z-0 pointer-events-none" alt="Background">
 
     <div class="absolute top-10 left-0 w-full flex flex-col items-center text-center z-30 px-6">
@@ -42,7 +42,7 @@ new class extends Component {
             </div> --}}
             <!-- Tanggal -->
             <div class="flex justify-center items-center gap-2">
-                <img src="{{ asset('assets/png/catalog7/clock.png') }}" class="w-5 h-auto" alt="">
+                <img src="{{ asset('assets/png/esquisse/clock.png') }}" class="w-5 h-auto" alt="">
                 <p class="text-xs font-indie tracking-widest text-black">
                     <span>{{ \Carbon\Carbon::parse($invitation->content['tanggal_resepsi'])->locale('id')->isoFormat('dddd, D MMMM YYYY') }}</span>
                 </p>
@@ -59,10 +59,10 @@ new class extends Component {
                 class="w-[59%] h-auto aspect-[3.1/4] border-2 border-black rotate-10 object-cover shadow-lg">
         </div>
 
-        <img src="{{ asset('assets/png/catalog7/figura3.png') }}"
+        <img src="{{ asset('assets/png/esquisse/figura3.png') }}"
             class="relative w-full h-auto rotate-10 z-0 pointer-events-none">
 
-        <img src="{{ asset('assets/png/catalog7/lengan4.png') }}"
+        <img src="{{ asset('assets/png/esquisse/lengan4.png') }}"
             class="absolute w-[62%] h-auto z-20 pointer-events-none bottom-[-50%] right-[-25%]">
 
     </div>

@@ -14,7 +14,7 @@
 
     @livewire('invitations.eternal-serenity.header', ['invitation' => $invitation])
     @livewire('invitations.eternal-serenity.qoutes')
-    @livewire('invitations.eternal-serenity.bridgegroom', ['invitation' => $invitation])
+    @livewire('invitations.eternal-serenity.bridegroom', ['invitation' => $invitation])
     @livewire('invitations.eternal-serenity.acara', ['invitation' => $invitation])
     @livewire('invitations.eternal-serenity.gallery', ['invitation' => $invitation])
     @if (

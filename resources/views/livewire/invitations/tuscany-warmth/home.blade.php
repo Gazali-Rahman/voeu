@@ -13,7 +13,7 @@
     <div class="px-4">
         @livewire('invitations.tuscany-warmth.header', ['invitation' => $invitation])
         @livewire('invitations.tuscany-warmth.qoutes', ['guestName' => $guestName])
-        @livewire('invitations.tuscany-warmth.bridgegroom', ['invitation' => $invitation])
+        @livewire('invitations.tuscany-warmth.bridegroom', ['invitation' => $invitation])
         @livewire('invitations.tuscany-warmth.acara', ['invitation' => $invitation])
         @livewire('invitations.tuscany-warmth.gallery', ['invitation' => $invitation])
         @livewire('invitations.tuscany-warmth.lovestory', ['invitation' => $invitation])
