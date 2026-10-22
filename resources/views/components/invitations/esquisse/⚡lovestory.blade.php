@@ -41,7 +41,7 @@ new class extends Component {
             <div class="relative z-10 flex flex-col items-center">
                 <h2 x-show="show" x-transition:enter="transition ease-out duration-1000"
                     x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
-                    class="font-samantha text-5xl sm:text-6xl text-black mb-2 select-none">
+                    class="font-samantha text-4xl text-black mb-2 select-none">
                     Love Story
                 </h2>
                 <div x-show="show" x-transition:enter="transition ease-out duration-1000 delay-300"

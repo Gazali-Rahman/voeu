@@ -23,7 +23,7 @@ new class extends Component {
             class="mb-12 flex flex-col items-center text-center">
             <h2 x-show="show" x-transition:enter="transition ease-out duration-1000"
                 x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
-                class="font-samantha text-5xl text-black mb-8 select-none">
+                class="font-samantha text-4xl text-black mb-8 select-none">
                 The Celebration
             </h2>
             <div x-show="show" x-transition:enter="transition ease-out duration-1000 delay-300"
